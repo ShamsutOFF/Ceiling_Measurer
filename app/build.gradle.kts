@@ -45,11 +45,23 @@ android {
 }
 
 dependencies {
-    implementation ("androidx.core:core-ktx:1.8.0")
-    implementation ("com.google.android.material:material:1.6.1")
-    implementation ("androidx.appcompat:appcompat:1.5.0")
-    implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation ("junit:junit:4.13.2")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
+    //Essentials
+    implementation(Libs.core_ktx)
+    implementation(Libs.material)
+    implementation(Libs.appcompat)
+    implementation(Libs.constraintLayout)
+
+    //ViewModel + LiveData
+    implementation(Libs.lifecycle_livedata)
+    implementation(Libs.lifecycle_viewmodel)
+
+    //Room
+    implementation(Libs.room_runtime)
+    implementation(Libs.room_ktx)
+    kapt(Libs.room_compiler)
+
+    //Koin
+    implementation(Libs.koin_core)
+    implementation(Libs.koin_android)
+    implementation(Libs.koin_compat)
 }
