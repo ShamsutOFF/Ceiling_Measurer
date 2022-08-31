@@ -3,14 +3,17 @@
 
     <item
         android:id="@+id/nav_clients"
+        android:icon="@drawable/baseline_face_24"
         android:title="@string/clients" />
 
     <item
         android:id="@+id/nav_materials"
+        android:icon="@drawable/baseline_build_24"
         android:title="@string/materials" />
 
     <item
         android:id="@+id/nav_orders"
+        android:icon="@drawable/baseline_work_outline_24"
         android:title="@string/orders" />
 
 </menu>
