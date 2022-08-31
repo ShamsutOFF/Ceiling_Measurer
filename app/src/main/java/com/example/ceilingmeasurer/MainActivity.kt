@@ -17,6 +17,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initNavDrawer()
+        initNavItemListener()
+    }
+
+    private fun initNavDrawer() {
         actionBarDrawerToggle = ActionBarDrawerToggle(
             this,
             binding.mainDrawerLayout,
@@ -26,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         binding.mainDrawerLayout.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun initNavItemListener() {
         binding.navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_clients -> {
@@ -50,11 +58,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (actionBarDrawerToggle.onOptionsItemSelected(item)) true
         else super.onOptionsItemSelected(item)
     }
-
-
 }
