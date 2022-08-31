@@ -5,4 +5,6 @@
     <string name="clients">Клиенты</string>
     <string name="materials">Материалы</string>
     <string name="orders">Заказы</string>
+    <string name="nav_open">Открыть</string>
+    <string name="nav_close">Закрыть</string>
 </resources>
