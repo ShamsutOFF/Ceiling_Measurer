@@ -2,4 +2,7 @@
     <string name="app_name">Ceiling Measurer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="clients">Клиенты</string>
+    <string name="materials">Материалы</string>
+    <string name="orders">Заказы</string>
 </resources>
