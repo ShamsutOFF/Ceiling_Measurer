@@ -16,53 +16,28 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initNavDrawer()
-        initNavItemListener()
+        initBottomNavigation()
     }
 
-    private fun initNavDrawer() {
-        actionBarDrawerToggle = ActionBarDrawerToggle(
-            this,
-            binding.mainDrawerLayout,
-            R.string.nav_open,
-            R.string.nav_close
-        )
-        binding.mainDrawerLayout.addDrawerListener(actionBarDrawerToggle)
-        actionBarDrawerToggle.syncState()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    private fun initNavItemListener() {
-        binding.navView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
+    private fun initBottomNavigation() {
+        binding.bottomNavigation.setOnItemSelectedListener {
+            when (it.itemId) {
                 R.id.nav_clients -> {
                     Toast.makeText(this, "R.id.nav_clients", Toast.LENGTH_LONG).show()
-                    binding.mainDrawerLayout.close()
-                    true
                 }
                 R.id.nav_materials -> {
                     Toast.makeText(this, "R.id.nav_materials", Toast.LENGTH_LONG).show()
-                    binding.mainDrawerLayout.close()
-                    true
                 }
                 R.id.nav_orders -> {
                     Toast.makeText(this, "R.id.nav_orders", Toast.LENGTH_LONG).show()
-                    binding.mainDrawerLayout.close()
-                    true
-                }
-                else -> {
-                    false
                 }
             }
+            true
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (actionBarDrawerToggle.onOptionsItemSelected(item)) true
         else super.onOptionsItemSelected(item)
-    }
-
-    override fun onBackPressed() {
-        binding.mainDrawerLayout.close()
     }
 }
