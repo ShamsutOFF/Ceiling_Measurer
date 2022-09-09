@@ -35,9 +35,4 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (actionBarDrawerToggle.onOptionsItemSelected(item)) true
-        else super.onOptionsItemSelected(item)
-    }
 }
