@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import com.example.ceilingmeasurer.databinding.FragmentPlanBinding
 
 
-private const val HEIGHT_PARAM = "param1"
-private const val WIDTH_PARAM = "param2"
+private const val HEIGHT_PARAM = "HEIGHT_PARAM"
+private const val WIDTH_PARAM = "WIDTH_PARAM"
 
 class PlanFragment : Fragment() {
     private var height: String? = null
