@@ -14,19 +14,31 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initBottomNavigation()
+        initStartScreen()
+    }
+
+    private fun initStartScreen() {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_container, ClientsFragment())
+        transaction.commit()
     }
 
     private fun initBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {
+            val transaction = supportFragmentManager.beginTransaction()
             when (it.itemId) {
                 R.id.nav_clients -> {
-                    Toast.makeText(this, "R.id.nav_clients", Toast.LENGTH_LONG).show()
+                    transaction.replace(R.id.main_container, ClientsFragment())
+//            transaction.addToBackStack(null)
+                    transaction.commit()
                 }
                 R.id.nav_materials -> {
-                    Toast.makeText(this, "R.id.nav_materials", Toast.LENGTH_LONG).show()
+                    transaction.replace(R.id.main_container, MaterialsFragment())
+                    transaction.commit()
                 }
                 R.id.nav_orders -> {
-                    Toast.makeText(this, "R.id.nav_orders", Toast.LENGTH_LONG).show()
+                    transaction.replace(R.id.main_container, OrdersFragment())
+                    transaction.commit()
                 }
             }
             true
