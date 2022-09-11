@@ -1,24 +1,35 @@
 package com.example.ceilingmeasurer
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ceilingmeasurer.databinding.ActivityMainBinding
 
-private lateinit var binding: ActivityMainBinding
-
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
-        binding.button.setOnClickListener {
-            val fragment = PlanFragment.newInstance(binding.widthEt.text.toString(), binding.heightEt.text.toString())
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, fragment)
-//            transaction.addToBackStack(null)
-            transaction.commit()
+        initBottomNavigation()
+    }
+
+    private fun initBottomNavigation() {
+        binding.bottomNavigation.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.nav_clients -> {
+                    Toast.makeText(this, "R.id.nav_clients", Toast.LENGTH_LONG).show()
+                }
+                R.id.nav_materials -> {
+                    Toast.makeText(this, "R.id.nav_materials", Toast.LENGTH_LONG).show()
+                }
+                R.id.nav_orders -> {
+                    Toast.makeText(this, "R.id.nav_orders", Toast.LENGTH_LONG).show()
+                }
+            }
+            true
         }
     }
 }
