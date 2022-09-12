@@ -1,10 +1,11 @@
-package com.example.ceilingmeasurer.model.Tables
+package com.example.ceilingmeasurer.data.room
 
-import com.example.ceilingmeasurer.model.LocalRepository
-import com.example.ceilingmeasurer.model.OrdersDAO
+import com.example.ceilingmeasurer.domain.LocalRepo
+import com.example.ceilingmeasurer.data.room.dao.OrdersDAO
+import com.example.ceilingmeasurer.data.room.tables.OrderEntity
 import java.util.*
 
-class LocalRepositoryImpl(private val dao: OrdersDAO) : LocalRepository {
+class RoomLocalRepoImpl(private val dao: OrdersDAO) : LocalRepo {
 
     override fun getAllOrders(): List<OrderEntity> {
         return dao.all()

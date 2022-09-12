@@ -1,7 +1,7 @@
-package com.example.ceilingmeasurer.model
+package com.example.ceilingmeasurer.data.room.dao
 
 import androidx.room.*
-import com.example.ceilingmeasurer.model.Tables.OrderEntity
+import com.example.ceilingmeasurer.data.room.tables.OrderEntity
 
 @Dao
 interface OrdersDAO {

@@ -1,8 +1,8 @@
-package com.example.ceilingmeasurer
+package com.example.ceilingmeasurer.ui
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
