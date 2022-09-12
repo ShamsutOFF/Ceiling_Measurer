@@ -1,4 +1,4 @@
-package com.example.ceilingmeasurer.model.Tables
+package com.example.ceilingmeasurer.data.room.tables
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

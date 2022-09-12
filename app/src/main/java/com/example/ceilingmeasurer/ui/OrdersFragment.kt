@@ -1,15 +1,14 @@
-package com.example.ceilingmeasurer
+package com.example.ceilingmeasurer.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.ceilingmeasurer.databinding.FragmentMaterialsBinding
+import com.example.ceilingmeasurer.databinding.FragmentOrdersBinding
 
-class MaterialsFragment :Fragment(){
-
-    private var _binding:FragmentMaterialsBinding? = null
+class OrdersFragment : Fragment() {
+    private var _binding: FragmentOrdersBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -17,7 +16,7 @@ class MaterialsFragment :Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMaterialsBinding.inflate(inflater,container,false)
+        _binding = FragmentOrdersBinding.inflate(inflater, container, false)
         return binding.root
     }
 

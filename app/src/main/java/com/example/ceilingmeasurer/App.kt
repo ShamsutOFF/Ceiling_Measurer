@@ -2,8 +2,8 @@ package com.example.ceilingmeasurer
 
 import android.app.Application
 import androidx.room.Room
-import com.example.ceilingmeasurer.model.ClientsDAO
-import com.example.ceilingmeasurer.model.DataBaseApp
+import com.example.ceilingmeasurer.data.room.dao.ClientsDAO
+import com.example.ceilingmeasurer.data.room.DataBaseApp
 
 class App: Application() {
 
