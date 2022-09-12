@@ -2,11 +2,18 @@ package com.example.ceilingmeasurer.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
+    companion object {
+        const val FRAGMENT_CLIENTS = "clients"
+        const val FRAGMENT_MATERIALS = "materials"
+        const val FRAGMENT_ORDERS = "orders"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,34 +21,37 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initBottomNavigation()
-        initStartScreen()
-    }
-
-    private fun initStartScreen() {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.main_container, ClientsFragment())
-        transaction.commit()
+        if (supportFragmentManager.findFragmentById(R.id.main_container) == null) {
+            attachFragment(ClientsFragment(), FRAGMENT_CLIENTS)
+        }
     }
 
     private fun initBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {
-            val transaction = supportFragmentManager.beginTransaction()
             when (it.itemId) {
-                R.id.nav_clients -> {
-                    transaction.replace(R.id.main_container, ClientsFragment())
-//            transaction.addToBackStack(null)
-                    transaction.commit()
-                }
-                R.id.nav_materials -> {
-                    transaction.replace(R.id.main_container, MaterialsFragment())
-                    transaction.commit()
-                }
-                R.id.nav_orders -> {
-                    transaction.replace(R.id.main_container, OrdersFragment())
-                    transaction.commit()
-                }
+                R.id.nav_clients -> attachFragment(ClientsFragment(), FRAGMENT_CLIENTS)
+                R.id.nav_materials -> attachFragment(MaterialsFragment(), FRAGMENT_MATERIALS)
+                R.id.nav_orders -> attachFragment(OrdersFragment(), FRAGMENT_ORDERS)
             }
             true
         }
+    }
+
+    private fun attachFragment(fragment: Fragment, tag: String) {
+        val tempFragment = supportFragmentManager.findFragmentByTag(tag)
+        if (tempFragment == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main_container, fragment, tag)
+                .addToBackStack(null)
+                .commit()
+        } else {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main_container, tempFragment, tag)
+                .commit()
+        }
+    }
+
+    override fun onBackPressed() {
+        //nothing
     }
 }
