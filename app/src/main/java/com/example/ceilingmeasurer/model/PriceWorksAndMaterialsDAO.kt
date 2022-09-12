@@ -7,6 +7,6 @@ import com.example.ceilingmeasurer.model.Tables.PriceWorksAndMaterialsEntity
 interface PriceWorksAndMaterialsDAO {
 
     @Query ("SELECT * FROM PriceWorksAndMaterialsEntity")
-    fun allPriceWorks(): List<PriceWorksAndMaterialsEntity>
+    fun allPrice(): List<PriceWorksAndMaterialsEntity>
 
 }
