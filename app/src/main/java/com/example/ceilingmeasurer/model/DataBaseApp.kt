@@ -8,8 +8,7 @@ import com.example.ceilingmeasurer.model.Tables.*
     ClientEntity::class,
     CeilingEntity::class,
     OrderEntity::class,
-    PriceMaterialsEntity::class,
-    PriceWorksEntity::class
+    PriceWorksAndMaterialsEntity::class,
 ), version = 1, exportSchema = false)
 
 abstract class DataBaseApp: RoomDatabase() {
