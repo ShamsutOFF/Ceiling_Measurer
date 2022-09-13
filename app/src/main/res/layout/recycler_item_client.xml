@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/yellow_70"
+    android:orientation="horizontal"
+    android:paddingTop="20dp">
+
+    <TextView
+        android:id="@+id/client_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/client_surname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:textSize="24sp" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/status_green"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:src="@drawable/baseline_check_circle_24" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/status_yellow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:src="@drawable/baseline_pending_24" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/status_red"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:src="@drawable/baseline_cancel_24" />
+</LinearLayout>

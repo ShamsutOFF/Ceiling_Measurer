@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.ActivityMainBinding
+import com.example.ceilingmeasurer.ui.clientsList.ClientsListFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -22,14 +23,14 @@ class MainActivity : AppCompatActivity() {
 
         initBottomNavigation()
         if (supportFragmentManager.findFragmentById(R.id.main_container) == null) {
-            attachFragment(ClientsFragment(), FRAGMENT_CLIENTS)
+            attachFragment(ClientsListFragment(), FRAGMENT_CLIENTS)
         }
     }
 
     private fun initBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.nav_clients -> attachFragment(ClientsFragment(), FRAGMENT_CLIENTS)
+                R.id.nav_clients -> attachFragment(ClientsListFragment(), FRAGMENT_CLIENTS)
                 R.id.nav_materials -> attachFragment(MaterialsFragment(), FRAGMENT_MATERIALS)
                 R.id.nav_orders -> attachFragment(OrdersFragment(), FRAGMENT_ORDERS)
             }
