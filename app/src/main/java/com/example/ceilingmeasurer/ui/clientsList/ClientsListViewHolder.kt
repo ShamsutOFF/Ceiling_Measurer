@@ -17,5 +17,7 @@ class ClientsListViewHolder(private val binding: RecyclerItemClientBinding) :
     fun bind(item: Client) {
         binding.clientName.text = item.name
         binding.clientSurname.text = item.surname
+        binding.clientAddress.text = item.address
+        binding.clientStatus.text = item.status
     }
 }

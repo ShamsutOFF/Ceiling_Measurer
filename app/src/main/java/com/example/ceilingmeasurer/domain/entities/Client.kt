@@ -6,5 +6,6 @@ data class Client (
     val surname: String,
     val phone_number: String,
     val address: String,
-    val district: String
+    val district: String,
+    val status: String
 )

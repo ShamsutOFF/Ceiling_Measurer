@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="navigation_item_padding_large">30dp</dimen>
+    <dimen name="client_card_view_item_padding">12dp</dimen>
+    <dimen name="client_card_view_item_text_size">24sp</dimen>
+    <dimen name="client_card_view_height">100dp</dimen>
+    <dimen name="client_card_view_padding">20dp</dimen>
+    <dimen name="client_card_view_corner_radius">10dp</dimen>
+    <dimen name="client_card_view_stroke_width">1dp</dimen>
+    <dimen name="client_card_view_margin">12dp</dimen>
+    <dimen name="bottom_navigation_padding_top">8dp</dimen>
 </resources>

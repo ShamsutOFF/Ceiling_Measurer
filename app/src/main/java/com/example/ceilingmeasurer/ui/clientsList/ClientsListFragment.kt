@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ceilingmeasurer.databinding.FragmentClientsListBinding
 import com.example.ceilingmeasurer.domain.entities.Client
 
@@ -28,9 +27,9 @@ class ClientsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val fakeList = listOf(
-            Client(1, "Andrei", "Roman", "1234", "address1", "9"),
-            Client(2, "Adel", "Shamsutoff", "1235", "address2", "7"),
-            Client(3, "Vladimir", "", "1236", "address3", "5"),
+            Client(1, "Andrei", "Roman", "1234", "Стекляный 13, кв22", "9", "Замер"),
+            Client(2, "Adel", "Shamsutoff", "1235", "Виноградный 28, кв1", "7", "На монтаже"),
+            Client(3, "Vladimir", "", "1236", "Лебединый 33, кв150", "5", "Закрыт"),
         )
         binding.clientListRecyclerView.layoutManager = GridLayoutManager(context, 1)
         binding.clientListRecyclerView.adapter = adapter
