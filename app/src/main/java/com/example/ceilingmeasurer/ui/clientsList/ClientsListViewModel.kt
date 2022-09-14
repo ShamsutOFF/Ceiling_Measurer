@@ -10,7 +10,7 @@ import kotlinx.coroutines.withContext
 
 class ClientsListViewModel(private val repo: ClientListRepo) : BaseViewModel<List<Client>>() {
 
-    val liveData: LiveData<List<Client>> = _liveData
+    val clientList: LiveData<List<Client>> = _liveData
 
     fun getClientList() {
         cancelJob()

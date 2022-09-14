@@ -30,7 +30,7 @@ class ClientsListFragment : Fragment() {
 
         binding.clientListRecyclerView.layoutManager = GridLayoutManager(context, 1)
         binding.clientListRecyclerView.adapter = adapter
-        viewModel.liveData.observe(viewLifecycleOwner) {
+        viewModel.clientList.observe(viewLifecycleOwner) {
             adapter.setData(it)
         }
         viewModel.getClientList()
