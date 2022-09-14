@@ -1,23 +1,16 @@
 package com.example.ceilingmeasurer.ui.clientsList
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.ceilingmeasurer.domain.ClientListRepo
 import com.example.ceilingmeasurer.domain.entities.Client
-import kotlinx.coroutines.*
+import com.example.ceilingmeasurer.ui.BaseViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class ClientsListViewModel(private val repo: ClientListRepo) : ViewModel() {
-    private val _liveData: MutableLiveData<List<Client>> = MutableLiveData()
+class ClientsListViewModel(private val repo: ClientListRepo) : BaseViewModel<List<Client>>() {
+
     val liveData: LiveData<List<Client>> = _liveData
-
-    private val viewModelCoroutineScope = CoroutineScope(
-        Dispatchers.IO
-                + SupervisorJob()
-                + CoroutineExceptionHandler { _, throwable ->
-            handleError(throwable)
-        }
-    )
 
     fun getClientList() {
         cancelJob()
@@ -28,18 +21,5 @@ class ClientsListViewModel(private val repo: ClientListRepo) : ViewModel() {
         withContext(Dispatchers.IO) {
             _liveData.postValue(repo.getClientList())
         }
-    }
-
-    private fun cancelJob() {
-        viewModelCoroutineScope.coroutineContext.cancelChildren()
-    }
-
-    private fun handleError(error: Throwable) {
-        //nothing
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        viewModelCoroutineScope.coroutineContext.cancel()
     }
 }
