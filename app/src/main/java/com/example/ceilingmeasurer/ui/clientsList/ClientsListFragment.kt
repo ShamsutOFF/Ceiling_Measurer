@@ -14,7 +14,7 @@ class ClientsListFragment : Fragment() {
     private var _binding: FragmentClientsListBinding? = null
     private val binding get() = _binding!!
     private val adapter = ClientsListAdapter()
-    private val viewModel: ClientsListInterface = ClientsListViewModel(FakeClientListRepoImpl())
+    private val viewModel = ClientsListViewModel(FakeClientListRepoImpl())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +30,10 @@ class ClientsListFragment : Fragment() {
 
         binding.clientListRecyclerView.layoutManager = GridLayoutManager(context, 1)
         binding.clientListRecyclerView.adapter = adapter
-        adapter.setData(viewModel.getClientList())
+        viewModel.liveData.observe(viewLifecycleOwner) {
+            adapter.setData(it)
+        }
+        viewModel.getClientList()
     }
 
     override fun onDestroy() {
