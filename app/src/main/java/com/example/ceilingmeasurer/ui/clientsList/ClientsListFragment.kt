@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.data.fake.FakeClientListRepoImpl
 import com.example.ceilingmeasurer.databinding.FragmentClientsListBinding
+import com.example.ceilingmeasurer.domain.entities.Client
 import com.example.ceilingmeasurer.ui.ClientDetailsFragment
 import com.example.ceilingmeasurer.utils.IOnBackPressed
 
@@ -44,11 +45,11 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
 
     private fun iniFab() {
         binding.clientListFab.setOnClickListener {
-            initFragment(ClientDetailsFragment())
+            initChildFragment(ClientDetailsFragment.newInstance(Client()))
         }
     }
 
-    private fun initFragment(fragment: Fragment) {
+    private fun initChildFragment(fragment: Fragment) {
         childFragmentManager.beginTransaction()
             .replace(R.id.client_list_container, fragment)
             .addToBackStack("")
