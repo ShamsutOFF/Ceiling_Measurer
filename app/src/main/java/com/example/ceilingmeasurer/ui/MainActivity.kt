@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.ActivityMainBinding
 import com.example.ceilingmeasurer.ui.clientsList.ClientsListFragment
+import com.example.ceilingmeasurer.utils.IOnBackPressed
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -53,6 +54,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        //nothing
+        val fragment =
+            this.supportFragmentManager.findFragmentById(R.id.main_container)
+        (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let {
+            //nothing
+        }
     }
 }

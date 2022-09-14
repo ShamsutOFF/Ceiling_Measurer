@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/client_list_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_20"
+    android:background="@color/blue_100"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".ui.clientsList.ClientsListFragment">
@@ -14,4 +16,14 @@
         android:layout_height="match_parent"
         tools:itemCount="5"
         tools:listitem="@layout/recycler_item_client" />
-</LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/client_list_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/fab_margin_end"
+        android:layout_marginBottom="@dimen/fab_margin_bottom"
+        android:contentDescription="@string/fab_content_desc"
+        app:srcCompat="@drawable/ic_plus_24" />
+</FrameLayout>
