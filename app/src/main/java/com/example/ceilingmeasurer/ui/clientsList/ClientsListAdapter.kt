@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ceilingmeasurer.domain.entities.Client
 
-class ClientsListAdapter() :
+class ClientsListAdapter(private val onItemClick: (position: Int) -> Unit) :
     RecyclerView.Adapter<ClientsListViewHolder>() {
     private var data: List<Client> = emptyList()
 
@@ -15,7 +15,7 @@ class ClientsListAdapter() :
     fun getData() = data
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClientsListViewHolder =
-        ClientsListViewHolder.create(parent)
+        ClientsListViewHolder.create(parent, onItemClick)
 
     override fun onBindViewHolder(holder: ClientsListViewHolder, position: Int) {
         holder.bind(data[position])

@@ -17,7 +17,9 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
 
     private var _binding: FragmentClientsListBinding? = null
     private val binding get() = _binding!!
-    private val adapter = ClientsListAdapter()
+    private val adapter = ClientsListAdapter { position ->
+        onItemClick(position)
+    }
     private val viewModel = ClientsListViewModel(FakeClientListRepoImpl())
 
     override fun onCreateView(
@@ -41,6 +43,10 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
     private fun initRecycler() {
         binding.clientListRecyclerView.layoutManager = GridLayoutManager(context, 1)
         binding.clientListRecyclerView.adapter = adapter
+    }
+
+    private fun onItemClick(position: Int) {
+        initChildFragment(ClientDetailsFragment.newInstance(adapter.getData()[position]))
     }
 
     private fun iniFab() {

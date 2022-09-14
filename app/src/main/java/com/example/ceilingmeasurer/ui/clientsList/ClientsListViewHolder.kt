@@ -6,18 +6,29 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ceilingmeasurer.databinding.RecyclerItemClientBinding
 import com.example.ceilingmeasurer.domain.entities.Client
 
-class ClientsListViewHolder(private val binding: RecyclerItemClientBinding) :
+class ClientsListViewHolder(
+    private val binding: RecyclerItemClientBinding,
+    private val onItemClick: (position: Int) -> Unit
+) :
     RecyclerView.ViewHolder(binding.root) {
-
-    companion object {
-        fun create(parent: ViewGroup): ClientsListViewHolder =
-            ClientsListViewHolder(RecyclerItemClientBinding.inflate(LayoutInflater.from(parent.context)))
+    init {
+        itemView.setOnClickListener {
+            onItemClick(adapterPosition)
+        }
     }
 
-    fun bind(item: Client) {
-        binding.clientName.text = item.name
-        binding.clientSurname.text = item.surname
-        binding.clientAddress.text = item.address
-        binding.clientStatus.text = item.status
+    companion object {
+        fun create(parent: ViewGroup, onItemClick: (position: Int) -> Unit): ClientsListViewHolder =
+            ClientsListViewHolder(
+                RecyclerItemClientBinding.inflate(LayoutInflater.from(parent.context)),
+                onItemClick
+            )
+    }
+
+    fun bind(client: Client) {
+        binding.clientName.text = client.name
+        binding.clientSurname.text = client.surname
+        binding.clientAddress.text = client.address
+        binding.clientStatus.text = client.status
     }
 }
