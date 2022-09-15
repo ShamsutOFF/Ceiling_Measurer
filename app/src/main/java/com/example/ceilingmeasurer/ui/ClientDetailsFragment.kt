@@ -18,6 +18,7 @@ class ClientDetailsFragment : Fragment() {
         private const val CLIENT = "client"
         fun newInstance(client: Client) = ClientDetailsFragment().apply {
             arguments = bundleOf(CLIENT to client)
+            this.client = client
         }
     }
 
@@ -29,6 +30,11 @@ class ClientDetailsFragment : Fragment() {
     ): View {
         _binding = FragmentClientDetailsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.client.text = client.name + " " + client.surname
     }
 
     override fun onDestroy() {
