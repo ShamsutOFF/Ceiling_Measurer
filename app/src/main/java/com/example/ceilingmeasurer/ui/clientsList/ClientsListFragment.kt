@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentClientsListBinding
 import com.example.ceilingmeasurer.domain.entities.Client
-import com.example.ceilingmeasurer.ui.ClientDetailsFragment
+import com.example.ceilingmeasurer.ui.clientDetails.ClientDetailsFragment
 import com.example.ceilingmeasurer.ui.clientsList.recycler.ClientsListAdapter
 import com.example.ceilingmeasurer.utils.IOnBackPressed
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -28,15 +28,14 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentClientsListBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initFab()
         initRecycler()
-        iniFab()
         initViewModel()
         renderData()
     }
@@ -50,13 +49,15 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
         initChildFragment(ClientDetailsFragment.newInstance(adapter.getData()[position]))
     }
 
-    private fun iniFab() {
+    private fun initFab() {
+        binding.clientListFab.show()
         binding.clientListFab.setOnClickListener {
             initChildFragment(ClientDetailsFragment.newInstance(Client()))
         }
     }
 
     private fun initChildFragment(fragment: Fragment) {
+        binding.clientListFab.hide()
         childFragmentManager.beginTransaction()
             .replace(R.id.client_list_container, fragment)
             .addToBackStack("")

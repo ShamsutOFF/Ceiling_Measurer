@@ -1,11 +1,9 @@
 package com.example.ceilingmeasurer.ui
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.*
 
-abstract class BaseViewModel<T> : ViewModel() {
-    protected val _liveData: MutableLiveData<T> = MutableLiveData()
+abstract class BaseViewModel : ViewModel() {
 
     protected val viewModelCoroutineScope = CoroutineScope(
         Dispatchers.IO
