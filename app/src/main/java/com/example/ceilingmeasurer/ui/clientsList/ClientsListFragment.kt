@@ -10,6 +10,7 @@ import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentClientsListBinding
 import com.example.ceilingmeasurer.domain.entities.Client
 import com.example.ceilingmeasurer.ui.ClientDetailsFragment
+import com.example.ceilingmeasurer.ui.clientsList.recycler.ClientsListAdapter
 import com.example.ceilingmeasurer.utils.IOnBackPressed
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
