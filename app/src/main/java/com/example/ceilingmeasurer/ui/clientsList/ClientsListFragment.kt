@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ceilingmeasurer.R
-import com.example.ceilingmeasurer.data.fake.FakeClientListRepoImpl
 import com.example.ceilingmeasurer.databinding.FragmentClientsListBinding
 import com.example.ceilingmeasurer.domain.entities.Client
 import com.example.ceilingmeasurer.ui.ClientDetailsFragment
 import com.example.ceilingmeasurer.utils.IOnBackPressed
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ClientsListFragment : Fragment(), IOnBackPressed {
 
@@ -20,7 +20,7 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
     private val adapter = ClientsListAdapter { position ->
         onItemClick(position)
     }
-    private val viewModel = ClientsListViewModel(FakeClientListRepoImpl())
+    private val viewModel: ClientsListViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
