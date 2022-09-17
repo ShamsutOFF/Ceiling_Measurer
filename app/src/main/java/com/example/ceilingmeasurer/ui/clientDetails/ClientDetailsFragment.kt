@@ -50,12 +50,14 @@ class ClientDetailsFragment : Fragment() {
     }
 
     private fun initClient() {
-        binding.clientName.setText(client.name)
-        binding.clientSurname.setText(client.surname)
-        binding.phoneNumber.setText(client.phone_number)
-        binding.address.setText(client.address)
-        binding.district.setText(client.district)
-        binding.clientStatus.setText(client.status)
+        binding.apply {
+            clientName.setText(client.name)
+            clientSurname.setText(client.surname)
+            phoneNumber.setText(client.phone_number)
+            address.setText(client.address)
+            district.setText(client.district)
+            clientStatus.setText(client.status)
+        }
     }
 
     private fun initRecycler() {

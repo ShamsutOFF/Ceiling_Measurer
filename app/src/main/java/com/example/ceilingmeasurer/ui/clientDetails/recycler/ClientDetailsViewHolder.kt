@@ -29,18 +29,20 @@ class ClientDetailsViewHolder(
     }
 
     fun bind(ceiling: Ceiling) {
-        binding.material.setText(ceiling.name_material)
-        binding.square.setText(ceiling.square.toString())
-        binding.perimeter.setText(ceiling.perimeter.toString())
-        binding.chandeliers.setText(ceiling.chandeliers.toString())
-        binding.lamps.setText(ceiling.lamps.toString())
-        binding.corners.setText(ceiling.corners.toString())
-        binding.stroke.setText(ceiling.stroke.toString())
-        binding.twoSteps.setText(ceiling.two_steps.toString())
-        binding.curtain.setText(ceiling.curtain.toString())
-        binding.aluCurtain.setText(ceiling.alu_curtain.toString())
-        binding.priceForM2.setText(ceiling.price_for_m2.toString())
-        binding.attachment.setText(ceiling.attachment)
-        binding.drawing.setText(ceiling.drawing)
+        binding.apply {
+            material.setText(ceiling.name_material)
+            square.setText(ceiling.square.toString())
+            perimeter.setText(ceiling.perimeter.toString())
+            chandeliers.setText(ceiling.chandeliers.toString())
+            lamps.setText(ceiling.lamps.toString())
+            corners.setText(ceiling.corners.toString())
+            stroke.setText(ceiling.stroke.toString())
+            twoSteps.setText(ceiling.two_steps.toString())
+            curtain.setText(ceiling.curtain.toString())
+            aluCurtain.setText(ceiling.alu_curtain.toString())
+            priceForM2.setText(ceiling.price_for_m2.toString())
+            attachment.setText(ceiling.attachment)
+            drawing.setText(ceiling.drawing)
+        }
     }
 }

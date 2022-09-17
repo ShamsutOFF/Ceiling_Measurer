@@ -26,9 +26,11 @@ class ClientsListViewHolder(
     }
 
     fun bind(client: Client) {
-        binding.clientName.text = client.name
-        binding.clientSurname.text = client.surname
-        binding.clientAddress.text = client.address
-        binding.clientStatus.text = client.status
+        binding.apply {
+            clientName.text = client.name
+            clientSurname.text = client.surname
+            clientAddress.text = client.address
+            clientStatus.text = client.status
+        }
     }
 }
