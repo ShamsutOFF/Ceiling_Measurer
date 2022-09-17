@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/client_card_view_margin"
     android:layout_marginTop="@dimen/card_view_margin"
-    android:layout_marginBottom="@dimen/card_view_margin"
+    android:paddingBottom="20dp"
     android:clickable="true"
     android:focusable="true"
     android:paddingTop="@dimen/client_card_view_padding"

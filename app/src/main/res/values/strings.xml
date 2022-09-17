@@ -27,4 +27,5 @@
     <string name="price_for_m2">Цена за кв. метр</string>
     <string name="attachment">Фото замера</string>
     <string name="drawing">Чертеж</string>
+    <string name="save">Save</string>
 </resources>
