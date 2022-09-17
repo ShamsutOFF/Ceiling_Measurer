@@ -10,6 +10,7 @@ class ClientDetailsAdapter(private val onItemClick: (position: Int) -> Unit) :
 
     fun setData(clientsList: List<Ceiling>) {
         data = clientsList
+        notifyDataSetChanged()
     }
 
     fun getData() = data
