@@ -2,5 +2,7 @@
 <resources>
     <style name="NavigationDrawerStyle">
         <item name="android:textSize">24sp</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 </resources>

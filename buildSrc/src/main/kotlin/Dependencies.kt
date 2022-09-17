@@ -13,6 +13,9 @@ object Versions {
 
     //Koin
     const val koin = "3.2.0"
+
+    //Timber
+    const val timber = "5.0.1"
 }
 
 object Libs {
@@ -35,4 +38,7 @@ object Libs {
     const val koin_core = "io.insert-koin:koin-core:${Versions.koin}"
     const val koin_android = "io.insert-koin:koin-core:${Versions.koin}"
     const val koin_compat = "io.insert-koin:koin-core:${Versions.koin}"
+
+    //Timber
+    const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 }

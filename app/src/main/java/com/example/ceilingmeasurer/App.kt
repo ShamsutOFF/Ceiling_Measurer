@@ -2,14 +2,18 @@ package com.example.ceilingmeasurer
 
 import android.app.Application
 import androidx.room.Room
-import com.example.ceilingmeasurer.data.room.dao.ClientsDAO
 import com.example.ceilingmeasurer.data.room.DataBaseApp
+import com.example.ceilingmeasurer.data.room.dao.ClientsDAO
+import timber.log.Timber
+import timber.log.Timber.Forest.plant
+
 
 class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
         appInstance = this
+        plant(Timber.DebugTree())
     }
 
     companion object {
