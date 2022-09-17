@@ -45,6 +45,7 @@ class ClientDetailsFragment : Fragment() {
         initRecycler()
         initClient()
         initViewModel()
+        initSaveButton()
         renderData()
     }
 
@@ -68,6 +69,16 @@ class ClientDetailsFragment : Fragment() {
         }
     }
 
+    private fun initSaveButton() {
+        binding.saveButton.setOnClickListener {
+            viewModel.updateClientCredentials(
+                getClient()
+            )
+            viewModel.updateCeilingsDetails(adapter.getData())
+            parentFragmentManager.popBackStack()
+        }
+    }
+
     private fun renderData() {
         viewModel.getCeilings(client)
     }
@@ -78,17 +89,19 @@ class ClientDetailsFragment : Fragment() {
 
     override fun onDestroy() {
         viewModel.updateClientCredentials(
-            Client(
-                binding.clientName.text.toString(),
-                binding.clientSurname.text.toString(),
-                binding.phoneNumber.text.toString(),
-                binding.address.text.toString(),
-                binding.district.text.toString(),
-                binding.clientStatus.text.toString()
-            )
+            getClient()
         )
         viewModel.updateCeilingsDetails(adapter.getData())
         super.onDestroy()
         _binding = null
     }
+
+    private fun getClient(): Client = Client(
+        binding.clientName.text.toString(),
+        binding.clientSurname.text.toString(),
+        binding.phoneNumber.text.toString(),
+        binding.address.text.toString(),
+        binding.district.text.toString(),
+        binding.clientStatus.text.toString()
+    )
 }
