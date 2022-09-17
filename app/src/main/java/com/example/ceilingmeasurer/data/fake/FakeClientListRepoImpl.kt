@@ -11,4 +11,8 @@ class FakeClientListRepoImpl : ClientListRepo {
             Client("Vladimir", "", "1236", "Лебединый 33, кв150", "5", "Закрыт"),
         )
     }
+
+    override suspend fun updateClient(client: Client) {
+        //nothing
+    }
 }
