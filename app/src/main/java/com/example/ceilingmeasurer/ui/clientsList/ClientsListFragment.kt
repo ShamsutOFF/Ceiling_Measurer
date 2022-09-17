@@ -34,7 +34,7 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initFab()
+        initButton()
         initRecycler()
         initViewModel()
         renderData()
@@ -49,15 +49,13 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
         initChildFragment(ClientDetailsFragment.newInstance(adapter.getData()[position]))
     }
 
-    private fun initFab() {
-        binding.clientListFab.show()
-        binding.clientListFab.setOnClickListener {
+    private fun initButton() {
+        binding.clientListAddButton.setOnClickListener {
             initChildFragment(ClientDetailsFragment.newInstance(Client()))
         }
     }
 
     private fun initChildFragment(fragment: Fragment) {
-        binding.clientListFab.hide()
         childFragmentManager.beginTransaction()
             .replace(R.id.client_list_container, fragment)
             .addToBackStack("")
