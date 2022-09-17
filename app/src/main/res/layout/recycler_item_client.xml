@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/client_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/client_card_view_margin"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingTop="@dimen/client_card_view_padding"
+    app:cardCornerRadius="@dimen/client_card_view_corner_radius"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    app:strokeColor="@color/black"
+    app:strokeWidth="@dimen/client_card_view_stroke_width">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/client_card_view_height">
+
+        <TextView
+            android:id="@+id/client_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/client_card_view_item_padding"
+            android:textSize="@dimen/client_card_view_item_text_size"
+            app:layout_constraintStart_toStartOf="@id/card_view"
+            app:layout_constraintTop_toTopOf="@id/card_view"
+            tools:text="Name" />
+
+        <TextView
+            android:id="@+id/client_surname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/client_card_view_item_padding"
+            android:textSize="@dimen/client_card_view_item_text_size"
+            app:layout_constraintStart_toEndOf="@id/client_name"
+            app:layout_constraintTop_toTopOf="@id/card_view"
+            tools:text="Surname" />
+
+        <TextView
+            android:id="@+id/client_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/client_card_view_item_padding"
+            android:textAlignment="viewEnd"
+            android:textSize="@dimen/client_card_view_item_text_size"
+            app:layout_constraintEnd_toEndOf="@id/card_view"
+            app:layout_constraintTop_toTopOf="@id/card_view"
+            tools:text="Status" />
+
+        <TextView
+            android:id="@+id/client_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/client_card_view_item_padding"
+            android:textAlignment="viewEnd"
+            android:textSize="@dimen/client_card_view_item_text_size"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@id/card_view"
+            app:layout_constraintStart_toStartOf="@id/card_view"
+            tools:text="Address" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
