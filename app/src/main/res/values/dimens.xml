@@ -12,7 +12,9 @@
     <dimen name="fab_margin_end">24dp</dimen>
     <dimen name="fab_margin_bottom">64dp</dimen>
     <dimen name="client_details_margin_edit_text">16dp</dimen>
-    <dimen name="input_layout_margin">20dp</dimen>
+    <dimen name="input_layout_margin_side_large">20dp</dimen>
+    <dimen name="input_layout_margin_side_small">4dp</dimen>
+    <dimen name="input_layout_margin_top">6dp</dimen>
     <dimen name="card_view_margin">20dp</dimen>
     <dimen name="card_view_inner_margin">20dp</dimen>
 </resources>
