@@ -18,4 +18,25 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="fab_content_desc">create new item</string>
+    <string name="name">Имя</string>
+    <string name="surname">Фамилия</string>
+    <string name="phone_number">Номер телефона</string>
+    <string name="address">Адрес</string>
+    <string name="district">Район</string>
+    <string name="client_status">Статус клиента</string>
+    <string name="material">Материал</string>
+    <string name="square">Площадь</string>
+    <string name="perimeter">Периметр</string>
+    <string name="chandeliers">Кол-во люстр</string>
+    <string name="lamps">Кол-во светильников</string>
+    <string name="corners">Кол-во доп.углов</string>
+    <string name="stroke">Кол-во обводок</string>
+    <string name="two_steps">Периметр 2 ого уровня</string>
+    <string name="curtain">Длина монтажа гардин</string>
+    <string name="alu_curtain">Длина монтажа алюминиевых гардин</string>
+    <string name="price_for_m2">Цена за кв. метр</string>
+    <string name="attachment">Фото замера</string>
+    <string name="drawing">Чертеж</string>
+    <string name="save">Save</string>
 </resources>

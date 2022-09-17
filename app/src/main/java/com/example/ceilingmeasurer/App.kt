@@ -4,16 +4,26 @@ import android.app.Application
 import androidx.room.Room
 import com.example.ceilingmeasurer.data.room.DataBaseApp
 import com.example.ceilingmeasurer.data.room.dao.ClientsDAO
+import com.example.ceilingmeasurer.di.KoinModules.repository
+import com.example.ceilingmeasurer.di.KoinModules.viewModel
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
+import com.example.ceilingmeasurer.data.room.dao.ClientsDAO
 import timber.log.Timber
 import timber.log.Timber.Forest.plant
 
 
-class App: Application() {
+class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
         appInstance = this
         plant(Timber.DebugTree())
+
+        startKoin {
+            androidContext(this@App)
+            modules(listOf(repository, viewModel))
+        }
     }
 
     companion object {
@@ -23,7 +33,7 @@ class App: Application() {
 
         fun getClientsDao(): ClientsDAO {
 
-            if(db == null) {
+            if (db == null) {
                 synchronized(DataBaseApp::class.java) {
                     if (db == null) {
                         appInstance?.let { app ->
@@ -33,7 +43,7 @@ class App: Application() {
                                 DB_NAME
                             ).allowMainThreadQueries()
                                 .build()
-                        } ?: throw Exception ("WHAT IS?")
+                        } ?: throw Exception("WHAT IS?")
                     }
                 }
             }

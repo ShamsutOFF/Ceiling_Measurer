@@ -23,11 +23,13 @@ object Libs {
     const val core_ktx = "androidx.core:core-ktx:${Versions.coreKtx}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
-    const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    const val constraintLayout =
+        "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
 
     //ViewModel + LiveData
     const val lifecycle_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
-    const val lifecycle_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+    const val lifecycle_viewmodel =
+        "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
 
     //Room
     const val room_runtime = "androidx.room:room-runtime:${Versions.room}"
@@ -36,8 +38,8 @@ object Libs {
 
     //Koin
     const val koin_core = "io.insert-koin:koin-core:${Versions.koin}"
-    const val koin_android = "io.insert-koin:koin-core:${Versions.koin}"
-    const val koin_compat = "io.insert-koin:koin-core:${Versions.koin}"
+    const val koin_android = "io.insert-koin:koin-android:${Versions.koin}"
+    const val koin_compat = "io.insert-koin:koin-android-compat:${Versions.koin}"
 
     //Timber
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"

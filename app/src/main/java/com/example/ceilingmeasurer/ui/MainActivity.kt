@@ -13,6 +13,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.ActivityMainBinding
+import com.example.ceilingmeasurer.ui.clientsList.ClientsListFragment
+import com.example.ceilingmeasurer.utils.IOnBackPressed
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
@@ -30,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         initAppBar()
         initBottomNavigation()
         if (supportFragmentManager.findFragmentById(R.id.main_container) == null) {
-            attachFragment(ClientsFragment(), FRAGMENT_CLIENTS)
+            attachFragment(ClientsListFragment(), FRAGMENT_CLIENTS)
         }
     }
 
@@ -68,7 +70,7 @@ class MainActivity : AppCompatActivity() {
     private fun initBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.nav_clients -> attachFragment(ClientsFragment(), FRAGMENT_CLIENTS)
+                R.id.nav_clients -> attachFragment(ClientsListFragment(), FRAGMENT_CLIENTS)
                 R.id.nav_materials -> attachFragment(MaterialsFragment(), FRAGMENT_MATERIALS)
                 R.id.nav_orders -> attachFragment(OrdersFragment(), FRAGMENT_ORDERS)
             }
@@ -91,7 +93,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        //nothing
+        val fragment =
+            this.supportFragmentManager.findFragmentById(R.id.main_container)
+        (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let {
+            //nothing
+        }
     }
 
     companion object {
