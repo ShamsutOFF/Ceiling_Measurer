@@ -16,6 +16,9 @@ object Versions {
 
     //Timber
     const val timber = "5.0.1"
+
+    //Navigation
+    const val navigation = "2.5.2"
 }
 
 object Libs {
@@ -40,6 +43,11 @@ object Libs {
     const val koin_core = "io.insert-koin:koin-core:${Versions.koin}"
     const val koin_android = "io.insert-koin:koin-android:${Versions.koin}"
     const val koin_compat = "io.insert-koin:koin-android-compat:${Versions.koin}"
+
+    //Navigation
+    const val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+    const val navigation_ui = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+
 
     //Timber
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"

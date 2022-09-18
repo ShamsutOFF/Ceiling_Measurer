@@ -56,16 +56,13 @@ dependencies {
     implementation(Libs.lifecycle_livedata)
     implementation(Libs.lifecycle_viewmodel)
 
+    //Navigation
+    implementation(Libs.navigation_fragment)
+    implementation(Libs.navigation_ui)
+
     //Room
     implementation(Libs.room_runtime)
     implementation(Libs.room_ktx)
-    implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.5.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.5.2")
     kapt(Libs.room_compiler)
 
     //Koin
