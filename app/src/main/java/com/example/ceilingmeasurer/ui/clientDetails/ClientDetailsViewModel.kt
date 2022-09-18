@@ -35,7 +35,7 @@ class ClientDetailsViewModel(
 
     private suspend fun updateClient(client: Client) {
         withContext(Dispatchers.IO) {
-            repoClients.updateClient(client)
+            repoClients.saveClient(client)
         }
     }
 
