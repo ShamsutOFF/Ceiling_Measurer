@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         initAppBar()
         initBottomNavigation()
-        if (supportFragmentManager.findFragmentById(R.id.main_container) == null) {
+        if (supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_naw_drawer) == null) {
             attachFragment(ClientsListFragment(), FRAGMENT_CLIENTS)
         }
     }
@@ -82,19 +82,19 @@ class MainActivity : AppCompatActivity() {
         val tempFragment = supportFragmentManager.findFragmentByTag(tag)
         if (tempFragment == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.main_container, fragment, tag)
+                .replace(R.id.nav_host_fragment_content_naw_drawer, fragment, tag)
                 .addToBackStack(null)
                 .commit()
         } else {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.main_container, tempFragment, tag)
+                .replace(R.id.nav_host_fragment_content_naw_drawer, tempFragment, tag)
                 .commit()
         }
     }
 
     override fun onBackPressed() {
         val fragment =
-            this.supportFragmentManager.findFragmentById(R.id.main_container)
+            this.supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_naw_drawer)
         (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let {
             //nothing
         }
