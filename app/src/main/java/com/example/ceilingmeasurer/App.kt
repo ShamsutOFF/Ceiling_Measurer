@@ -8,7 +8,6 @@ import com.example.ceilingmeasurer.di.KoinModules.repository
 import com.example.ceilingmeasurer.di.KoinModules.viewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import com.example.ceilingmeasurer.data.room.dao.ClientsDAO
 import timber.log.Timber
 import timber.log.Timber.Forest.plant
 
