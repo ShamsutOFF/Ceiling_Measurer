@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background_color"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/frg_det_mat_name"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:textSize="@dimen/material_text_size_24">
+    </TextView>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/input_layout_margin_side_large"
+            android:layout_marginTop="@dimen/input_layout_margin_top"
+            android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+            android:hint="@string/hint_frg_det_mat_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/frg_name_material"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/frg_det_mat_unit_measure"
+            android:textSize="16sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/input_layout_margin_side_large"
+            android:layout_marginTop="@dimen/input_layout_margin_top"
+            android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+            android:layout_weight="1"
+            android:hint="@string/hint_frg_det_mat_unit_measure">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/frg_unit_measure"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@android:color/white"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/frg_det_mat_price_mat"
+            android:textSize="16sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/input_layout_margin_side_large"
+            android:layout_marginTop="@dimen/input_layout_margin_top"
+            android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+            android:layout_weight="1"
+            android:hint="@string/_250">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/frg_price_material"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@android:color/white"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/frg_det_mat_price_work"
+            android:textSize="16sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/input_layout_margin_side_large"
+            android:layout_marginTop="@dimen/input_layout_margin_top"
+            android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+            android:layout_weight="1"
+            android:hint="@string/_350">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/frg_price_work"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@android:color/white"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_frg_material_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="@string/btn_save"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+

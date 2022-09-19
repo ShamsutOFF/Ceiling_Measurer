@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Ceiling Measurer</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="clients">Клиенты</string>
     <string name="materials">Материалы</string>
@@ -29,4 +28,16 @@
     <string name="drawing">Чертеж</string>
     <string name="save">Save</string>
     <string name="add_client">Добавить клиента</string>
+    <string name="frg_det_mat_name">Сведения о материале</string>
+    <string name="hint_frg_det_mat_name">Название материала</string>
+    <string name="frg_det_mat_unit_measure">Еденица измерения</string>
+    <string name="hint_frg_det_mat_unit_measure">м2</string>
+    <string name="frg_det_mat_price_mat">Стоимость материала</string>
+    <string name="_250">250</string>
+    <string name="frg_det_mat_price_work">Стоимость работы</string>
+    <string name="_350">350</string>
+    <string name="btn_save">Сохранить</string>
+    <string name="rv_mat_name">Матовое полотно белое</string>
+    <string name="rv_mat_price_mat">цена работы</string>
+    <string name="rv_mat_price_work">цена материала</string>
 </resources>
