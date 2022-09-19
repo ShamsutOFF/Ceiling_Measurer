@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentClientsListBinding
 import com.example.ceilingmeasurer.domain.entities.Client
@@ -23,6 +24,12 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
     }
     private val viewModel: ClientsListViewModel by viewModel()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val inflater = TransitionInflater.from(requireContext())
+        exitTransition = inflater.inflateTransition(R.transition.fade)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +41,7 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initFab()
+        initButton()
         initRecycler()
         initViewModel()
         renderData()
@@ -49,15 +56,13 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
         initChildFragment(ClientDetailsFragment.newInstance(adapter.getData()[position]))
     }
 
-    private fun initFab() {
-        binding.clientListFab.show()
-        binding.clientListFab.setOnClickListener {
+    private fun initButton() {
+        binding.clientListAddButton.setOnClickListener {
             initChildFragment(ClientDetailsFragment.newInstance(Client()))
         }
     }
 
     private fun initChildFragment(fragment: Fragment) {
-        binding.clientListFab.hide()
         childFragmentManager.beginTransaction()
             .replace(R.id.client_list_container, fragment)
             .addToBackStack("")

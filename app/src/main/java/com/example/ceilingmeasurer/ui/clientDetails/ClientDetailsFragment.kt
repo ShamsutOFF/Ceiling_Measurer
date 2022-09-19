@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.transition.TransitionInflater
+import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentClientDetailsBinding
 import com.example.ceilingmeasurer.domain.entities.Client
 import com.example.ceilingmeasurer.ui.clientDetails.recycler.ClientDetailsAdapter
@@ -28,6 +30,12 @@ class ClientDetailsFragment : Fragment() {
             arguments = bundleOf(CLIENT to client)
             this.client = client
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val inflater = TransitionInflater.from(requireContext())
+        enterTransition = inflater.inflateTransition(R.transition.slide_right)
     }
 
     override fun onCreateView(
