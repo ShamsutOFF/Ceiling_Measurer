@@ -11,6 +11,7 @@ import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentClientDetailsBinding
 import com.example.ceilingmeasurer.domain.entities.Client
+import com.example.ceilingmeasurer.temp.PlanFragment
 import com.example.ceilingmeasurer.ui.clientDetails.recycler.ClientDetailsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -113,7 +114,16 @@ class ClientDetailsFragment : Fragment() {
     }
 
     private fun onOpenPlan(position: Int) {
-
+        parentFragmentManager.beginTransaction()
+            .replace(
+                R.id.client_list_container,
+                PlanFragment.newInstance(
+                    adapter.getData()[position].length.toString(),
+                    adapter.getData()[position].width.toString()
+                )
+            )
+            .addToBackStack("")
+            .commit()
     }
 
 

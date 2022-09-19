@@ -73,11 +73,11 @@ class ClientDetailsViewHolder(
         }
 
         binding.buttonPlan.setOnClickListener {
-            onOpenPlan
+            onOpenPlan(adapterPosition)
         }
 
         binding.buttonAddPhoto.setOnClickListener {
-            onAddPhoto
+            onAddPhoto(adapterPosition)
         }
     }
 }
