@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ceiling_card_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/darker_gray">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/client_card_view_margin"
+    android:layout_marginTop="@dimen/card_view_margin"
+    android:paddingBottom="20dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingTop="@dimen/client_card_view_padding"
+    app:cardCornerRadius="@dimen/client_card_view_corner_radius"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    app:strokeColor="@color/black"
+    app:strokeWidth="@dimen/client_card_view_stroke_width">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -120,5 +132,4 @@
 
 
     </LinearLayout>
-
-</FrameLayout>
+</com.google.android.material.card.MaterialCardView>
