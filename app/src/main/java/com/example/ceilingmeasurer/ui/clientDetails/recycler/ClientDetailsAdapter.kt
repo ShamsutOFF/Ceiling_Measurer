@@ -5,7 +5,12 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ceilingmeasurer.domain.entities.Ceiling
 
-class ClientDetailsAdapter(private val onItemClick: (position: Int) -> Unit) :
+class ClientDetailsAdapter(
+    private val onItemClick: (position: Int) -> Unit,
+    private val onOpenPlan: (position: Int) -> Unit,
+    private val onAddPhoto: (position: Int) -> Unit,
+    private val onItemDelete: (position: Int) -> Unit
+) :
     RecyclerView.Adapter<ClientDetailsViewHolder>() {
     private var data: List<Ceiling> = mutableListOf()
 
@@ -24,10 +29,20 @@ class ClientDetailsAdapter(private val onItemClick: (position: Int) -> Unit) :
         notifyItemInserted(data.size)
     }
 
+    fun deleteCeiling(position: Int) {
+        val newData = mutableListOf<Ceiling>()
+        for (element in data) {
+            newData.add(element)
+        }
+        newData.removeAt(position)
+        data = newData
+        notifyItemRemoved(position)
+    }
+
     fun getData(): List<Ceiling> = data
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClientDetailsViewHolder =
-        ClientDetailsViewHolder.create(parent, onItemClick)
+        ClientDetailsViewHolder.create(parent, onItemClick, onOpenPlan, onAddPhoto, onItemDelete)
 
     override fun onBindViewHolder(holder: ClientDetailsViewHolder, position: Int) {
         holder.bind(data[position])

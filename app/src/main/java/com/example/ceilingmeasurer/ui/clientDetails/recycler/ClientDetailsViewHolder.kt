@@ -2,15 +2,16 @@ package com.example.ceilingmeasurer.ui.clientDetails.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.EditText
-import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ceilingmeasurer.databinding.RecyclerItemCeilingBinding
 import com.example.ceilingmeasurer.domain.entities.Ceiling
 
 class ClientDetailsViewHolder(
     private val binding: RecyclerItemCeilingBinding,
-    private val onItemClick: (position: Int) -> Unit
+    private val onItemClick: (position: Int) -> Unit,
+    private val onOpenPlan: (position: Int) -> Unit,
+    private val onAddPhoto: (position: Int) -> Unit,
+    private val onItemDelete: (position: Int) -> Unit
 ) :
     RecyclerView.ViewHolder(binding.root) {
     init {
@@ -36,11 +37,17 @@ class ClientDetailsViewHolder(
     companion object {
         fun create(
             parent: ViewGroup,
-            onItemClick: (position: Int) -> Unit
+            onItemClick: (position: Int) -> Unit,
+            onOpenPlan: (position: Int) -> Unit,
+            onAddPhoto: (position: Int) -> Unit,
+            onItemDelete: (position: Int) -> Unit
         ): ClientDetailsViewHolder =
             ClientDetailsViewHolder(
                 RecyclerItemCeilingBinding.inflate(LayoutInflater.from(parent.context)),
-                onItemClick
+                onItemClick,
+                onOpenPlan,
+                onAddPhoto,
+                onItemDelete
             )
     }
 
@@ -59,6 +66,18 @@ class ClientDetailsViewHolder(
             aluCurtain.setText(ceiling.alu_curtain.toString())
             priceForM2.setText(ceiling.price_for_m2.toString())
             attachment.setText(ceiling.attachment)
+        }
+
+        binding.buttonDeleteCeiling.setOnClickListener {
+            onItemDelete(adapterPosition)
+        }
+
+        binding.buttonPlan.setOnClickListener {
+            onOpenPlan
+        }
+
+        binding.buttonAddPhoto.setOnClickListener {
+            onAddPhoto
         }
     }
 }

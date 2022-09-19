@@ -18,9 +18,11 @@ class ClientDetailsFragment : Fragment() {
     private var _binding: FragmentClientDetailsBinding? = null
     private val binding get() = _binding!!
     private lateinit var client: Client
-    private val adapter = ClientDetailsAdapter { position ->
-        onItemClick(position)
-    }
+    private val adapter = ClientDetailsAdapter(
+        { position -> onItemClick(position) },
+        { position -> onOpenPlan(position) },
+        { position -> onAddPhoto(position) },
+        { position -> onItemDelete(position) })
 
     private val viewModel: ClientDetailsViewModel by viewModel()
 
@@ -101,6 +103,19 @@ class ClientDetailsFragment : Fragment() {
     private fun onItemClick(position: Int) {
         //nothing
     }
+
+    private fun onItemDelete(position: Int) {
+        adapter.deleteCeiling(position)
+    }
+
+    private fun onAddPhoto(position: Int) {
+
+    }
+
+    private fun onOpenPlan(position: Int) {
+
+    }
+
 
     override fun onDestroy() {
 //        viewModel.updateClientCredentials(getClient())
