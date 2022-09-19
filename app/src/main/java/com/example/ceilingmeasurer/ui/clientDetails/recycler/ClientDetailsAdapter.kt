@@ -15,27 +15,17 @@ class ClientDetailsAdapter(
     private var data: List<Ceiling> = mutableListOf()
 
     fun setData(clientsList: List<Ceiling>) {
-        data = clientsList
+        data = clientsList.toMutableList()
         notifyDataSetChanged()
     }
 
     fun addNewCeiling() {
-        val newData = mutableListOf<Ceiling>()
-        for (element in data) {
-            newData.add(element)
-        }
-        newData.add(Ceiling())
-        data = newData
+        (data as MutableList).add(Ceiling())
         notifyItemInserted(data.size)
     }
 
     fun deleteCeiling(position: Int) {
-        val newData = mutableListOf<Ceiling>()
-        for (element in data) {
-            newData.add(element)
-        }
-        newData.removeAt(position)
-        data = newData
+        (data as MutableList).removeAt(position)
         notifyItemRemoved(position)
     }
 

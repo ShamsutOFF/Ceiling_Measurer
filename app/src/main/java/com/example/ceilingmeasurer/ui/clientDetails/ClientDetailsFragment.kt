@@ -110,7 +110,7 @@ class ClientDetailsFragment : Fragment() {
     }
 
     private fun onAddPhoto(position: Int) {
-
+        //nothing
     }
 
     private fun onOpenPlan(position: Int) {
