@@ -140,13 +140,23 @@
             tools:listitem="@layout/recycler_item_ceiling" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_ceiling_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/input_layout_margin_side_small"
+            android:background="@color/design_default_color_primary"
+            android:text="@string/add_new_ceiling"
+            android:textColor="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/save_button"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:background="@color/design_default_color_primary"
-            android:layout_marginBottom="@dimen/last_element_bottom_margin"
             android:layout_height="wrap_content"
-            android:text="@string/save" />
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/last_element_bottom_margin"
+            android:background="@color/design_default_color_primary"
+            android:text="@string/save"
+            android:textColor="@color/white" />
     </LinearLayout>
 </ScrollView>

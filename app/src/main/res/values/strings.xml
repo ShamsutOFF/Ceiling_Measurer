@@ -29,4 +29,11 @@
     <string name="drawing">Чертеж</string>
     <string name="save">Save</string>
     <string name="add_client">Добавить клиента</string>
+    <string name="length">Длина</string>
+    <string name="width">Ширина</string>
+    <string name="open_plan">Открыть чертеж</string>
+    <string name="add_photo">добавить фото</string>
+    <string name="delete_ceiling">удалить</string>
+    <string name="add_new_ceiling">Добавить потолок</string>
+    <string name="ceiling_name">Наименование</string>
 </resources>

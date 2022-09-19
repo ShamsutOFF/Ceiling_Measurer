@@ -30,9 +30,10 @@ class ClientDetailsViewHolder(
 
     fun bind(ceiling: Ceiling) {
         binding.apply {
+            name.setText(ceiling.name)
             material.setText(ceiling.name_material)
-            square.setText(ceiling.square.toString())
-            perimeter.setText(ceiling.perimeter.toString())
+            length.setText(ceiling.length.toString())
+            width.setText(ceiling.width.toString())
             chandeliers.setText(ceiling.chandeliers.toString())
             lamps.setText(ceiling.lamps.toString())
             corners.setText(ceiling.corners.toString())
@@ -42,7 +43,6 @@ class ClientDetailsViewHolder(
             aluCurtain.setText(ceiling.alu_curtain.toString())
             priceForM2.setText(ceiling.price_for_m2.toString())
             attachment.setText(ceiling.attachment)
-            drawing.setText(ceiling.drawing)
         }
     }
 }
