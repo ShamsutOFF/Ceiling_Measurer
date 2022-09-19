@@ -54,7 +54,14 @@ class ClientDetailsFragment : Fragment() {
         initClient()
         initViewModel()
         initSaveButton()
+        initAddCeilingButton()
         renderData()
+    }
+
+    private fun initAddCeilingButton() {
+        binding.addCeilingButton.setOnClickListener {
+            adapter.addNewCeiling()
+        }
     }
 
     private fun initClient() {
@@ -81,9 +88,7 @@ class ClientDetailsFragment : Fragment() {
 
     private fun initSaveButton() {
         binding.saveButton.setOnClickListener {
-            viewModel.updateClientCredentials(
-                getClient()
-            )
+            viewModel.updateClientCredentials(getClient())
             viewModel.updateCeilingsDetails(adapter.getData())
             parentFragmentManager.popBackStack()
         }
@@ -98,10 +103,8 @@ class ClientDetailsFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        viewModel.updateClientCredentials(
-            getClient()
-        )
-        viewModel.updateCeilingsDetails(adapter.getData())
+//        viewModel.updateClientCredentials(getClient())
+//        viewModel.updateCeilingsDetails(getCeilings())
         super.onDestroy()
         _binding = null
     }

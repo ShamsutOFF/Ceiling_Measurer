@@ -2,6 +2,8 @@ package com.example.ceilingmeasurer.ui.clientDetails.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.EditText
+import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ceilingmeasurer.databinding.RecyclerItemCeilingBinding
 import com.example.ceilingmeasurer.domain.entities.Ceiling
@@ -16,6 +18,20 @@ class ClientDetailsViewHolder(
             onItemClick(adapterPosition)
         }
     }
+
+    val name = binding.name
+    val material = binding.material
+    val length = binding.length
+    val width = binding.width
+    val chandeliers = binding.chandeliers
+    val lamps = binding.lamps
+    val corners = binding.corners
+    val stroke = binding.stroke
+    val twoSteps = binding.twoSteps
+    val curtain = binding.curtain
+    val aluCurtain = binding.aluCurtain
+    val priceForM2 = binding.priceForM2
+    val attachment = binding.attachment
 
     companion object {
         fun create(
