@@ -64,6 +64,7 @@ class ClientDetailsFragment : Fragment() {
     private fun initAddCeilingButton() {
         binding.addCeilingButton.setOnClickListener {
             adapter.addNewCeiling()
+            binding.ceilingsRecyclerView.scrollToPosition(adapter.itemCount - 1)
         }
     }
 

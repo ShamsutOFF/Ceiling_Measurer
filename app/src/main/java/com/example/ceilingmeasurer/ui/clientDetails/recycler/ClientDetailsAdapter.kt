@@ -1,8 +1,10 @@
 package com.example.ceilingmeasurer.ui.clientDetails.recycler
 
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.domain.entities.Ceiling
 
 class ClientDetailsAdapter(
@@ -37,6 +39,7 @@ class ClientDetailsAdapter(
     override fun onBindViewHolder(holder: ClientDetailsViewHolder, position: Int) {
         holder.bind(data[position])
         bindTextWatchers(holder, position)
+        holder.ceilingCardView.animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.recycler_add)
     }
 
     private fun bindTextWatchers(holder: ClientDetailsViewHolder, position: Int) {

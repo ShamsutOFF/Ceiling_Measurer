@@ -20,6 +20,7 @@ class ClientDetailsViewHolder(
         }
     }
 
+    val ceilingCardView = binding.ceilingCardView
     val name = binding.name
     val material = binding.material
     val length = binding.length
