@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_background_color"
     android:gravity="center">
 
     <TextView
@@ -18,5 +19,13 @@
         android:layout_height="wrap_content"
         tools:itemCount="2"
         tools:listitem="@layout/recycler_item_material"/>
+
+    <Button
+        android:id="@+id/btn_new_material"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/btn_add_new_material" />
 
 </LinearLayout>
