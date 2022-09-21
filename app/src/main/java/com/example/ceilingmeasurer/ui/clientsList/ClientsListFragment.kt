@@ -58,7 +58,7 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
 
     private fun initButton() {
         binding.clientListAddButton.setOnClickListener {
-            initChildFragment(ClientDetailsFragment.newInstance(Client()))
+            initChildFragment(ClientDetailsFragment.newInstance(Client(0)))
         }
     }
 

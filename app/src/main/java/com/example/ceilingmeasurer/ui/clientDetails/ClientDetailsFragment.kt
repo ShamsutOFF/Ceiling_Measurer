@@ -136,6 +136,7 @@ class ClientDetailsFragment : Fragment() {
     }
 
     private fun getClient(): Client = Client(
+        -1,
         binding.clientName.text.toString(),
         binding.clientSurname.text.toString(),
         binding.phoneNumber.text.toString(),

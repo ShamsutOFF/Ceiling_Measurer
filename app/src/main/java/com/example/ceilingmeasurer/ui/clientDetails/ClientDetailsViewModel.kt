@@ -41,7 +41,7 @@ class ClientDetailsViewModel(
 
     private suspend fun fetchClientDetails(client: Client) {
         withContext(Dispatchers.IO) {
-            _liveCeilingList.postValue(repoCeilings.getCeilings(client.name, client.surname))
+            _liveCeilingList.postValue(client.id?.let { repoCeilings.getCeilings(it) })
         }
     }
 

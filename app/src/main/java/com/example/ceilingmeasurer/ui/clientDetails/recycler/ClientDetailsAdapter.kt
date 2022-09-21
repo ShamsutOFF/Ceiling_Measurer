@@ -22,7 +22,7 @@ class ClientDetailsAdapter(
     }
 
     fun addNewCeiling() {
-        (data as MutableList).add(Ceiling())
+        (data as MutableList).add(Ceiling(0, 0))
         notifyItemInserted(data.size)
     }
 
@@ -39,7 +39,8 @@ class ClientDetailsAdapter(
     override fun onBindViewHolder(holder: ClientDetailsViewHolder, position: Int) {
         holder.bind(data[position])
         bindTextWatchers(holder, position)
-        holder.ceilingCardView.animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.recycler_add)
+        holder.ceilingCardView.animation =
+            AnimationUtils.loadAnimation(holder.itemView.context, R.anim.recycler_add)
     }
 
     private fun bindTextWatchers(holder: ClientDetailsViewHolder, position: Int) {
