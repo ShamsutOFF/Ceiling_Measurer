@@ -27,7 +27,7 @@ class ClientDetailsAdapter(
 
     override fun onBindViewHolder(holder: ClientDetailsViewHolder, position: Int) {
         holder.bind(data[position])
-        bindTextWatchers(holder, position)
+        bindTextWatchers(holder, holder.adapterPosition)
         holder.ceilingCardView.animation =
             AnimationUtils.loadAnimation(holder.itemView.context, R.anim.recycler_add)
     }

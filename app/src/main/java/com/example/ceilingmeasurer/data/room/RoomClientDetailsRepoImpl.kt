@@ -76,6 +76,10 @@ class RoomClientDetailsRepoImpl(private val dao: CeilingDAO) : ClientDetailsRepo
         )
     }
 
+    override suspend fun deleteCeilingByClientId(id: Int) {
+        dao.deleteCeilingByClientId(id)
+    }
+
     override suspend fun updateCeilings(ceilingList: List<Ceiling>) {
         val updateList = mutableListOf<CeilingEntity>()
         for (ceiling in ceilingList) {

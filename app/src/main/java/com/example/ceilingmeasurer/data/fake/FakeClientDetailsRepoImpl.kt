@@ -20,4 +20,8 @@ class FakeClientDetailsRepoImpl : ClientDetailsRepo {
     override suspend fun deleteCeiling(ceiling: Ceiling) {
         //nothing
     }
+
+    override suspend fun deleteCeilingByClientId(id: Int) {
+        //nothing
+    }
 }

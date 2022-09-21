@@ -112,7 +112,9 @@ class ClientDetailsFragment : Fragment() {
 
     private fun onItemDelete(position: Int) {
         viewModel.deleteCeiling(adapter.getData()[position])
-        updateData()
+        Handler(Looper.getMainLooper()).postDelayed({
+            updateData()
+        }, 500)
     }
 
     private fun onAddPhoto(position: Int) {

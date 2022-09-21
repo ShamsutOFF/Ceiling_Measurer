@@ -18,4 +18,7 @@ interface CeilingDAO {
 
     @Delete
     fun deleteCeiling(entity: CeilingEntity)
+
+    @Query("DELETE FROM ${RoomConst.TABLE_CEILINGS} WHERE clientId = :id")
+    fun deleteCeilingByClientId(id: Int)
 }

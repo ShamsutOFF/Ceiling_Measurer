@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentClientsListBinding
@@ -19,9 +21,8 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
 
     private var _binding: FragmentClientsListBinding? = null
     private val binding get() = _binding!!
-    private val adapter = ClientsListAdapter { position ->
-        onItemClick(position)
-    }
+    private val adapter = ClientsListAdapter { position -> onItemClick(position) }
+
     private val viewModel: ClientsListViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +46,7 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
         initRecycler()
         initViewModel()
         renderData()
+        initItemTouchHelper()
     }
 
     private fun initRecycler() {
@@ -54,6 +56,10 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
 
     private fun onItemClick(position: Int) {
         initChildFragment(ClientDetailsFragment.newInstance(adapter.getData()[position]))
+    }
+
+    private fun deleteClient(position: Int) {
+        viewModel.deleteClient(adapter.getData()[position])
     }
 
     private fun initButton() {
@@ -78,6 +84,24 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
 
     private fun renderData() {
         viewModel.getClientList()
+    }
+
+    private fun initItemTouchHelper() {
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                deleteClient(viewHolder.adapterPosition)
+                adapter.notifyItemRemoved(viewHolder.adapterPosition)
+                renderData()
+            }
+        }).attachToRecyclerView(binding.clientListRecyclerView)
     }
 
     override fun onDestroy() {
