@@ -43,7 +43,7 @@ class ClientDetailsViewModel(
     }
 
     fun deleteCeiling(ceiling: Ceiling) {
-        cancelJob()
+//        cancelJob()
         viewModelCoroutineScope.launch { susDeleteCeiling(ceiling) }
     }
 

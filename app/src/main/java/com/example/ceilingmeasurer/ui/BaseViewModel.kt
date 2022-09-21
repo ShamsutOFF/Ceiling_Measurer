@@ -18,7 +18,7 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     protected fun cancelJob() {
-        viewModelCoroutineScope.coroutineContext.cancelChildren()
+//        viewModelCoroutineScope.coroutineContext.cancelChildren()
     }
 
     override fun onCleared() {

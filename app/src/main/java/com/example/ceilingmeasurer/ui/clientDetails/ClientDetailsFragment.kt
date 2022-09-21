@@ -60,16 +60,15 @@ class ClientDetailsFragment : Fragment() {
         initViewModel()
         initSaveButton()
         initAddCeilingButton()
-        renderData()
+        updateData()
     }
 
     private fun initAddCeilingButton() {
         binding.addCeilingButton.setOnClickListener {
             viewModel.insertNewCeiling(client.id)
             Handler(Looper.getMainLooper()).postDelayed({
-                renderData()
-                adapter.notifyItemInserted(adapter.itemCount - 1)
-            }, 1000)
+                updateData()
+            }, 500)
         }
     }
 
@@ -92,6 +91,7 @@ class ClientDetailsFragment : Fragment() {
     private fun initViewModel() {
         viewModel.ceilingList.observe(viewLifecycleOwner) {
             adapter.setData(it)
+            adapter.notifyDataSetChanged()
         }
     }
 
@@ -102,7 +102,7 @@ class ClientDetailsFragment : Fragment() {
         }
     }
 
-    private fun renderData() {
+    private fun updateData() {
         viewModel.getCeilings(client)
     }
 
@@ -112,10 +112,7 @@ class ClientDetailsFragment : Fragment() {
 
     private fun onItemDelete(position: Int) {
         viewModel.deleteCeiling(adapter.getData()[position])
-        Handler(Looper.getMainLooper()).postDelayed({
-            renderData()
-            adapter.notifyItemRemoved(position)
-        }, 1000)
+        updateData()
     }
 
     private fun onAddPhoto(position: Int) {

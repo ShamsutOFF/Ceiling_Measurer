@@ -18,7 +18,6 @@ class ClientDetailsAdapter(
 
     fun setData(clientsList: List<Ceiling>) {
         data = clientsList.toMutableList()
-        notifyDataSetChanged()
     }
 
     fun getData(): List<Ceiling> = data
