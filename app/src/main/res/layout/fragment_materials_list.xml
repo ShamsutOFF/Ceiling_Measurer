@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/material_list_container"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/main_background_color"
-    android:gravity="center"
-    tools:context=".ui.materialsList.MaterialsListFragment">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/materials"
-        android:textSize="22pt"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/materialsRecyclerView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:itemCount="2"
-        tools:listitem="@layout/recycler_item_material"/>
+        android:layout_height="match_parent"
+        android:background="@color/main_background_color"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".ui.materialsList.MaterialsListFragment">
 
-    <Button
-        android:id="@+id/btn_new_material"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="@string/btn_add_new_material" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/materials"
+            android:textSize="22pt" />
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/materialsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:itemCount="2"
+            tools:listitem="@layout/recycler_item_material" />
+
+        <Button
+            android:id="@+id/btn_new_material"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/btn_add_new_material" />
+    </LinearLayout>
+</FrameLayout>
