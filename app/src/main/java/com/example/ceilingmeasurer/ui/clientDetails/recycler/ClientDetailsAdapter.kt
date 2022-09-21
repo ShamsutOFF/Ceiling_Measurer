@@ -21,11 +21,6 @@ class ClientDetailsAdapter(
         notifyDataSetChanged()
     }
 
-    fun deleteCeiling(position: Int) {
-        (data as MutableList).removeAt(position)
-        notifyItemRemoved(position)
-    }
-
     fun getData(): List<Ceiling> = data
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClientDetailsViewHolder =

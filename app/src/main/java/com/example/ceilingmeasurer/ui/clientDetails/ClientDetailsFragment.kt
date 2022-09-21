@@ -1,6 +1,8 @@
 package com.example.ceilingmeasurer.ui.clientDetails
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,7 +66,10 @@ class ClientDetailsFragment : Fragment() {
     private fun initAddCeilingButton() {
         binding.addCeilingButton.setOnClickListener {
             viewModel.insertNewCeiling(client.id)
-            renderData()
+            Handler(Looper.getMainLooper()).postDelayed({
+                renderData()
+                adapter.notifyItemInserted(adapter.itemCount - 1)
+            }, 1000)
         }
     }
 
@@ -106,7 +111,11 @@ class ClientDetailsFragment : Fragment() {
     }
 
     private fun onItemDelete(position: Int) {
-        adapter.deleteCeiling(position)
+        viewModel.deleteCeiling(adapter.getData()[position])
+        Handler(Looper.getMainLooper()).postDelayed({
+            renderData()
+            adapter.notifyItemRemoved(position)
+        }, 1000)
     }
 
     private fun onAddPhoto(position: Int) {

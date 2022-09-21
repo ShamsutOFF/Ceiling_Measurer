@@ -42,6 +42,17 @@ class ClientDetailsViewModel(
         viewModelCoroutineScope.launch { updateCeilings(ceilings) }
     }
 
+    fun deleteCeiling(ceiling: Ceiling) {
+        cancelJob()
+        viewModelCoroutineScope.launch { susDeleteCeiling(ceiling) }
+    }
+
+    private suspend fun susDeleteCeiling(ceiling: Ceiling) {
+        withContext(Dispatchers.IO) {
+            repoCeilings.deleteCeiling(ceiling)
+        }
+    }
+
     private suspend fun updateClient(client: Client) {
         withContext(Dispatchers.IO) {
             repoClients.updateClient(client)
