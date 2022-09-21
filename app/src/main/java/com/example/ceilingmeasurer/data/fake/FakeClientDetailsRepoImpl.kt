@@ -6,10 +6,14 @@ import com.example.ceilingmeasurer.domain.entities.Ceiling
 class FakeClientDetailsRepoImpl : ClientDetailsRepo {
 
     override suspend fun getCeilings(id: Int): List<Ceiling> {
-        return listOf(Ceiling(0,0))
+        return listOf(Ceiling())
     }
 
-    override suspend fun saveCeilings(ceiling: List<Ceiling>) {
+    override suspend fun saveCeiling(ceiling: Ceiling) {
+        //nothing
+    }
+
+    override suspend fun updateCeilings(ceilingList: List<Ceiling>) {
         //nothing
     }
 

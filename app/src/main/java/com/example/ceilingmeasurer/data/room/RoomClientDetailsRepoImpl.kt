@@ -33,13 +33,56 @@ class RoomClientDetailsRepoImpl(private val dao: CeilingDAO) : ClientDetailsRepo
         return returnList
     }
 
-    override suspend fun saveCeilings(ceilingList: List<Ceiling>) {
-        val insertList = mutableListOf<CeilingEntity>()
+    override suspend fun saveCeiling(ceiling: Ceiling) {
+        val insertCeiling = CeilingEntity(
+            ceilingId = ceiling.id,
+            clientId = ceiling.clientId,
+            name = ceiling.name,
+            name_material = ceiling.name_material,
+            length = ceiling.length,
+            width = ceiling.width,
+            chandeliers = ceiling.chandeliers,
+            lamps = ceiling.lamps,
+            corners = ceiling.corners,
+            stroke = ceiling.stroke,
+            two_steps = ceiling.two_steps,
+            curtain = ceiling.curtain,
+            alu_curtain = ceiling.alu_curtain,
+            price_for_m2 = ceiling.price_for_m2,
+            attachment = ceiling.attachment,
+        )
+        dao.insertNewCeiling(insertCeiling)
+    }
+
+    override suspend fun deleteCeiling(ceiling: Ceiling) {
+        dao.deleteCeiling(
+            CeilingEntity(
+                ceilingId = ceiling.id,
+                clientId = ceiling.clientId,
+                name = ceiling.name,
+                name_material = ceiling.name_material,
+                length = ceiling.length,
+                width = ceiling.width,
+                chandeliers = ceiling.chandeliers,
+                lamps = ceiling.lamps,
+                corners = ceiling.corners,
+                stroke = ceiling.stroke,
+                two_steps = ceiling.two_steps,
+                curtain = ceiling.curtain,
+                alu_curtain = ceiling.alu_curtain,
+                price_for_m2 = ceiling.price_for_m2,
+                attachment = ceiling.attachment,
+            )
+        )
+    }
+
+    override suspend fun updateCeilings(ceilingList: List<Ceiling>) {
+        val updateList = mutableListOf<CeilingEntity>()
         for (ceiling in ceilingList) {
-            insertList.add(
+            updateList.add(
                 CeilingEntity(
-                    ceilingId = ceiling.id ?: 0,
-                    clientId = ceiling.clientId ?: 0,
+                    ceilingId = ceiling.id,
+                    clientId = ceiling.clientId,
                     name = ceiling.name,
                     name_material = ceiling.name_material,
                     length = ceiling.length,
@@ -56,30 +99,8 @@ class RoomClientDetailsRepoImpl(private val dao: CeilingDAO) : ClientDetailsRepo
                 )
             )
         }
-        for (ceiling in insertList) {
-            dao.insertNewCeiling(ceiling)
+        for (ceiling in updateList) {
+            dao.updateCeiling(ceiling)
         }
-    }
-
-    override suspend fun deleteCeiling(ceiling: Ceiling) {
-        dao.deleteCeiling(
-            CeilingEntity(
-                ceilingId = ceiling.id ?: 0,
-                clientId = ceiling.clientId ?: 0,
-                name = ceiling.name,
-                name_material = ceiling.name_material,
-                length = ceiling.length,
-                width = ceiling.width,
-                chandeliers = ceiling.chandeliers,
-                lamps = ceiling.lamps,
-                corners = ceiling.corners,
-                stroke = ceiling.stroke,
-                two_steps = ceiling.two_steps,
-                curtain = ceiling.curtain,
-                alu_curtain = ceiling.alu_curtain,
-                price_for_m2 = ceiling.price_for_m2,
-                attachment = ceiling.attachment,
-            )
-        )
     }
 }

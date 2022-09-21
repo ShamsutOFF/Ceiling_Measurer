@@ -13,9 +13,24 @@ class ClientsListViewModel(private val repo: ClientListRepo) : BaseViewModel() {
     private val _liveData: MutableLiveData<List<Client>> = MutableLiveData()
     val clientList: LiveData<List<Client>> = _liveData
 
+    fun insertNewClient() {
+        cancelJob()
+        viewModelCoroutineScope.launch {
+            susInsertNewClient()
+        }
+    }
+
+    private suspend fun susInsertNewClient() {
+        withContext(Dispatchers.IO) {
+            repo.saveClient(Client())
+        }
+    }
+
     fun getClientList() {
         cancelJob()
-        viewModelCoroutineScope.launch { fetchClientList() }
+        viewModelCoroutineScope.launch {
+            fetchClientList()
+        }
     }
 
     private suspend fun fetchClientList() {

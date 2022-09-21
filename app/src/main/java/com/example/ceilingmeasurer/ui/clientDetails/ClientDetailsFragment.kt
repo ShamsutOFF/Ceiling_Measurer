@@ -94,7 +94,6 @@ class ClientDetailsFragment : Fragment() {
         binding.saveButton.setOnClickListener {
             viewModel.updateClientCredentials(getClient())
             viewModel.updateCeilingsDetails(adapter.getData())
-            parentFragmentManager.popBackStack()
         }
     }
 
@@ -130,18 +129,21 @@ class ClientDetailsFragment : Fragment() {
 
     override fun onDestroy() {
 //        viewModel.updateClientCredentials(getClient())
-//        viewModel.updateCeilingsDetails(getCeilings())
+//        viewModel.updateCeilingsDetails(adapter.getData())
         super.onDestroy()
         _binding = null
     }
 
-    private fun getClient(): Client = Client(
-        -1,
-        binding.clientName.text.toString(),
-        binding.clientSurname.text.toString(),
-        binding.phoneNumber.text.toString(),
-        binding.address.text.toString(),
-        binding.district.text.toString(),
-        binding.clientStatus.text.toString()
-    )
+    private fun getClient(): Client {
+        val returnClient = arguments?.getParcelable<Client>(CLIENT) ?: Client()
+        returnClient.apply {
+            name = binding.clientName.text.toString()
+            surname = binding.clientSurname.text.toString()
+            phone_number = binding.phoneNumber.text.toString()
+            address = binding.address.text.toString()
+            district = binding.district.text.toString()
+            status = binding.clientStatus.text.toString()
+        }
+        return returnClient
+    }
 }

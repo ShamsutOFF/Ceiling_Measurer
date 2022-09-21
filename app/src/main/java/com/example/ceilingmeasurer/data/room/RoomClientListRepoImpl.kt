@@ -37,4 +37,32 @@ class RoomClientListRepoImpl(private val dao: ClientDAO) : ClientListRepo {
             )
         )
     }
+
+    override suspend fun updateClient(client: Client) {
+        dao.updateClient(
+            ClientEntity(
+                clientId = client.id,
+                name = client.name,
+                surname = client.surname,
+                phone_number = client.phone_number,
+                address = client.address,
+                district = client.district,
+                status = client.status
+            )
+        )
+    }
+
+    override suspend fun deleteClient(client: Client) {
+        dao.deleteClient(
+            ClientEntity(
+                clientId = client.id,
+                name = client.name,
+                surname = client.surname,
+                phone_number = client.phone_number,
+                address = client.address,
+                district = client.district,
+                status = client.status
+            )
+        )
+    }
 }

@@ -18,4 +18,12 @@ class FakeClientListRepoImpl : ClientListRepo {
     override suspend fun saveClient(client: Client) {
         this.client.add(client)
     }
+
+    override suspend fun updateClient(client: Client) {
+        //nothing
+    }
+
+    override suspend fun deleteClient(client: Client) {
+        //nothing
+    }
 }

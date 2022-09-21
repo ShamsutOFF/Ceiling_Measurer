@@ -5,8 +5,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Ceiling(
-    var id: Int?,
-    var clientId: Int?,
+    var id: Int = 0,
+    var clientId: Int = 0,
     var name: String = "",
     var name_material: String = "",
     var length: Double = 0.0,

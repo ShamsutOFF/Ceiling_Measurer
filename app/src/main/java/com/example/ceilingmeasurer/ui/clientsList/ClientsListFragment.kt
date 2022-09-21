@@ -58,7 +58,8 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
 
     private fun initButton() {
         binding.clientListAddButton.setOnClickListener {
-            initChildFragment(ClientDetailsFragment.newInstance(Client(0)))
+            viewModel.insertNewClient()
+            initChildFragment(ClientDetailsFragment.newInstance(Client()))
         }
     }
 
@@ -86,6 +87,7 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
 
     override fun onBackPressed(): Boolean {
         childFragmentManager.popBackStack()
+        renderData()
         return true
     }
 }
