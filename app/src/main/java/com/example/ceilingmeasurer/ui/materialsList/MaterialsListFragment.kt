@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentMaterialsListBinding
+import com.example.ceilingmeasurer.ui.MaterialDetailsFragment
 import com.example.ceilingmeasurer.ui.materialDetails.recycler.MaterialsListAdapter
 import com.example.ceilingmeasurer.utils.IOnBackPressed
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -22,13 +23,16 @@ class MaterialsListFragment : Fragment(), IOnBackPressed {
     private val viewModel: MaterialsListViewModel by viewModel()
 
     private fun onItemClick(position: Int) {
-        //
-    }
-/*
-    private fun onItemClick(position: Int) {
-            initChildFragment(MaterialsListFragment.newInstance(adapter.getData()[position]))
+            initChildFragment(MaterialDetailsFragment.newInstance(adapter.getData()[position]))
         }
-    */
+
+    private fun initChildFragment(fragment: Fragment) {
+        childFragmentManager.beginTransaction()
+            .replace(R.id.material_list_container, fragment)
+            .addToBackStack("")
+            .commit()
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

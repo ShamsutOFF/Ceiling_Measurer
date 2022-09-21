@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MaterialsListViewModel(private val repo: MaterialListRepo, get: MaterialListRepo) : BaseViewModel() {
+class MaterialsListViewModel(private val repo: MaterialListRepo) : BaseViewModel() {
     private val _liveData: MutableLiveData<List<Material>> = MutableLiveData()
     val materialList: LiveData<List<Material>> = _liveData
 

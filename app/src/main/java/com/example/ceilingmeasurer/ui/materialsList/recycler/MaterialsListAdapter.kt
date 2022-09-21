@@ -22,4 +22,5 @@ RecyclerView.Adapter<MaterialsListViewHolder>(){
     }
 
     override fun getItemCount(): Int = data.size
+    fun getData() = data
 }

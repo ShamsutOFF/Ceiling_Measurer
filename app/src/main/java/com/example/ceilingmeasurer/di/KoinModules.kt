@@ -28,7 +28,7 @@ object KoinModules {
         viewModel { ClientDetailsViewModel(get<ClientDetailsRepo>(), get<ClientListRepo>()) }
     }
     val viewModelMaterial = module {
-        viewModel { MaterialsListViewModel(get<MaterialListRepo>(), get<MaterialListRepo>()) }
+        viewModel { MaterialsListViewModel(get<MaterialListRepo>()) }
     }
 
 }
