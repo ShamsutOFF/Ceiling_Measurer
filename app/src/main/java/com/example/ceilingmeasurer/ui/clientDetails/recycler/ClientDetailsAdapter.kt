@@ -21,11 +21,6 @@ class ClientDetailsAdapter(
         notifyDataSetChanged()
     }
 
-    fun addNewCeiling() {
-        (data as MutableList).add(Ceiling(0, 0))
-        notifyItemInserted(data.size)
-    }
-
     fun deleteCeiling(position: Int) {
         (data as MutableList).removeAt(position)
         notifyItemRemoved(position)

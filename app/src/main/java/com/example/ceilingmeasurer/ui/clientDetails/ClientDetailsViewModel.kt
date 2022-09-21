@@ -23,13 +23,13 @@ class ClientDetailsViewModel(
         viewModelCoroutineScope.launch { fetchClientDetails(client) }
     }
 
-    fun insertNewCeiling() {
+    fun insertNewCeiling(clientId: Int) {
         cancelJob()
-        viewModelCoroutineScope.launch { susInsertNewCeiling() }
+        viewModelCoroutineScope.launch { susInsertNewCeiling(clientId) }
     }
 
-    private suspend fun susInsertNewCeiling() {
-        withContext(Dispatchers.IO) { repoCeilings.saveCeiling(Ceiling()) }
+    private suspend fun susInsertNewCeiling(clientId: Int) {
+        withContext(Dispatchers.IO) { repoCeilings.saveCeiling(Ceiling(clientId = clientId)) }
     }
 
     fun updateClientCredentials(client: Client) {
