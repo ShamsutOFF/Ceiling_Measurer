@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentClientsListBinding
@@ -15,6 +13,7 @@ import com.example.ceilingmeasurer.domain.entities.Client
 import com.example.ceilingmeasurer.ui.clientDetails.ClientDetailsFragment
 import com.example.ceilingmeasurer.ui.clientsList.recycler.ClientsListAdapter
 import com.example.ceilingmeasurer.utils.IOnBackPressed
+import com.example.ceilingmeasurer.utils.attachLeftSwipeHelper
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ClientsListFragment : Fragment(), IOnBackPressed {
@@ -49,6 +48,7 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
         initItemTouchHelper()
     }
 
+    // region private
     private fun initRecycler() {
         binding.clientListRecyclerView.layoutManager = GridLayoutManager(context, 1)
         binding.clientListRecyclerView.adapter = adapter
@@ -87,22 +87,13 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
     }
 
     private fun initItemTouchHelper() {
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                deleteClient(viewHolder.adapterPosition)
-                adapter.notifyItemRemoved(viewHolder.adapterPosition)
-                updateClientData()
-            }
-        }).attachToRecyclerView(binding.clientListRecyclerView)
+        binding.clientListRecyclerView.attachLeftSwipeHelper { viewHolder ->
+            deleteClient(viewHolder.adapterPosition)
+            adapter.notifyItemRemoved(viewHolder.adapterPosition)
+            updateClientData()
+        }
     }
+    // endregion
 
     override fun onDestroy() {
         super.onDestroy()
