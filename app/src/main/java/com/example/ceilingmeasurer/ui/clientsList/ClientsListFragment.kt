@@ -42,10 +42,10 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initButton()
+        initAddButton()
         initRecycler()
         initViewModel()
-        renderData()
+        updateClientData()
         initItemTouchHelper()
     }
 
@@ -62,7 +62,7 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
         viewModel.deleteClient(adapter.getData()[position])
     }
 
-    private fun initButton() {
+    private fun initAddButton() {
         binding.clientListAddButton.setOnClickListener {
             viewModel.insertNewClient()
             initChildFragment(ClientDetailsFragment.newInstance(Client()))
@@ -82,7 +82,7 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
         }
     }
 
-    private fun renderData() {
+    private fun updateClientData() {
         viewModel.getClientList()
     }
 
@@ -99,7 +99,7 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 deleteClient(viewHolder.adapterPosition)
                 adapter.notifyItemRemoved(viewHolder.adapterPosition)
-                renderData()
+                updateClientData()
             }
         }).attachToRecyclerView(binding.clientListRecyclerView)
     }
@@ -111,7 +111,7 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
 
     override fun onBackPressed(): Boolean {
         childFragmentManager.popBackStack()
-        renderData()
+        updateClientData()
         return true
     }
 }
