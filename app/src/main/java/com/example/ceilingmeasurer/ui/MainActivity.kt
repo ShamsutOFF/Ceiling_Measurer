@@ -1,15 +1,23 @@
 package com.example.ceilingmeasurer.ui
 
+import android.Manifest
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.ActivityMainBinding
 import com.example.ceilingmeasurer.ui.clientsList.ClientsListFragment
 import com.example.ceilingmeasurer.utils.IOnBackPressed
+import com.example.hellolibrary.HelloLibrary
+
+private const val TAG = "### MainActivity"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val hellowLibrary = HelloLibrary()
 
     companion object {
         const val FRAGMENT_CLIENTS = "clients"
@@ -21,6 +29,29 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        Log.d(TAG, "this ${this}")
+        Log.d(TAG, "applicationContext ${applicationContext}")
+        Log.d(TAG, "baseContext ${baseContext}")
+
+        hellowLibrary.helloFromOurLibrary()
+        hellowLibrary.getSystemInfo()
+
+
+
+        val androidID = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID)
+        Log.d(TAG, "androidID = $androidID")
+
+        hellowLibrary.printSystemInfo2()
+
+        val permissionApproved = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            applicationContext.checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
+        } else {
+            false
+        }
+        Log.d(TAG, "permissionApproved = $permissionApproved")
+
+
 
         initBottomNavigation()
         if (supportFragmentManager.findFragmentById(R.id.main_container) == null) {
