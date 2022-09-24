@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ceilingmeasurer.databinding.RecyclerItemClientBinding
 import com.example.ceilingmeasurer.domain.entities.Client
 
+
 class ClientsListViewHolder(
     private val binding: RecyclerItemClientBinding,
     private val onItemClick: (position: Int) -> Unit
@@ -18,7 +19,10 @@ class ClientsListViewHolder(
     }
 
     companion object {
-        fun create(parent: ViewGroup, onItemClick: (position: Int) -> Unit): ClientsListViewHolder =
+        fun create(
+            parent: ViewGroup,
+            onItemClick: (position: Int) -> Unit
+        ): ClientsListViewHolder =
             ClientsListViewHolder(
                 RecyclerItemClientBinding.inflate(LayoutInflater.from(parent.context)),
                 onItemClick

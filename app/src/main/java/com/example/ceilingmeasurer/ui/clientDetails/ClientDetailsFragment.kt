@@ -1,6 +1,8 @@
 package com.example.ceilingmeasurer.ui.clientDetails
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,7 @@ import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentClientDetailsBinding
 import com.example.ceilingmeasurer.domain.entities.Client
+import com.example.ceilingmeasurer.temp.PlanFragment
 import com.example.ceilingmeasurer.ui.clientDetails.recycler.ClientDetailsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -18,9 +21,11 @@ class ClientDetailsFragment : Fragment() {
     private var _binding: FragmentClientDetailsBinding? = null
     private val binding get() = _binding!!
     private lateinit var client: Client
-    private val adapter = ClientDetailsAdapter { position ->
-        onItemClick(position)
-    }
+    private val adapter = ClientDetailsAdapter(
+        { position -> onItemClick(position) },
+        { position -> onOpenPlan(position) },
+        { position -> onAddPhoto(position) },
+        { position -> onItemDelete(position) })
 
     private val viewModel: ClientDetailsViewModel by viewModel()
 
@@ -54,7 +59,17 @@ class ClientDetailsFragment : Fragment() {
         initClient()
         initViewModel()
         initSaveButton()
-        renderData()
+        initAddCeilingButton()
+        updateData()
+    }
+
+    private fun initAddCeilingButton() {
+        binding.addCeilingButton.setOnClickListener {
+            viewModel.insertNewCeiling(client.id)
+            Handler(Looper.getMainLooper()).postDelayed({
+                updateData()
+            }, 500)
+        }
     }
 
     private fun initClient() {
@@ -76,20 +91,18 @@ class ClientDetailsFragment : Fragment() {
     private fun initViewModel() {
         viewModel.ceilingList.observe(viewLifecycleOwner) {
             adapter.setData(it)
+            adapter.notifyDataSetChanged()
         }
     }
 
     private fun initSaveButton() {
         binding.saveButton.setOnClickListener {
-            viewModel.updateClientCredentials(
-                getClient()
-            )
+            viewModel.updateClientCredentials(getClient())
             viewModel.updateCeilingsDetails(adapter.getData())
-            parentFragmentManager.popBackStack()
         }
     }
 
-    private fun renderData() {
+    private fun updateData() {
         viewModel.getCeilings(client)
     }
 
@@ -97,21 +110,48 @@ class ClientDetailsFragment : Fragment() {
         //nothing
     }
 
+    private fun onItemDelete(position: Int) {
+        viewModel.deleteCeiling(adapter.getData()[position])
+        Handler(Looper.getMainLooper()).postDelayed({
+            updateData()
+        }, 500)
+    }
+
+    private fun onAddPhoto(position: Int) {
+        //nothing
+    }
+
+    private fun onOpenPlan(position: Int) {
+        parentFragmentManager.beginTransaction()
+            .replace(
+                R.id.client_list_container,
+                PlanFragment.newInstance(
+                    adapter.getData()[position].length.toString(),
+                    adapter.getData()[position].width.toString()
+                )
+            )
+            .addToBackStack("")
+            .commit()
+    }
+
+
     override fun onDestroy() {
-        viewModel.updateClientCredentials(
-            getClient()
-        )
-        viewModel.updateCeilingsDetails(adapter.getData())
+//        viewModel.updateClientCredentials(getClient())
+//        viewModel.updateCeilingsDetails(adapter.getData())
         super.onDestroy()
         _binding = null
     }
 
-    private fun getClient(): Client = Client(
-        binding.clientName.text.toString(),
-        binding.clientSurname.text.toString(),
-        binding.phoneNumber.text.toString(),
-        binding.address.text.toString(),
-        binding.district.text.toString(),
-        binding.clientStatus.text.toString()
-    )
+    private fun getClient(): Client {
+        val returnClient = arguments?.getParcelable<Client>(CLIENT) ?: Client()
+        returnClient.apply {
+            name = binding.clientName.text.toString()
+            surname = binding.clientSurname.text.toString()
+            phone_number = binding.phoneNumber.text.toString()
+            address = binding.address.text.toString()
+            district = binding.district.text.toString()
+            status = binding.clientStatus.text.toString()
+        }
+        return returnClient
+    }
 }
