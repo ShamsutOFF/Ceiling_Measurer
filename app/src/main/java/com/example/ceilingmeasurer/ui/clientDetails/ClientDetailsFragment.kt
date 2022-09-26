@@ -52,8 +52,8 @@ class ClientDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecycler()
         initClient()
+        initRecycler()
         initViewModel()
         initSaveButton()
         initAddCeilingButton()
