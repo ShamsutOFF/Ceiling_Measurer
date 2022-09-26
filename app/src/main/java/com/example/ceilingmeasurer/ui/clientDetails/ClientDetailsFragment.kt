@@ -22,7 +22,7 @@ class ClientDetailsFragment : Fragment() {
     private var _binding: FragmentClientDetailsBinding? = null
     private val binding get() = _binding!!
     private lateinit var client: Client
-    private val adapter = ClientDetailsAdapter { position -> onItemClick(position) }
+    private val ceilingsAdapter = ClientDetailsAdapter { position -> onItemClick(position) }
 
     private val viewModel: ClientDetailsViewModel by viewModel()
 
@@ -83,17 +83,17 @@ class ClientDetailsFragment : Fragment() {
     private fun initRecycler() {
         binding.ceilingsRecyclerView.apply {
             layoutManager = GridLayoutManager(context, 1)
-            adapter = adapter
+            adapter = ceilingsAdapter
         }.attachLeftSwipeHelper { viewHolder ->
-            viewModel.deleteCeiling(adapter.getData()[viewHolder.adapterPosition])
-            adapter.notifyItemRemoved(viewHolder.adapterPosition)
+            viewModel.deleteCeiling(ceilingsAdapter.getData()[viewHolder.adapterPosition])
+            ceilingsAdapter.notifyItemRemoved(viewHolder.adapterPosition)
             updateData()
         }
     }
 
     private fun initViewModel() {
         viewModel.ceilingList.observe(viewLifecycleOwner) {
-            adapter.setData(it)
+            ceilingsAdapter.setData(it)
         }
     }
 
@@ -112,7 +112,7 @@ class ClientDetailsFragment : Fragment() {
             .replace(
                 R.id.client_list_container,
                 CeilingDetailsFragment.newInstance(
-                    ceiling = adapter.getData()[position]
+                    ceiling = ceilingsAdapter.getData()[position]
                 )
             )
             .addToBackStack("")
