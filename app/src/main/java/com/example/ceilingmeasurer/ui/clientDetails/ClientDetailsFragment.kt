@@ -8,15 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentClientDetailsBinding
 import com.example.ceilingmeasurer.domain.entities.Client
 import com.example.ceilingmeasurer.ui.ceilingDetails.CeilingDetailsFragment
+import com.example.ceilingmeasurer.ui.clientDetails.recycler.CeilingsCallback
 import com.example.ceilingmeasurer.ui.clientDetails.recycler.ClientDetailsAdapter
 import com.example.ceilingmeasurer.utils.attachLeftSwipeHelper
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.math.ceil
 
 class ClientDetailsFragment : Fragment() {
     private var _binding: FragmentClientDetailsBinding? = null
@@ -65,7 +68,7 @@ class ClientDetailsFragment : Fragment() {
             viewModel.insertNewCeiling(client.id)
             Handler(Looper.getMainLooper()).postDelayed({
                 updateData()
-            }, 500)
+            }, 1000)
         }
     }
 
@@ -92,8 +95,11 @@ class ClientDetailsFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        viewModel.ceilingList.observe(viewLifecycleOwner) {
-            ceilingsAdapter.setData(it)
+        viewModel.ceilingList.observe(viewLifecycleOwner) { newData ->
+            val diffCallback = CeilingsCallback(ceilingsAdapter.getData(), newData)
+            val diffCeilings = DiffUtil.calculateDiff(diffCallback)
+            ceilingsAdapter.setData(newData)
+            diffCeilings.dispatchUpdatesTo(ceilingsAdapter)
         }
     }
 
