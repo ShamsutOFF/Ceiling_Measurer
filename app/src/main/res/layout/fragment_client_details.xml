@@ -1,162 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_background_color">
+    android:background="@color/main_background_color"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/input_layout_margin_side_large"
-        android:orientation="vertical"
-        android:textSize="22pt">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_large"
-                android:layout_marginTop="@dimen/input_layout_margin_top"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
-                android:layout_weight="1"
-                android:hint="@string/name">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/client_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_small"
-                android:layout_marginTop="@dimen/input_layout_margin_top"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
-                android:layout_weight="1"
-                android:hint="@string/surname">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/client_surname"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/input_layout_margin_side_large"
             android:layout_marginTop="@dimen/input_layout_margin_top"
-            android:layout_marginEnd="@dimen/input_layout_margin_side_large"
-            android:hint="@string/phone_number">
+            android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+            android:layout_weight="1"
+            android:hint="@string/name">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phone_number"
+                android:id="@+id/client_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/input_layout_margin_side_small"
+            android:layout_marginTop="@dimen/input_layout_margin_top"
+            android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+            android:layout_weight="1"
+            android:hint="@string/surname">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/client_surname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/input_layout_margin_side_large"
+        android:layout_marginTop="@dimen/input_layout_margin_top"
+        android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+        android:hint="@string/phone_number">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
+            android:background="@android:color/white"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_large"
-                android:layout_marginTop="@dimen/input_layout_margin_top"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
-                android:layout_weight="2"
-                android:hint="@string/address">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/address"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_small"
-                android:layout_marginTop="@dimen/input_layout_margin_top"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
-                android:layout_weight="1"
-                android:hint="@string/district">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/district"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/input_layout_margin_side_large"
             android:layout_marginTop="@dimen/input_layout_margin_top"
-            android:layout_marginEnd="@dimen/input_layout_margin_side_large"
-            android:hint="@string/client_status">
+            android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+            android:layout_weight="2"
+            android:hint="@string/address">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/client_status"
+                android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/ceilings_recycler_view"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/input_layout_margin_side_small"
+            android:layout_marginTop="@dimen/input_layout_margin_top"
+            android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+            android:layout_weight="1"
+            android:hint="@string/district">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/district"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/input_layout_margin_side_large"
+        android:layout_marginTop="@dimen/input_layout_margin_top"
+        android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+        android:hint="@string/client_status">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/client_status"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:itemCount="6"
-            tools:listitem="@layout/recycler_item_ceiling" />
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ceilings_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:itemCount="4"
+        tools:listitem="@layout/recycler_item_ceiling" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/last_element_bottom_margin"
+        android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/add_ceiling_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/input_layout_margin_side_small"
+            android:layout_margin="@dimen/client_button_margin"
+            android:layout_weight="1"
             android:background="@color/design_default_color_primary"
+            android:gravity="center"
             android:text="@string/add_new_ceiling"
             android:textColor="@color/white" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/save_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/last_element_bottom_margin"
+            android:layout_margin="@dimen/client_button_margin"
+            android:layout_weight="1"
             android:background="@color/design_default_color_primary"
+            android:gravity="center"
             android:text="@string/save"
             android:textColor="@color/white" />
     </LinearLayout>
-</ScrollView>
+</LinearLayout>

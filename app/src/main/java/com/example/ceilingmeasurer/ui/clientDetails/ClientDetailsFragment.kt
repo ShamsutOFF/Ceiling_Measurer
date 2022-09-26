@@ -13,19 +13,16 @@ import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentClientDetailsBinding
 import com.example.ceilingmeasurer.domain.entities.Client
-import com.example.ceilingmeasurer.temp.PlanFragment
+import com.example.ceilingmeasurer.ui.ceilingDetails.CeilingDetailsFragment
 import com.example.ceilingmeasurer.ui.clientDetails.recycler.ClientDetailsAdapter
+import com.example.ceilingmeasurer.utils.attachLeftSwipeHelper
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ClientDetailsFragment : Fragment() {
     private var _binding: FragmentClientDetailsBinding? = null
     private val binding get() = _binding!!
     private lateinit var client: Client
-    private val adapter = ClientDetailsAdapter(
-        { position -> onItemClick(position) },
-        { position -> onOpenPlan(position) },
-        { position -> onAddPhoto(position) },
-        { position -> onItemDelete(position) })
+    private val adapter = ClientDetailsAdapter { position -> onItemClick(position) }
 
     private val viewModel: ClientDetailsViewModel by viewModel()
 
@@ -84,21 +81,25 @@ class ClientDetailsFragment : Fragment() {
     }
 
     private fun initRecycler() {
-        binding.ceilingsRecyclerView.layoutManager = GridLayoutManager(context, 1)
-        binding.ceilingsRecyclerView.adapter = adapter
+        binding.ceilingsRecyclerView.apply {
+            layoutManager = GridLayoutManager(context, 1)
+            adapter = adapter
+        }.attachLeftSwipeHelper { viewHolder ->
+            viewModel.deleteCeiling(adapter.getData()[viewHolder.adapterPosition])
+            adapter.notifyItemRemoved(viewHolder.adapterPosition)
+            updateData()
+        }
     }
 
     private fun initViewModel() {
         viewModel.ceilingList.observe(viewLifecycleOwner) {
             adapter.setData(it)
-            adapter.notifyDataSetChanged()
         }
     }
 
     private fun initSaveButton() {
         binding.saveButton.setOnClickListener {
             viewModel.updateClientCredentials(getClient())
-            viewModel.updateCeilingsDetails(adapter.getData())
         }
     }
 
@@ -107,33 +108,16 @@ class ClientDetailsFragment : Fragment() {
     }
 
     private fun onItemClick(position: Int) {
-        //nothing
-    }
-
-    private fun onItemDelete(position: Int) {
-        viewModel.deleteCeiling(adapter.getData()[position])
-        Handler(Looper.getMainLooper()).postDelayed({
-            updateData()
-        }, 500)
-    }
-
-    private fun onAddPhoto(position: Int) {
-        //nothing
-    }
-
-    private fun onOpenPlan(position: Int) {
         parentFragmentManager.beginTransaction()
             .replace(
                 R.id.client_list_container,
-                PlanFragment.newInstance(
-                    adapter.getData()[position].length.toString(),
-                    adapter.getData()[position].width.toString()
+                CeilingDetailsFragment.newInstance(
+                    ceiling = adapter.getData()[position]
                 )
             )
             .addToBackStack("")
             .commit()
     }
-
 
     override fun onDestroy() {
 //        viewModel.updateClientCredentials(getClient())

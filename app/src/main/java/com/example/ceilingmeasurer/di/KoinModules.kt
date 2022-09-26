@@ -9,6 +9,7 @@ import com.example.ceilingmeasurer.data.room.dao.ClientDAO
 import com.example.ceilingmeasurer.data.room.utils.RoomConst
 import com.example.ceilingmeasurer.domain.ClientDetailsRepo
 import com.example.ceilingmeasurer.domain.ClientListRepo
+import com.example.ceilingmeasurer.ui.ceilingDetails.CeilingDetailsViewModel
 import com.example.ceilingmeasurer.ui.clientDetails.ClientDetailsViewModel
 import com.example.ceilingmeasurer.ui.clientsList.ClientsListViewModel
 import org.koin.android.ext.koin.androidApplication
@@ -38,5 +39,6 @@ object KoinModules {
     val viewModel = module {
         viewModel { ClientsListViewModel(get<ClientListRepo>(), get<ClientDetailsRepo>()) }
         viewModel { ClientDetailsViewModel(get<ClientDetailsRepo>(), get<ClientListRepo>()) }
+        viewModel { CeilingDetailsViewModel(get<ClientDetailsRepo>()) }
     }
 }
