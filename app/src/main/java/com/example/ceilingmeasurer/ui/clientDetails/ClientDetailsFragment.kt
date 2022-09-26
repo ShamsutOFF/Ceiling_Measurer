@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
@@ -19,7 +20,6 @@ import com.example.ceilingmeasurer.ui.clientDetails.recycler.CeilingsCallback
 import com.example.ceilingmeasurer.ui.clientDetails.recycler.ClientDetailsAdapter
 import com.example.ceilingmeasurer.utils.attachLeftSwipeHelper
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.math.ceil
 
 class ClientDetailsFragment : Fragment() {
     private var _binding: FragmentClientDetailsBinding? = null
@@ -56,11 +56,23 @@ class ClientDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initClient()
+        initSpinner()
         initRecycler()
         initViewModel()
         initSaveButton()
         initAddCeilingButton()
         updateData()
+    }
+
+    private fun initSpinner() {
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.status_client,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.clientStatus.adapter = adapter
+        }
     }
 
     private fun initAddCeilingButton() {
@@ -79,7 +91,6 @@ class ClientDetailsFragment : Fragment() {
             phoneNumber.setText(client.phone_number)
             address.setText(client.address)
             district.setText(client.district)
-            clientStatus.setText(client.status)
         }
     }
 
@@ -140,7 +151,7 @@ class ClientDetailsFragment : Fragment() {
             phone_number = binding.phoneNumber.text.toString()
             address = binding.address.text.toString()
             district = binding.district.text.toString()
-            status = binding.clientStatus.text.toString()
+            status = binding.clientStatus.selectedItem.toString()
         }
         return returnClient
     }

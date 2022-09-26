@@ -36,4 +36,11 @@
     <string name="delete_ceiling">удалить</string>
     <string name="add_new_ceiling">Добавить потолок</string>
     <string name="ceiling_name">Наименование</string>
+    <string-array name="status_client">
+        <item>Замер</item>
+        <item>Прощет</item>
+        <item>На монтаже</item>
+        <item>Закрыт</item>
+        <item>Рекламация</item>
+    </string-array>
 </resources>
