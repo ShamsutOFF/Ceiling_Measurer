@@ -10,6 +10,7 @@ import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentCeilingDetailsBinding
 import com.example.ceilingmeasurer.domain.entities.Ceiling
+import com.example.ceilingmeasurer.temp.PlanFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CeilingDetailsFragment : Fragment() {
@@ -44,7 +45,72 @@ class CeilingDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //TODO
+        initCeiling()
+        initButtons()
+    }
+
+    private fun initCeiling() {
+        binding.apply {
+            name.setText(ceiling.name)
+            material.setText(ceiling.name_material)
+            length.setText(ceiling.length.toString())
+            width.setText(ceiling.width.toString())
+            twoSteps.setText(ceiling.two_steps.toString())
+            corners.setText(ceiling.corners.toString())
+            stroke.setText(ceiling.stroke.toString())
+            lamps.setText(ceiling.lamps.toString())
+            chandeliers.setText(ceiling.chandeliers.toString())
+            curtain.setText(ceiling.curtain.toString())
+            aluCurtain.setText(ceiling.alu_curtain.toString())
+            priceForM2.setText(ceiling.price_for_m2.toString())
+        }
+    }
+
+    private fun initButtons() {
+        buttonOpenPlan()
+        buttonAddPhoto()
+        buttonSave()
+    }
+
+    private fun buttonOpenPlan() {
+        binding.buttonPlan.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(
+                    R.id.client_list_container,
+                    PlanFragment.newInstance(ceiling.length.toString(), ceiling.width.toString())
+                )
+                .addToBackStack("")
+                .commit()
+        }
+    }
+
+    private fun buttonAddPhoto() {
+        //nothing
+    }
+
+    private fun buttonSave() {
+        binding.buttonSaveCeiling.setOnClickListener {
+            viewModel.saveCeiling(getCeiling())
+        }
+    }
+
+    private fun getCeiling(): Ceiling {
+        return Ceiling(
+            id = ceiling.id,
+            clientId = ceiling.clientId,
+            name = binding.name.text.toString(),
+            name_material = binding.material.text.toString(),
+            length = binding.length.toString().toDoubleOrNull() ?: 0.0,
+            width = binding.width.toString().toDoubleOrNull() ?: 0.0,
+            chandeliers = binding.chandeliers.toString().toIntOrNull() ?: 0,
+            lamps = binding.lamps.toString().toIntOrNull() ?: 0,
+            corners = binding.corners.toString().toIntOrNull() ?: 0,
+            stroke = binding.stroke.toString().toIntOrNull() ?: 0,
+            two_steps = binding.twoSteps.toString().toDoubleOrNull() ?: 0.0,
+            curtain = binding.curtain.toString().toDoubleOrNull() ?: 0.0,
+            alu_curtain = binding.aluCurtain.toString().toDoubleOrNull() ?: 0.0,
+            price_for_m2 = binding.priceForM2.toString().toDoubleOrNull() ?: 0.0,
+        )
     }
 
     override fun onDestroy() {

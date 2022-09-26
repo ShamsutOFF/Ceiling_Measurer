@@ -109,21 +109,6 @@
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_large"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
-                android:hint="@string/stroke">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/stroke"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_plan"
                 android:layout_width="match_parent"
@@ -143,13 +128,13 @@
                 android:text="@string/add_photo" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_delete_ceiling"
+                android:id="@+id/button_save_ceiling"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/input_layout_margin_side_large"
                 android:layout_marginEnd="@dimen/input_layout_margin_side_small"
-                android:text="@string/delete_ceiling" />
+                android:text="@string/save" />
         </LinearLayout>
 
         <LinearLayout
@@ -237,15 +222,15 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_small"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
-                android:hint="@string/drawing">
+                android:layout_marginStart="@dimen/input_layout_margin_side_large"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+                android:hint="@string/stroke">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/attachment"
+                    android:id="@+id/stroke"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
