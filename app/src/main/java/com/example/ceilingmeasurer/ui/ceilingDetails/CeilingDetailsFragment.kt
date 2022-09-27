@@ -1,7 +1,6 @@
 package com.example.ceilingmeasurer.ui.ceilingDetails
 
 import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +8,7 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.launch
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.transition.TransitionInflater
@@ -41,6 +39,10 @@ class CeilingDetailsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         val inflater = TransitionInflater.from(requireContext())
         enterTransition = inflater.inflateTransition(R.transition.slide_right)
+        registerForActivities()
+    }
+
+    private fun registerForActivities() {
         requestPermission =
             registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
                 if (isGranted) {
@@ -65,6 +67,20 @@ class CeilingDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initCeiling()
         initButtons()
+        initImageViewClickListener()
+    }
+
+    private fun initImageViewClickListener() {
+        binding.imagePlan.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(
+                    R.id.client_list_container,
+                    ImageFragment.newInstance(binding.imagePlan.drawable.toBitmap())
+                )
+                .addToBackStack("")
+                .commit()
+
+        }
     }
 
     private fun initCeiling() {
@@ -106,24 +122,6 @@ class CeilingDetailsFragment : Fragment() {
         binding.buttonAddPhoto.setOnClickListener {
             requestPermission.launch(Manifest.permission.CAMERA)
         }
-    }
-
-    private fun checkCameraPermission() {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.CAMERA
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            requestCameraPermission()
-        }
-    }
-
-    private fun requestCameraPermission() {
-        ActivityCompat.requestPermissions(
-            requireActivity(),
-            arrayOf(Manifest.permission.CAMERA),
-            200
-        )
     }
 
     private fun buttonSave() {

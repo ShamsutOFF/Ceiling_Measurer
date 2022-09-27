@@ -14,8 +14,8 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_marginBottom="@dimen/last_element_bottom_margin"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/last_element_bottom_margin"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -222,8 +222,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_large"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+                android:layout_marginStart="@dimen/input_layout_margin_side_small"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
                 android:hint="@string/stroke">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -238,8 +238,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginStart="@dimen/input_layout_margin_side_large"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+                android:layout_marginTop="@dimen/input_layout_margin_side_small"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/ic_launcher_foreground" />
         </LinearLayout>
     </LinearLayout>
