@@ -239,6 +239,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/input_layout_margin_side_small"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+                android:layout_marginStart="@dimen/input_layout_margin_side_large"
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:focusable="true"
