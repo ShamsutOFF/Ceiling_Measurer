@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ceilingmeasurer">
 
+    <uses-permission android:name="android.permission.CAMERA" />
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -17,8 +18,8 @@
         <activity
             android:name=".ui.MainActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
