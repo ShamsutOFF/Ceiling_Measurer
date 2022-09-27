@@ -38,9 +38,8 @@
     <string name="ceiling_name">Наименование</string>
     <string-array name="status_client">
         <item>Замер</item>
-        <item>Прощет</item>
-        <item>На монтаже</item>
-        <item>Закрыт</item>
-        <item>Рекламация</item>
+        <item>В работе</item>
+        <item>Сдан</item>
+        <item>Отказ</item>
     </string-array>
 </resources>
