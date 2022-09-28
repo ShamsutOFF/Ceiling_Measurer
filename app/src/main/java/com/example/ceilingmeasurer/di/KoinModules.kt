@@ -9,9 +9,11 @@ import com.example.ceilingmeasurer.data.room.dao.ClientDAO
 import com.example.ceilingmeasurer.data.room.utils.RoomConst
 import com.example.ceilingmeasurer.domain.ClientDetailsRepo
 import com.example.ceilingmeasurer.domain.ClientListRepo
-import com.example.ceilingmeasurer.ui.ceilingDetails.CeilingDetailsViewModel
+import com.example.ceilingmeasurer.domain.MaterialListRepo
+import com.example.ceilingmeasurer.domain.entities.Material
 import com.example.ceilingmeasurer.ui.clientDetails.ClientDetailsViewModel
 import com.example.ceilingmeasurer.ui.clientsList.ClientsListViewModel
+import com.example.ceilingmeasurer.ui.materialsList.MaterialsListViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -35,10 +37,17 @@ object KoinModules {
         single<ClientListRepo> { RoomClientListRepoImpl(get<ClientDAO>()) }
         single<ClientDetailsRepo> { RoomClientDetailsRepoImpl(get<CeilingDAO>()) }
     }
+    val repositoryMaterial = module {
+        single<MaterialListRepo> { FakeMaterialListRepoImpl() }
+    }
 
     val viewModel = module {
         viewModel { ClientsListViewModel(get<ClientListRepo>(), get<ClientDetailsRepo>()) }
         viewModel { ClientDetailsViewModel(get<ClientDetailsRepo>(), get<ClientListRepo>()) }
         viewModel { CeilingDetailsViewModel(get<ClientDetailsRepo>()) }
     }
+    val viewModelMaterial = module {
+        viewModel { MaterialsListViewModel(get<MaterialListRepo>()) }
+    }
+
 }
