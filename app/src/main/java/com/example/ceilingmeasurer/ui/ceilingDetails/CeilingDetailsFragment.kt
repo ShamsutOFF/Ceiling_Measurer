@@ -16,6 +16,7 @@ import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentCeilingDetailsBinding
 import com.example.ceilingmeasurer.domain.entities.Ceiling
 import com.example.ceilingmeasurer.temp.PlanFragment
+import com.example.ceilingmeasurer.utils.ImageSaver
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CeilingDetailsFragment : Fragment() {
@@ -49,9 +50,13 @@ class CeilingDetailsFragment : Fragment() {
                     takePicture.launch()
                 }
             }
-        takePicture = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {
-            binding.imagePlan.setImageBitmap(it)
-        }
+        takePicture =
+            registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
+                binding.imagePlan.setImageBitmap(bitmap)
+                ImageSaver(requireContext())
+                    .setFileName("image${ceiling.clientId}&${ceiling.id}")
+                    .save(bitmap)
+            }
     }
 
     override fun onCreateView(
@@ -67,7 +72,16 @@ class CeilingDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initCeiling()
         initButtons()
+        loadImage()
         initImageViewClickListener()
+    }
+
+    private fun loadImage() {
+        binding.imagePlan.setImageBitmap(
+            ImageSaver(requireContext())
+                .setFileName("image${ceiling.clientId}&${ceiling.id}")
+                .load()
+        )
     }
 
     private fun initImageViewClickListener() {
