@@ -52,6 +52,9 @@ class ImageSaver(var context: Context) {
         return null
     }
 
+    //Не забудь setFileName того файла что собираемся удалить
+    fun deleteFile() = createFile().delete()
+
     companion object {
         private const val DIRECTORY_NAME = "images"
     }
