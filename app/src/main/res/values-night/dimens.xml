@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="material_text_size_24">24sp</dimen>
+    <dimen name="material_text_size_18">18sp</dimen>
+    <dimen name="material_text_size_11">11sp</dimen>
+</resources>
