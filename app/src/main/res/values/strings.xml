@@ -41,4 +41,12 @@
     <string name="rv_mat_price_mat">цена работы</string>
     <string name="rv_mat_price_work">цена материала</string>
     <string name="btn_add_new_material">Добавить новый</string>
+    <string name="length">Длина</string>
+    <string name="width">Ширина</string>
+    <string name="open_plan">Открыть чертеж</string>
+    <string name="add_photo">добавить фото</string>
+    <string name="delete_ceiling">удалить</string>
+    <string name="add_new_ceiling">Добавить потолок</string>
+    <string name="ceiling_name">Наименование</string>
+
 </resources>
