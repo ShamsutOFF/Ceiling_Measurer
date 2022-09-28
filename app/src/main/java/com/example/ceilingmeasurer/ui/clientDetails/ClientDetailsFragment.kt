@@ -6,26 +6,26 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentClientDetailsBinding
 import com.example.ceilingmeasurer.domain.entities.Client
-import com.example.ceilingmeasurer.temp.PlanFragment
+import com.example.ceilingmeasurer.ui.ceilingDetails.CeilingDetailsFragment
+import com.example.ceilingmeasurer.ui.clientDetails.recycler.CeilingsCallback
 import com.example.ceilingmeasurer.ui.clientDetails.recycler.ClientDetailsAdapter
+import com.example.ceilingmeasurer.utils.attachLeftSwipeHelper
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ClientDetailsFragment : Fragment() {
     private var _binding: FragmentClientDetailsBinding? = null
     private val binding get() = _binding!!
     private lateinit var client: Client
-    private val adapter = ClientDetailsAdapter(
-        { position -> onItemClick(position) },
-        { position -> onOpenPlan(position) },
-        { position -> onAddPhoto(position) },
-        { position -> onItemDelete(position) })
+    private val ceilingsAdapter = ClientDetailsAdapter { position -> onItemClick(position) }
 
     private val viewModel: ClientDetailsViewModel by viewModel()
 
@@ -55,12 +55,24 @@ class ClientDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecycler()
         initClient()
+        initSpinner()
+        initRecycler()
         initViewModel()
         initSaveButton()
         initAddCeilingButton()
         updateData()
+    }
+
+    private fun initSpinner() {
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.status_client,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.clientStatus.adapter = adapter
+        }
     }
 
     private fun initAddCeilingButton() {
@@ -68,7 +80,7 @@ class ClientDetailsFragment : Fragment() {
             viewModel.insertNewCeiling(client.id)
             Handler(Looper.getMainLooper()).postDelayed({
                 updateData()
-            }, 500)
+            }, 1000)
         }
     }
 
@@ -79,26 +91,32 @@ class ClientDetailsFragment : Fragment() {
             phoneNumber.setText(client.phone_number)
             address.setText(client.address)
             district.setText(client.district)
-            clientStatus.setText(client.status)
         }
     }
 
     private fun initRecycler() {
-        binding.ceilingsRecyclerView.layoutManager = GridLayoutManager(context, 1)
-        binding.ceilingsRecyclerView.adapter = adapter
+        binding.ceilingsRecyclerView.apply {
+            layoutManager = GridLayoutManager(context, 1)
+            adapter = ceilingsAdapter
+        }.attachLeftSwipeHelper { viewHolder ->
+            viewModel.deleteCeiling(ceilingsAdapter.getData()[viewHolder.adapterPosition])
+            ceilingsAdapter.notifyItemRemoved(viewHolder.adapterPosition)
+            updateData()
+        }
     }
 
     private fun initViewModel() {
-        viewModel.ceilingList.observe(viewLifecycleOwner) {
-            adapter.setData(it)
-            adapter.notifyDataSetChanged()
+        viewModel.ceilingList.observe(viewLifecycleOwner) { newData ->
+            val diffCallback = CeilingsCallback(ceilingsAdapter.getData(), newData)
+            val diffCeilings = DiffUtil.calculateDiff(diffCallback)
+            ceilingsAdapter.setData(newData)
+            diffCeilings.dispatchUpdatesTo(ceilingsAdapter)
         }
     }
 
     private fun initSaveButton() {
         binding.saveButton.setOnClickListener {
             viewModel.updateClientCredentials(getClient())
-            viewModel.updateCeilingsDetails(adapter.getData())
         }
     }
 
@@ -107,33 +125,16 @@ class ClientDetailsFragment : Fragment() {
     }
 
     private fun onItemClick(position: Int) {
-        //nothing
-    }
-
-    private fun onItemDelete(position: Int) {
-        viewModel.deleteCeiling(adapter.getData()[position])
-        Handler(Looper.getMainLooper()).postDelayed({
-            updateData()
-        }, 500)
-    }
-
-    private fun onAddPhoto(position: Int) {
-        //nothing
-    }
-
-    private fun onOpenPlan(position: Int) {
         parentFragmentManager.beginTransaction()
             .replace(
                 R.id.client_list_container,
-                PlanFragment.newInstance(
-                    adapter.getData()[position].length.toString(),
-                    adapter.getData()[position].width.toString()
+                CeilingDetailsFragment.newInstance(
+                    ceiling = ceilingsAdapter.getData()[position]
                 )
             )
             .addToBackStack("")
             .commit()
     }
-
 
     override fun onDestroy() {
 //        viewModel.updateClientCredentials(getClient())
@@ -150,7 +151,7 @@ class ClientDetailsFragment : Fragment() {
             phone_number = binding.phoneNumber.text.toString()
             address = binding.address.text.toString()
             district = binding.district.text.toString()
-            status = binding.clientStatus.text.toString()
+            status = binding.clientStatus.selectedItem.toString()
         }
         return returnClient
     }

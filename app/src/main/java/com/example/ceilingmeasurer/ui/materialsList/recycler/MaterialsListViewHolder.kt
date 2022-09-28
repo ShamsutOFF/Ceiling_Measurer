@@ -1,4 +1,4 @@
-package com.example.ceilingmeasurer.ui.materialDetails.recycler
+package com.example.ceilingmeasurer.ui.materialsList.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ceilingmeasurer.databinding.RecyclerItemMaterialBinding
 import com.example.ceilingmeasurer.domain.entities.Material
 
-class MaterialsListViewHolder (
+class MaterialsListViewHolder(
     private val binding: RecyclerItemMaterialBinding,
     private val onItemClick: (position: Int) -> Unit
-):
-    RecyclerView.ViewHolder(binding.root){
+) :
+    RecyclerView.ViewHolder(binding.root) {
     init {
         itemView.setOnClickListener {
             onItemClick(adapterPosition)
@@ -30,11 +30,10 @@ class MaterialsListViewHolder (
 
     fun bind(material: Material) {
         binding.apply {
-            rvMatName.setText(material.name_material)
-            rvMatUnitMeasure.setText(material.unit_measure)
-            rvMatPriceMaterial.setText(material.unit_price.toString())
-            rvMatPriceWork.setText(material.unit_work_price.toString())
-
+            rvMatName.text = material.name_material
+            rvMatUnitMeasure.text = material.unit_measure
+            rvMatPriceMaterial.text = material.unit_price.toString()
+            rvMatPriceWork.text = material.unit_work_price.toString()
         }
     }
 }

@@ -20,7 +20,13 @@ class ClientDetailsViewModel(
 
     fun getCeilings(client: Client) {
         cancelJob()
-        viewModelCoroutineScope.launch { fetchClientDetails(client) }
+        viewModelCoroutineScope.launch { susGetCeilings(client) }
+    }
+
+    private suspend fun susGetCeilings(client: Client) {
+        withContext(Dispatchers.IO) {
+            _liveCeilingList.postValue(repoCeilings.getCeilings(client.id))
+        }
     }
 
     fun insertNewCeiling(clientId: Int) {
@@ -37,9 +43,10 @@ class ClientDetailsViewModel(
         viewModelCoroutineScope.launch { updateClient(client) }
     }
 
-    fun updateCeilingsDetails(ceilings: List<Ceiling>) {
-        cancelJob()
-        viewModelCoroutineScope.launch { updateCeilings(ceilings) }
+    private suspend fun updateClient(client: Client) {
+        withContext(Dispatchers.IO) {
+            repoClients.updateClient(client)
+        }
     }
 
     fun deleteCeiling(ceiling: Ceiling) {
@@ -50,24 +57,6 @@ class ClientDetailsViewModel(
     private suspend fun susDeleteCeiling(ceiling: Ceiling) {
         withContext(Dispatchers.IO) {
             repoCeilings.deleteCeiling(ceiling)
-        }
-    }
-
-    private suspend fun updateClient(client: Client) {
-        withContext(Dispatchers.IO) {
-            repoClients.updateClient(client)
-        }
-    }
-
-    private suspend fun fetchClientDetails(client: Client) {
-        withContext(Dispatchers.IO) {
-            _liveCeilingList.postValue(repoCeilings.getCeilings(client.id))
-        }
-    }
-
-    private suspend fun updateCeilings(ceilings: List<Ceiling>) {
-        withContext(Dispatchers.IO) {
-            repoCeilings.updateCeilings(ceilings)
         }
     }
 }

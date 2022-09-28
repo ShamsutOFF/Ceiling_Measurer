@@ -1,10 +1,10 @@
 package com.example.ceilingmeasurer.ui.materialsList
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
@@ -23,8 +23,8 @@ class MaterialsListFragment : Fragment(), IOnBackPressed {
     private val viewModel: MaterialsListViewModel by viewModel()
 
     private fun onItemClick(position: Int) {
-            initChildFragment(MaterialDetailsFragment.newInstance(adapter.getData()[position]))
-        }
+        initChildFragment(MaterialDetailsFragment.newInstance(adapter.getData()[position]))
+    }
 
     private fun initChildFragment(fragment: Fragment) {
         childFragmentManager.beginTransaction()
@@ -32,7 +32,6 @@ class MaterialsListFragment : Fragment(), IOnBackPressed {
             .addToBackStack("")
             .commit()
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +56,6 @@ class MaterialsListFragment : Fragment(), IOnBackPressed {
         initViewModel()
     }
 
-
     private fun initRecycler() {
         binding.materialsRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.materialsRecyclerView.adapter = adapter
@@ -71,11 +69,13 @@ class MaterialsListFragment : Fragment(), IOnBackPressed {
         viewModel.materialList.observe(viewLifecycleOwner) {
             adapter.setData(it)
         }
-}
+    }
+
     override fun onBackPressed(): Boolean {
         childFragmentManager.popBackStack()
         return true
     }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

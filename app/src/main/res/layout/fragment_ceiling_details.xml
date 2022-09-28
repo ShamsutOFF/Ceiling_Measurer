@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/card_view_inner_margin"
+        android:background="@color/main_background_color"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/last_element_bottom_margin"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/input_layout_margin_side_large"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+                android:hint="@string/ceiling_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/input_layout_margin_side_large"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+                android:hint="@string/material">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/material"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/input_layout_margin_side_large"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+                android:hint="@string/length">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/length"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/input_layout_margin_side_large"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+                android:hint="@string/width">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/width"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/input_layout_margin_side_large"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+                android:hint="@string/corners">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/corners"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/input_layout_margin_side_large"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+                android:hint="@string/two_steps">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/two_steps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_plan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/input_layout_margin_side_large"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+                android:text="@string/open_plan" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_add_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/input_layout_margin_side_large"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+                android:text="@string/add_photo" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_save_ceiling"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/input_layout_margin_side_large"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+                android:text="@string/save" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/input_layout_margin_side_small"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+                android:hint="@string/chandeliers">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/chandeliers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/input_layout_margin_side_small"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+                android:hint="@string/lamps">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/lamps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/input_layout_margin_side_small"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+                android:hint="@string/curtain">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/curtain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/input_layout_margin_side_small"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+                android:hint="@string/alu_curtain">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/alu_curtain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/input_layout_margin_side_small"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+                android:hint="@string/price_for_m2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/price_for_m2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/input_layout_margin_side_small"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+                android:hint="@string/stroke">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/stroke"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_plan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/input_layout_margin_side_small"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+                android:layout_marginStart="@dimen/input_layout_margin_side_large"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_launcher_foreground" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

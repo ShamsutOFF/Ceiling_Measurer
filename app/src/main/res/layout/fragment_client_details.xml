@@ -8,13 +8,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/input_layout_margin_side_large"
-        android:orientation="vertical"
-        android:textSize="22pt">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_layout_margin_side_large"
             android:baselineAligned="false"
             android:orientation="horizontal">
 
@@ -32,7 +31,6 @@
                     android:id="@+id/client_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/white"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -50,27 +48,46 @@
                     android:id="@+id/client_surname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/white"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/input_layout_margin_side_large"
-            android:layout_marginTop="@dimen/input_layout_margin_top"
-            android:layout_marginEnd="@dimen/input_layout_margin_side_large"
-            android:hint="@string/phone_number">
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phone_number"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/input_layout_margin_side_large"
+                android:layout_marginTop="@dimen/input_layout_margin_top"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+                android:layout_weight="2"
+                android:hint="@string/phone_number">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@id/client_status"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/spinner_margin_top"
+                android:layout_marginBottom="@dimen/spinner_margin_bottom"
+                android:background="@drawable/spinner_border"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,7 +109,6 @@
                     android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/white"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -110,53 +126,47 @@
                     android:id="@+id/district"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/white"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/input_layout_margin_side_large"
-            android:layout_marginTop="@dimen/input_layout_margin_top"
-            android:layout_marginEnd="@dimen/input_layout_margin_side_large"
-            android:hint="@string/client_status">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/client_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ceilings_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:itemCount="6"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/recycler_ceilings_min_height"
+            tools:itemCount="4"
             tools:listitem="@layout/recycler_item_ceiling" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/add_ceiling_button"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/input_layout_margin_side_small"
-            android:background="@color/design_default_color_primary"
-            android:text="@string/add_new_ceiling"
-            android:textColor="@color/white" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/save_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginBottom="@dimen/last_element_bottom_margin"
-            android:background="@color/design_default_color_primary"
-            android:text="@string/save"
-            android:textColor="@color/white" />
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/add_ceiling_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/client_button_margin"
+                android:layout_weight="1"
+                android:background="@color/design_default_color_primary"
+                android:gravity="center"
+                android:text="@string/add_new_ceiling"
+                android:textColor="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/save_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/client_button_margin"
+                android:layout_weight="1"
+                android:background="@color/design_default_color_primary"
+                android:gravity="center"
+                android:text="@string/save"
+                android:textColor="@color/white" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

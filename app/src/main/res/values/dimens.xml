@@ -18,6 +18,11 @@
     <dimen name="card_view_margin">20dp</dimen>
     <dimen name="card_view_inner_margin">20dp</dimen>
     <dimen name="last_element_bottom_margin">36dp</dimen>
+    <dimen name="ceiling_text_side_margin">20dp</dimen>
+    <dimen name="client_button_margin">20dp</dimen>
+    <dimen name="recycler_ceilings_min_height">100dp</dimen>
+    <dimen name="spinner_margin_top">10dp</dimen>
+    <dimen name="spinner_margin_bottom">4dp</dimen>
     <dimen name="material_text_size_24">24sp</dimen>
     <dimen name="material_text_size_18">18sp</dimen>
     <dimen name="material_text_size_11">11sp</dimen>

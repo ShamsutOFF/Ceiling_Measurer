@@ -7,10 +7,10 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/client_card_view_margin"
     android:layout_marginTop="@dimen/card_view_margin"
-    android:paddingBottom="20dp"
     android:clickable="true"
     android:focusable="true"
     android:paddingTop="@dimen/client_card_view_padding"
+    android:paddingBottom="20dp"
     app:cardCornerRadius="@dimen/client_card_view_corner_radius"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"
@@ -48,10 +48,11 @@
                 android:layout_weight="2"
                 android:gravity="end"
                 android:hint="@string/rv_mat_price_mat"
-                android:textSize="@dimen/material_text_size_11"
                 android:textColor="@color/rv_mat_list_name_position"
+                android:textSize="@dimen/material_text_size_11"
                 tools:text="Еденица измерения" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -65,72 +66,75 @@
                 android:textColor="@color/black_color"
                 android:textSize="@dimen/material_text_size_24"
                 tools:text="Полотно белое матовое" />
+
             <TextView
                 android:id="@+id/rv_mat_unit_measure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/rv_mat_price_mat"
-                tools:text="м2"
-                android:textSize="@dimen/material_text_size_18"
-                android:textColor="@color/black_color"
                 android:layout_gravity="center"
+                android:layout_weight="2"
                 android:gravity="center"
-                android:layout_weight="2"/>
+                android:hint="@string/rv_mat_price_mat"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/material_text_size_18"
+                tools:text="м2" />
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="цена материала"
-            android:textSize="@dimen/material_text_size_11"
-            android:textColor="@color/rv_mat_list_name_position"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_weight="2"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/rv_mat_price_mat"
-            tools:text="цена работы"
-            android:textSize="@dimen/material_text_size_11"
-            android:textColor="@color/rv_mat_list_name_position"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_weight="2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:textColor="@color/rv_mat_list_name_position"
+                android:textSize="@dimen/material_text_size_11"
+                tools:text="цена материала" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:hint="@string/rv_mat_price_mat"
+                android:textColor="@color/rv_mat_list_name_position"
+                android:textSize="@dimen/material_text_size_11"
+                tools:text="цена работы" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/bottom_navigation_padding_top"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/rv_mat_price_material"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="@string/_250"
-                android:textSize="@dimen/material_text_size_18"
-                android:textColor="@color/black_color"
                 android:layout_gravity="center"
+                android:layout_weight="2"
                 android:gravity="center"
-                android:layout_weight="2"/>
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/material_text_size_18"
+                tools:text="@string/_250" />
+
             <TextView
                 android:id="@+id/rv_mat_price_work"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/rv_mat_price_mat"
-                tools:text="@string/_350"
-                android:textSize="@dimen/material_text_size_18"
-                android:textColor="@color/black_color"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:layout_weight="1"/>
+                android:hint="@string/rv_mat_price_mat"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/material_text_size_18"
+                tools:text="@string/_350" />
         </LinearLayout>
-
-
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

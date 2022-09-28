@@ -13,7 +13,7 @@ class FakeClientDetailsRepoImpl : ClientDetailsRepo {
         //nothing
     }
 
-    override suspend fun updateCeilings(ceilingList: List<Ceiling>) {
+    override suspend fun updateCeiling(ceiling: Ceiling) {
         //nothing
     }
 
