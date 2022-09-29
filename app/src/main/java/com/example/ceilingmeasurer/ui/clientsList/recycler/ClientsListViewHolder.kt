@@ -3,6 +3,7 @@ package com.example.ceilingmeasurer.ui.clientsList.recycler
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.RecyclerItemClientBinding
 import com.example.ceilingmeasurer.domain.entities.Client
 
@@ -31,7 +32,9 @@ class ClientsListViewHolder(
 
     fun bind(client: Client) {
         binding.apply {
-            clientName.text = client.name
+            if (client.name.isEmpty()) clientName.text =
+                itemView.context.getString(R.string.new_client)
+            else clientName.text = client.name
             clientSurname.text = client.surname
             clientAddress.text = client.address
             clientStatus.text = client.status

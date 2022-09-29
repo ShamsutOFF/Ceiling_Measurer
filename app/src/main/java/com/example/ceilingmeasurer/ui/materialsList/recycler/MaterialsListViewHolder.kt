@@ -3,6 +3,7 @@ package com.example.ceilingmeasurer.ui.materialsList.recycler
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.RecyclerItemMaterialBinding
 import com.example.ceilingmeasurer.domain.entities.Material
 
@@ -30,7 +31,8 @@ class MaterialsListViewHolder(
 
     fun bind(material: Material) {
         binding.apply {
-            rvMatName.text = material.name_material
+            if (material.name_material.isEmpty()) rvMatName.text = itemView.context.getString(R.string.new_material)
+            else rvMatName.text = material.name_material
             rvMatUnitMeasure.text = material.unit_measure
             rvMatPriceMaterial.text = material.unit_price.toString()
             rvMatPriceWork.text = material.unit_work_price.toString()

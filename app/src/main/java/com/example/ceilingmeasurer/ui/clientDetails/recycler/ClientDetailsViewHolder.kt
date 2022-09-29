@@ -3,6 +3,7 @@ package com.example.ceilingmeasurer.ui.clientDetails.recycler
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.RecyclerItemCeilingBinding
 import com.example.ceilingmeasurer.domain.entities.Ceiling
 
@@ -32,8 +33,11 @@ class ClientDetailsViewHolder(
 
     fun bind(ceiling: Ceiling) {
         binding.apply {
-            ceilingName.text = ceiling.name
-            ceilingSize.text = (ceiling.length * ceiling.width).toString() + "m^2"
+            if (ceiling.name_material.isEmpty()) ceilingName.text =
+                itemView.context.getString(R.string.new_ceiling)
+            else ceilingName.text = ceiling.name
+            if (ceiling.length.equals(0.0) || ceiling.width.equals(0.0)) ceilingSize.text = ""
+            else ceilingSize.text = (ceiling.length * ceiling.width).toString() + "m^2"
             ceilingMaterial.text = ceiling.name_material
         }
     }
