@@ -12,4 +12,5 @@
     <string name="rv_mat_price_mat">цена работы</string>
     <string name="rv_mat_price_work">цена материала</string>
     <string name="btn_add_new_material">Добавить новый</string>
+    <string name="rv_mat_unit_measure">Единица измерения</string>
 </resources>

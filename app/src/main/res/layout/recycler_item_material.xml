@@ -5,12 +5,8 @@
     android:id="@+id/ceiling_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/client_card_view_margin"
-    android:layout_marginTop="@dimen/card_view_margin"
     android:clickable="true"
     android:focusable="true"
-    android:paddingTop="@dimen/client_card_view_padding"
-    android:paddingBottom="20dp"
     app:cardCornerRadius="@dimen/client_card_view_corner_radius"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"
@@ -32,25 +28,24 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="2"
                 android:gravity="start"
+                android:hint="@string/hint_frg_det_mat_name"
                 android:textColor="@color/rv_mat_list_name_position"
-                android:textSize="@dimen/material_text_size_11"
-                tools:text="Название материала" />
+                android:textSize="@dimen/material_text_size_11" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="2"
                 android:gravity="end"
-                android:hint="@string/rv_mat_price_mat"
                 android:textColor="@color/rv_mat_list_name_position"
                 android:textSize="@dimen/material_text_size_11"
-                tools:text="Еденица измерения" />
+                android:hint="@string/rv_mat_unit_measure" />
         </LinearLayout>
 
         <LinearLayout
@@ -93,7 +88,7 @@
                 android:gravity="center"
                 android:textColor="@color/rv_mat_list_name_position"
                 android:textSize="@dimen/material_text_size_11"
-                tools:text="цена материала" />
+                android:hint="@string/rv_mat_price_mat" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -101,10 +96,9 @@
                 android:layout_gravity="center"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:hint="@string/rv_mat_price_mat"
+                android:hint="@string/rv_mat_price_work"
                 android:textColor="@color/rv_mat_list_name_position"
-                android:textSize="@dimen/material_text_size_11"
-                tools:text="цена работы" />
+                android:textSize="@dimen/material_text_size_11" />
         </LinearLayout>
 
         <LinearLayout
