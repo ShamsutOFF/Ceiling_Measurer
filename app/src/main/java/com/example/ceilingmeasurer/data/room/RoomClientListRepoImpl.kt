@@ -10,9 +10,7 @@ class RoomClientListRepoImpl(private val dao: ClientDAO) : ClientListRepo {
         val tempList = dao.getAllClients()
         val returnList = mutableListOf<Client>()
         for (clientEntity in tempList) {
-            returnList.add(
-                ClientMapper().fromModel(clientEntity)
-            )
+            returnList.add(ClientMapper().fromModel(clientEntity))
         }
         return returnList
     }

@@ -1,4 +1,4 @@
-package com.example.ceilingmeasurer.ui
+package com.example.ceilingmeasurer.ui.materialDetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -42,6 +42,4 @@ class MaterialDetailsFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
-
-
 }

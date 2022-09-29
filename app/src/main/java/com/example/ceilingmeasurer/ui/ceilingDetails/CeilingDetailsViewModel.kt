@@ -5,16 +5,14 @@ import com.example.ceilingmeasurer.domain.entities.Ceiling
 import com.example.ceilingmeasurer.ui.BaseViewModel
 import kotlinx.coroutines.launch
 
-class CeilingDetailsViewModel(
-    private val repoCeilings: ClientDetailsRepo
-) : BaseViewModel() {
+class CeilingDetailsViewModel(private val repoCeilings: ClientDetailsRepo) : BaseViewModel() {
 
     fun saveCeiling(ceiling: Ceiling) {
         cancelJob()
-        viewModelCoroutineScope.launch { susGetCeilings(ceiling) }
+        viewModelCoroutineScope.launch { susUpdateCeilings(ceiling) }
     }
 
-    private suspend fun susGetCeilings(ceiling: Ceiling) {
+    private suspend fun susUpdateCeilings(ceiling: Ceiling) {
         repoCeilings.updateCeiling(ceiling)
     }
 }

@@ -1,12 +1,13 @@
 package com.example.ceilingmeasurer.di
 
 import androidx.room.Room
-import com.example.ceilingmeasurer.data.fake.FakeMaterialListRepoImpl
 import com.example.ceilingmeasurer.data.room.RoomClientDetailsRepoImpl
 import com.example.ceilingmeasurer.data.room.RoomClientListRepoImpl
 import com.example.ceilingmeasurer.data.room.RoomDb
+import com.example.ceilingmeasurer.data.room.RoomMaterialListRepoImpl
 import com.example.ceilingmeasurer.data.room.dao.CeilingDAO
 import com.example.ceilingmeasurer.data.room.dao.ClientDAO
+import com.example.ceilingmeasurer.data.room.dao.MaterialsDAO
 import com.example.ceilingmeasurer.data.room.utils.RoomConst
 import com.example.ceilingmeasurer.domain.ClientDetailsRepo
 import com.example.ceilingmeasurer.domain.ClientListRepo
@@ -35,9 +36,13 @@ object KoinModules {
         single<CeilingDAO> {
             get<RoomDb>().CeilingDAO()
         }
+        single<MaterialsDAO> {
+            get<RoomDb>().MaterialDAO()
+        }
+
         single<ClientListRepo> { RoomClientListRepoImpl(get<ClientDAO>()) }
         single<ClientDetailsRepo> { RoomClientDetailsRepoImpl(get<CeilingDAO>()) }
-        single<MaterialListRepo> { FakeMaterialListRepoImpl() }
+        single<MaterialListRepo> { RoomMaterialListRepoImpl(get<MaterialsDAO>()) }
     }
 
     val viewModel = module {

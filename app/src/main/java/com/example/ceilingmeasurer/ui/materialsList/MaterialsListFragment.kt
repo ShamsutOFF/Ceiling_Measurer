@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentMaterialsListBinding
-import com.example.ceilingmeasurer.ui.MaterialDetailsFragment
+import com.example.ceilingmeasurer.ui.materialDetails.MaterialDetailsFragment
 import com.example.ceilingmeasurer.ui.materialDetails.recycler.MaterialsListAdapter
 import com.example.ceilingmeasurer.utils.IOnBackPressed
 import org.koin.androidx.viewmodel.ext.android.viewModel
