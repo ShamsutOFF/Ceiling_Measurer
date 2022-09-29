@@ -23,7 +23,7 @@
         android:hint="@string/hint_frg_det_mat_name">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/frg_name_material"
+            android:id="@+id/name_material"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
@@ -56,7 +56,7 @@
             android:hint="@string/hint_frg_det_mat_unit_measure">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/frg_unit_measure"
+                android:id="@+id/unit_measure"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -91,7 +91,7 @@
             android:hint="@string/_250">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/frg_price_material"
+                android:id="@+id/price_material"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -126,7 +126,7 @@
             android:hint="@string/_350">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/frg_price_work"
+                android:id="@+id/price_work"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -136,7 +136,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_frg_material_save"
+        android:id="@+id/button_material_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
