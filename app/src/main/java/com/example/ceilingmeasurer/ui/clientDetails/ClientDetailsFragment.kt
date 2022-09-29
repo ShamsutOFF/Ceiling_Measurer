@@ -18,6 +18,7 @@ import com.example.ceilingmeasurer.domain.entities.Client
 import com.example.ceilingmeasurer.ui.ceilingDetails.CeilingDetailsFragment
 import com.example.ceilingmeasurer.ui.clientDetails.recycler.CeilingsCallback
 import com.example.ceilingmeasurer.ui.clientDetails.recycler.ClientDetailsAdapter
+import com.example.ceilingmeasurer.ui.clientsList.ClientsListFragment
 import com.example.ceilingmeasurer.utils.IOnBackPressed
 import com.example.ceilingmeasurer.utils.ImageSaver
 import com.example.ceilingmeasurer.utils.attachLeftSwipeHelper
@@ -122,7 +123,7 @@ class ClientDetailsFragment : Fragment(), IOnBackPressed {
         binding.saveButton.setOnClickListener {
             viewModel.updateClientCredentials(getClient())
             Handler(Looper.getMainLooper()).postDelayed({
-                onBackPressed()
+                (parentFragment as ClientsListFragment).onBackPressed()
             }, 500)
         }
     }

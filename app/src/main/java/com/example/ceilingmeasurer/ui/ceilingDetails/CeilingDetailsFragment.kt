@@ -18,6 +18,7 @@ import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentCeilingDetailsBinding
 import com.example.ceilingmeasurer.domain.entities.Ceiling
 import com.example.ceilingmeasurer.temp.PlanFragment
+import com.example.ceilingmeasurer.ui.clientDetails.ClientDetailsFragment
 import com.example.ceilingmeasurer.utils.ImageSaver
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -143,7 +144,7 @@ class CeilingDetailsFragment : Fragment() {
         binding.buttonSaveCeiling.setOnClickListener {
             viewModel.saveCeiling(getCeiling())
             Handler(Looper.getMainLooper()).postDelayed({
-                parentFragmentManager.popBackStack()
+                (parentFragment as ClientDetailsFragment).onBackPressed()
             }, 500)
         }
     }

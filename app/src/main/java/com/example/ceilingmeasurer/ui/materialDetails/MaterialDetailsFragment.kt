@@ -12,6 +12,7 @@ import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentMaterialDetailBinding
 import com.example.ceilingmeasurer.domain.entities.Material
+import com.example.ceilingmeasurer.ui.materialsList.MaterialsListFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MaterialDetailsFragment : Fragment() {
@@ -63,7 +64,7 @@ class MaterialDetailsFragment : Fragment() {
         binding.buttonMaterialSave.setOnClickListener {
             viewModel.saveMaterial(getMaterial())
             Handler(Looper.getMainLooper()).postDelayed({
-                parentFragmentManager.popBackStack()
+                (parentFragment as MaterialsListFragment).onBackPressed()
             }, 500)
         }
     }
