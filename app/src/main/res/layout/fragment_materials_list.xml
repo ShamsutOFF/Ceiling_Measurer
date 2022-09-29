@@ -27,7 +27,7 @@
             tools:listitem="@layout/recycler_item_material" />
 
         <Button
-            android:id="@+id/btn_new_material"
+            android:id="@+id/button_add_new_material"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

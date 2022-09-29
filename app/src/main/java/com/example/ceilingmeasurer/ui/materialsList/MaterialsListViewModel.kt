@@ -23,4 +23,15 @@ class MaterialsListViewModel(private val repo: MaterialListRepo) : BaseViewModel
             _liveData.postValue(repo.getMaterialList())
         }
     }
+
+    fun insertNewMaterial(material: Material) {
+        cancelJob()
+        viewModelCoroutineScope.launch { susInsertNewMaterial(material) }
+    }
+
+    private suspend fun susInsertNewMaterial(material: Material) {
+        withContext(Dispatchers.IO) {
+            repo.insertMaterial(material)
+        }
+    }
 }

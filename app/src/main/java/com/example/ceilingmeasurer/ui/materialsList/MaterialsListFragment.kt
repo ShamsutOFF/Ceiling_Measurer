@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentMaterialsListBinding
+import com.example.ceilingmeasurer.domain.entities.Material
 import com.example.ceilingmeasurer.ui.materialDetails.MaterialDetailsFragment
 import com.example.ceilingmeasurer.ui.materialDetails.recycler.MaterialsListAdapter
 import com.example.ceilingmeasurer.utils.IOnBackPressed
@@ -21,17 +22,6 @@ class MaterialsListFragment : Fragment(), IOnBackPressed {
         onItemClick(position)
     }
     private val viewModel: MaterialsListViewModel by viewModel()
-
-    private fun onItemClick(position: Int) {
-        initChildFragment(MaterialDetailsFragment.newInstance(adapter.getData()[position]))
-    }
-
-    private fun initChildFragment(fragment: Fragment) {
-        childFragmentManager.beginTransaction()
-            .replace(R.id.material_list_container, fragment)
-            .addToBackStack("")
-            .commit()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +44,24 @@ class MaterialsListFragment : Fragment(), IOnBackPressed {
         initRecycler()
         renderData()
         initViewModel()
+        initAddNewMaterialButton()
+    }
+
+    private fun initAddNewMaterialButton() {
+        binding.buttonAddNewMaterial.setOnClickListener {
+            viewModel.insertNewMaterial(Material())
+        }
+    }
+
+    private fun onItemClick(position: Int) {
+        initChildFragment(MaterialDetailsFragment.newInstance(adapter.getData()[position]))
+    }
+
+    private fun initChildFragment(fragment: Fragment) {
+        childFragmentManager.beginTransaction()
+            .replace(R.id.material_list_container, fragment)
+            .addToBackStack("")
+            .commit()
     }
 
     private fun initRecycler() {
