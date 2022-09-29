@@ -1,6 +1,8 @@
 package com.example.ceilingmeasurer.ui.clientsList
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentClientsListBinding
-import com.example.ceilingmeasurer.domain.entities.Client
 import com.example.ceilingmeasurer.ui.clientDetails.ClientDetailsFragment
 import com.example.ceilingmeasurer.ui.clientsList.recycler.ClientsListAdapter
 import com.example.ceilingmeasurer.utils.IOnBackPressed
@@ -65,7 +66,9 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
     private fun initAddButton() {
         binding.clientListAddButton.setOnClickListener {
             viewModel.insertNewClient()
-            initChildFragment(ClientDetailsFragment.newInstance(Client()))
+            Handler(Looper.getMainLooper()).postDelayed({
+                updateClientData()
+            }, 500)
         }
     }
 
@@ -89,7 +92,9 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
     private fun initItemTouchHelper() {
         binding.clientListRecyclerView.attachLeftSwipeHelper { viewHolder ->
             deleteClient(viewHolder.adapterPosition)
-            updateClientData()
+            Handler(Looper.getMainLooper()).postDelayed({
+                updateClientData()
+            }, 500)
         }
     }
     // endregion

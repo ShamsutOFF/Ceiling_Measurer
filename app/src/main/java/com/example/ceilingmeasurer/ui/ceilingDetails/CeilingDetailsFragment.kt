@@ -2,6 +2,8 @@ package com.example.ceilingmeasurer.ui.ceilingDetails
 
 import android.Manifest
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -140,6 +142,9 @@ class CeilingDetailsFragment : Fragment() {
     private fun buttonSave() {
         binding.buttonSaveCeiling.setOnClickListener {
             viewModel.saveCeiling(getCeiling())
+            Handler(Looper.getMainLooper()).postDelayed({
+                parentFragmentManager.popBackStack()
+            }, 500)
         }
     }
 

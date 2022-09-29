@@ -18,11 +18,12 @@ import com.example.ceilingmeasurer.domain.entities.Client
 import com.example.ceilingmeasurer.ui.ceilingDetails.CeilingDetailsFragment
 import com.example.ceilingmeasurer.ui.clientDetails.recycler.CeilingsCallback
 import com.example.ceilingmeasurer.ui.clientDetails.recycler.ClientDetailsAdapter
+import com.example.ceilingmeasurer.utils.IOnBackPressed
 import com.example.ceilingmeasurer.utils.ImageSaver
 import com.example.ceilingmeasurer.utils.attachLeftSwipeHelper
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ClientDetailsFragment : Fragment() {
+class ClientDetailsFragment : Fragment(), IOnBackPressed {
     private var _binding: FragmentClientDetailsBinding? = null
     private val binding get() = _binding!!
     private lateinit var client: Client
@@ -120,6 +121,9 @@ class ClientDetailsFragment : Fragment() {
     private fun initSaveButton() {
         binding.saveButton.setOnClickListener {
             viewModel.updateClientCredentials(getClient())
+            Handler(Looper.getMainLooper()).postDelayed({
+                onBackPressed()
+            }, 500)
         }
     }
 
@@ -144,6 +148,12 @@ class ClientDetailsFragment : Fragment() {
 //        viewModel.updateCeilingsDetails(adapter.getData())
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onBackPressed(): Boolean {
+        parentFragmentManager.popBackStack()
+        updateData()
+        return true
     }
 
     private fun getClient(): Client {

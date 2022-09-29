@@ -92,6 +92,7 @@ class MaterialsListFragment : Fragment(), IOnBackPressed {
 
     override fun onBackPressed(): Boolean {
         childFragmentManager.popBackStack()
+        renderData()
         return true
     }
 
