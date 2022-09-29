@@ -16,6 +16,7 @@ import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentCeilingDetailsBinding
 import com.example.ceilingmeasurer.domain.entities.Ceiling
 import com.example.ceilingmeasurer.temp.PlanFragment
+import com.example.ceilingmeasurer.utils.ImageSaver
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CeilingDetailsFragment : Fragment() {
@@ -49,9 +50,13 @@ class CeilingDetailsFragment : Fragment() {
                     takePicture.launch()
                 }
             }
-        takePicture = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {
-            binding.imagePlan.setImageBitmap(it)
-        }
+        takePicture =
+            registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
+                binding.imagePlan.setImageBitmap(bitmap)
+                ImageSaver(requireContext())
+                    .setFileName("image${ceiling.clientId}&${ceiling.id}")
+                    .save(bitmap)
+            }
     }
 
     override fun onCreateView(
@@ -67,7 +72,16 @@ class CeilingDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initCeiling()
         initButtons()
+        loadImage()
         initImageViewClickListener()
+    }
+
+    private fun loadImage() {
+        binding.imagePlan.setImageBitmap(
+            ImageSaver(requireContext())
+                .setFileName("image${ceiling.clientId}&${ceiling.id}")
+                .load()
+        )
     }
 
     private fun initImageViewClickListener() {
@@ -79,7 +93,6 @@ class CeilingDetailsFragment : Fragment() {
                 )
                 .addToBackStack("")
                 .commit()
-
         }
     }
 
@@ -130,24 +143,22 @@ class CeilingDetailsFragment : Fragment() {
         }
     }
 
-    private fun getCeiling(): Ceiling {
-        return Ceiling(
-            id = ceiling.id,
-            clientId = ceiling.clientId,
-            name = binding.name.text.toString(),
-            name_material = binding.material.text.toString(),
-            length = binding.length.toString().toDoubleOrNull() ?: 0.0,
-            width = binding.width.toString().toDoubleOrNull() ?: 0.0,
-            chandeliers = binding.chandeliers.toString().toIntOrNull() ?: 0,
-            lamps = binding.lamps.toString().toIntOrNull() ?: 0,
-            corners = binding.corners.toString().toIntOrNull() ?: 0,
-            stroke = binding.stroke.toString().toIntOrNull() ?: 0,
-            two_steps = binding.twoSteps.toString().toDoubleOrNull() ?: 0.0,
-            curtain = binding.curtain.toString().toDoubleOrNull() ?: 0.0,
-            alu_curtain = binding.aluCurtain.toString().toDoubleOrNull() ?: 0.0,
-            price_for_m2 = binding.priceForM2.toString().toDoubleOrNull() ?: 0.0,
-        )
-    }
+    private fun getCeiling() = Ceiling(
+        id = ceiling.id,
+        clientId = ceiling.clientId,
+        name = binding.name.text.toString(),
+        name_material = binding.material.text.toString(),
+        length = binding.length.text.toString().trim().toDoubleOrNull() ?: 0.0,
+        width = binding.width.text.toString().trim().toDoubleOrNull() ?: 0.0,
+        chandeliers = binding.chandeliers.text.toString().trim().toIntOrNull() ?: 0,
+        lamps = binding.lamps.text.toString().trim().toIntOrNull() ?: 0,
+        corners = binding.corners.text.toString().trim().toIntOrNull() ?: 0,
+        stroke = binding.stroke.text.toString().trim().toIntOrNull() ?: 0,
+        two_steps = binding.twoSteps.text.toString().trim().toDoubleOrNull() ?: 0.0,
+        curtain = binding.curtain.text.toString().trim().toDoubleOrNull() ?: 0.0,
+        alu_curtain = binding.aluCurtain.text.toString().trim().toDoubleOrNull() ?: 0.0,
+        price_for_m2 = binding.priceForM2.text.toString().trim().toDoubleOrNull() ?: 0.0,
+    )
 
     override fun onDestroy() {
         super.onDestroy()

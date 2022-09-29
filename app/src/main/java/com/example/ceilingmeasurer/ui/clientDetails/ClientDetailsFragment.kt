@@ -18,6 +18,7 @@ import com.example.ceilingmeasurer.domain.entities.Client
 import com.example.ceilingmeasurer.ui.ceilingDetails.CeilingDetailsFragment
 import com.example.ceilingmeasurer.ui.clientDetails.recycler.CeilingsCallback
 import com.example.ceilingmeasurer.ui.clientDetails.recycler.ClientDetailsAdapter
+import com.example.ceilingmeasurer.utils.ImageSaver
 import com.example.ceilingmeasurer.utils.attachLeftSwipeHelper
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -99,6 +100,9 @@ class ClientDetailsFragment : Fragment() {
             layoutManager = GridLayoutManager(context, 1)
             adapter = ceilingsAdapter
         }.attachLeftSwipeHelper { viewHolder ->
+            ImageSaver(requireContext())
+                .setFileName("image${client.id}&${ceilingsAdapter.getData()[viewHolder.adapterPosition].id}")
+                .deleteFile()
             viewModel.deleteCeiling(ceilingsAdapter.getData()[viewHolder.adapterPosition])
             ceilingsAdapter.notifyItemRemoved(viewHolder.adapterPosition)
             updateData()
