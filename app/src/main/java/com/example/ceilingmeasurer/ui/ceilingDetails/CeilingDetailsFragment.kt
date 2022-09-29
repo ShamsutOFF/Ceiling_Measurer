@@ -18,10 +18,11 @@ import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentCeilingDetailsBinding
 import com.example.ceilingmeasurer.domain.entities.Ceiling
 import com.example.ceilingmeasurer.temp.PlanFragment
+import com.example.ceilingmeasurer.utils.IOnBackPressed
 import com.example.ceilingmeasurer.utils.ImageSaver
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CeilingDetailsFragment : Fragment() {
+class CeilingDetailsFragment : Fragment(), IOnBackPressed {
     private var _binding: FragmentCeilingDetailsBinding? = null
     private val binding get() = _binding!!
     private lateinit var ceiling: Ceiling
@@ -143,7 +144,7 @@ class CeilingDetailsFragment : Fragment() {
         binding.buttonSaveCeiling.setOnClickListener {
             viewModel.saveCeiling(getCeiling())
             Handler(Looper.getMainLooper()).postDelayed({
-                parentFragmentManager.popBackStack()
+                (parentFragment as IOnBackPressed).onBackPressed()
             }, 500)
         }
     }
@@ -168,5 +169,10 @@ class CeilingDetailsFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onBackPressed(): Boolean {
+        parentFragmentManager.popBackStack()
+        return true
     }
 }

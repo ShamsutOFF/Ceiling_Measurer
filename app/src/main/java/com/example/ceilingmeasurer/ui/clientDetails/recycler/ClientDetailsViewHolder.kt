@@ -33,7 +33,7 @@ class ClientDetailsViewHolder(
 
     fun bind(ceiling: Ceiling) {
         binding.apply {
-            if (ceiling.name_material.isEmpty()) ceilingName.text =
+            if (ceiling.name.isEmpty()) ceilingName.text =
                 itemView.context.getString(R.string.new_ceiling)
             else ceilingName.text = ceiling.name
             if (ceiling.length.equals(0.0) || ceiling.width.equals(0.0)) ceilingSize.text = ""
