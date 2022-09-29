@@ -151,8 +151,8 @@ class CeilingDetailsFragment : Fragment() {
     private fun getCeiling() = Ceiling(
         id = ceiling.id,
         clientId = ceiling.clientId,
-        name = binding.name.text.toString(),
-        name_material = binding.material.text.toString(),
+        name = binding.name.text.toString().trim(),
+        name_material = binding.material.text.toString().trim(),
         length = binding.length.text.toString().trim().toDoubleOrNull() ?: 0.0,
         width = binding.width.text.toString().trim().toDoubleOrNull() ?: 0.0,
         chandeliers = binding.chandeliers.text.toString().trim().toIntOrNull() ?: 0,

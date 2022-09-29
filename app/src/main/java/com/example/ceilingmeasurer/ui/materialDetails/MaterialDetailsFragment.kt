@@ -71,10 +71,10 @@ class MaterialDetailsFragment : Fragment() {
 
     private fun getMaterial() = Material(
         id = material.id,
-        name_material = binding.nameMaterial.text.toString(),
-        unit_measure = binding.unitMeasure.text.toString(),
-        unit_price = binding.priceMaterial.text.toString().toDoubleOrNull() ?: 0.0,
-        unit_work_price = binding.priceWork.text.toString().toDoubleOrNull() ?: 0.0
+        name_material = binding.nameMaterial.text.toString().trim(),
+        unit_measure = binding.unitMeasure.text.toString().trim(),
+        unit_price = binding.priceMaterial.text.toString().trim().toDoubleOrNull() ?: 0.0,
+        unit_work_price = binding.priceWork.text.toString().trim().toDoubleOrNull() ?: 0.0
     )
 
     override fun onDestroy() {

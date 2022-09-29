@@ -160,12 +160,12 @@ class ClientDetailsFragment : Fragment(), IOnBackPressed {
     private fun getClient(): Client {
         val returnClient = arguments?.getParcelable<Client>(CLIENT) ?: Client()
         returnClient.apply {
-            name = binding.clientName.text.toString()
-            surname = binding.clientSurname.text.toString()
-            phone_number = binding.phoneNumber.text.toString()
-            address = binding.address.text.toString()
-            district = binding.district.text.toString()
-            status = binding.clientStatus.selectedItem.toString()
+            name = binding.clientName.text.toString().trim()
+            surname = binding.clientSurname.text.toString().trim()
+            phone_number = binding.phoneNumber.text.toString().trim()
+            address = binding.address.text.toString().trim()
+            district = binding.district.text.toString().trim()
+            status = binding.clientStatus.selectedItem.toString().trim()
         }
         return returnClient
     }
