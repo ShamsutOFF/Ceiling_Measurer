@@ -26,7 +26,7 @@
     <string name="price_for_m2">Цена за кв. метр</string>
     <string name="attachment">Фото замера</string>
     <string name="drawing">Чертеж</string>
-    <string name="save">Save</string>
+    <string name="save">Сохранить</string>
     <string name="add_client">Добавить клиента</string>
     <string name="frg_det_mat_name">Сведения о материале</string>
     <string name="hint_frg_det_mat_name">Название материала</string>
