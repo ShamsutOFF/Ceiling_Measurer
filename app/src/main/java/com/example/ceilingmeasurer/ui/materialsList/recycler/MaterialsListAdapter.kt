@@ -1,4 +1,4 @@
-package com.example.ceilingmeasurer.ui.materialDetails.recycler
+package com.example.ceilingmeasurer.ui.materialsList.recycler
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

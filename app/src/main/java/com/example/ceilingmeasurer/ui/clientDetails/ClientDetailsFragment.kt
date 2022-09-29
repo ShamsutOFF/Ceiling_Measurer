@@ -104,7 +104,6 @@ class ClientDetailsFragment : Fragment() {
                 .setFileName("image${client.id}&${ceilingsAdapter.getData()[viewHolder.adapterPosition].id}")
                 .deleteFile()
             viewModel.deleteCeiling(ceilingsAdapter.getData()[viewHolder.adapterPosition])
-            ceilingsAdapter.notifyItemRemoved(viewHolder.adapterPosition)
             updateData()
         }
     }

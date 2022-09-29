@@ -22,4 +22,8 @@ class RoomMaterialListRepoImpl(private val dao: MaterialsDAO) : MaterialListRepo
     override suspend fun insertMaterial(material: Material) {
         dao.insertNewMaterial(MaterialMapper().toModel(material))
     }
+
+    override suspend fun deleteMaterial(material: Material) {
+        dao.deleteMaterial(MaterialMapper().toModel(material))
+    }
 }

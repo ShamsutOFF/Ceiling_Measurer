@@ -34,4 +34,15 @@ class MaterialsListViewModel(private val repo: MaterialListRepo) : BaseViewModel
             repo.insertMaterial(material)
         }
     }
+
+    fun deleteMaterial(material: Material) {
+        cancelJob()
+        viewModelCoroutineScope.launch { susDeleteMaterial(material) }
+    }
+
+    private suspend fun susDeleteMaterial(material: Material) {
+        withContext(Dispatchers.IO) {
+            repo.deleteMaterial(material)
+        }
+    }
 }

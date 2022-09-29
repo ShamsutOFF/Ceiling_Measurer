@@ -89,7 +89,6 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
     private fun initItemTouchHelper() {
         binding.clientListRecyclerView.attachLeftSwipeHelper { viewHolder ->
             deleteClient(viewHolder.adapterPosition)
-            adapter.notifyItemRemoved(viewHolder.adapterPosition)
             updateClientData()
         }
     }

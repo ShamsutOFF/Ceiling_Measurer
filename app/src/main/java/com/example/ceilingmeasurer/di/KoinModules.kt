@@ -15,6 +15,7 @@ import com.example.ceilingmeasurer.domain.MaterialListRepo
 import com.example.ceilingmeasurer.ui.ceilingDetails.CeilingDetailsViewModel
 import com.example.ceilingmeasurer.ui.clientDetails.ClientDetailsViewModel
 import com.example.ceilingmeasurer.ui.clientsList.ClientsListViewModel
+import com.example.ceilingmeasurer.ui.materialDetails.MaterialDetailsViewModel
 import com.example.ceilingmeasurer.ui.materialsList.MaterialsListViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -50,5 +51,6 @@ object KoinModules {
         viewModel { ClientDetailsViewModel(get<ClientDetailsRepo>(), get<ClientListRepo>()) }
         viewModel { CeilingDetailsViewModel(get<ClientDetailsRepo>()) }
         viewModel { MaterialsListViewModel(get<MaterialListRepo>()) }
+        viewModel { MaterialDetailsViewModel(get<MaterialListRepo>()) }
     }
 }
