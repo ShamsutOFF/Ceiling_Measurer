@@ -81,7 +81,11 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
 
     private fun initViewModel() {
         viewModel.clientList.observe(viewLifecycleOwner) {
+            val oldDataSize = adapter.getData().size
             adapter.setData(it)
+            if (oldDataSize != 0 && oldDataSize == it.size - 1) {
+                onItemClick(it.size - 1)
+            }
         }
     }
 

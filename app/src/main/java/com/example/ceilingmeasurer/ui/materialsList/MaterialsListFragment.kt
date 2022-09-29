@@ -86,7 +86,11 @@ class MaterialsListFragment : Fragment(), IOnBackPressed {
 
     private fun initViewModel() {
         viewModel.materialList.observe(viewLifecycleOwner) {
+            val oldDataSize = materialsAdapter.getData().size
             materialsAdapter.setData(it)
+            if (oldDataSize != 0 && oldDataSize == it.size - 1) {
+                onItemClick(it.size - 1)
+            }
         }
     }
 

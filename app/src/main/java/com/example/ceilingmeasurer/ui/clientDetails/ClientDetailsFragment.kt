@@ -9,14 +9,12 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentClientDetailsBinding
 import com.example.ceilingmeasurer.domain.entities.Client
 import com.example.ceilingmeasurer.ui.ceilingDetails.CeilingDetailsFragment
-import com.example.ceilingmeasurer.ui.clientDetails.recycler.CeilingsCallback
 import com.example.ceilingmeasurer.ui.clientDetails.recycler.ClientDetailsAdapter
 import com.example.ceilingmeasurer.ui.clientsList.ClientsListFragment
 import com.example.ceilingmeasurer.utils.IOnBackPressed
@@ -111,11 +109,12 @@ class ClientDetailsFragment : Fragment(), IOnBackPressed {
     }
 
     private fun initViewModel() {
-        viewModel.ceilingList.observe(viewLifecycleOwner) { newData ->
-            val diffCallback = CeilingsCallback(ceilingsAdapter.getData(), newData)
-            val diffCeilings = DiffUtil.calculateDiff(diffCallback)
-            ceilingsAdapter.setData(newData)
-            diffCeilings.dispatchUpdatesTo(ceilingsAdapter)
+        viewModel.ceilingList.observe(viewLifecycleOwner) {
+            val oldDataSize = ceilingsAdapter.getData().size
+            ceilingsAdapter.setData(it)
+            if (oldDataSize != 0 && oldDataSize == it.size - 1) {
+                onItemClick(it.size - 1)
+            }
         }
     }
 
