@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.transition.TransitionInflater
@@ -48,15 +49,26 @@ class MaterialDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initMaterial()
+        initSpinner()
         initSaveButton()
     }
 
     private fun initMaterial() {
         binding.apply {
             nameMaterial.setText(material.name_material)
-            unitMeasure.setText(material.unit_measure)
             priceMaterial.setText(material.unit_price.toString())
             priceWork.setText(material.unit_work_price.toString())
+        }
+    }
+
+    private fun initSpinner() {
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.unit_measure_spin,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.unitMeasureSp.adapter = adapter
         }
     }
 
@@ -72,7 +84,7 @@ class MaterialDetailsFragment : Fragment() {
     private fun getMaterial() = Material(
         id = material.id,
         name_material = binding.nameMaterial.text.toString().trim(),
-        unit_measure = binding.unitMeasure.text.toString().trim(),
+        unit_measure = binding.unitMeasureSp.selectedItem.toString().trim(),
         unit_price = binding.priceMaterial.text.toString().trim().toDoubleOrNull() ?: 0.0,
         unit_work_price = binding.priceWork.text.toString().trim().toDoubleOrNull() ?: 0.0
     )

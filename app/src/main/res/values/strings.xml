@@ -33,9 +33,7 @@
     <string name="frg_det_mat_unit_measure">Еденица измерения</string>
     <string name="hint_frg_det_mat_unit_measure">м2</string>
     <string name="frg_det_mat_price_mat">Стоимость материала</string>
-    <string name="_250">250</string>
     <string name="frg_det_mat_price_work">Стоимость работы</string>
-    <string name="_350">350</string>
     <string name="btn_save">Сохранить</string>
     <string name="rv_mat_name">Матовое полотно белое</string>
     <string name="rv_mat_price_mat">цена материала</string>
@@ -52,11 +50,18 @@
     <string name="new_ceiling">Новый потолок</string>
     <string name="new_material">Новый материал</string>
     <string name="rv_mat_unit_measure">Единица измерения</string>
+    <string name="cost">цена</string>
 
     <string-array name="status_client">
         <item>Замер</item>
         <item>В работе</item>
         <item>Сдан</item>
         <item>Отказ</item>
+    </string-array>
+
+    <string-array name="unit_measure_spin">
+        <item>м2</item>
+        <item>м.п.</item>
+        <item>шт</item>
     </string-array>
 </resources>

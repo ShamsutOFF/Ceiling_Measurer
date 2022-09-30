@@ -74,7 +74,8 @@
                     android:id="@+id/phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:inputType="phone"
+                    android:textColorHint="#546E7A" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
