@@ -49,7 +49,7 @@ object KoinModules {
     val viewModel = module {
         viewModel { ClientsListViewModel(get<ClientListRepo>(), get<ClientDetailsRepo>()) }
         viewModel { ClientDetailsViewModel(get<ClientDetailsRepo>(), get<ClientListRepo>()) }
-        viewModel { CeilingDetailsViewModel(get<ClientDetailsRepo>()) }
+        viewModel { CeilingDetailsViewModel(get<ClientDetailsRepo>(), get<MaterialListRepo>()) }
         viewModel { MaterialsListViewModel(get<MaterialListRepo>()) }
         viewModel { MaterialDetailsViewModel(get<MaterialListRepo>()) }
     }

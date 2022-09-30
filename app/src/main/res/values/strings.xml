@@ -51,6 +51,7 @@
     <string name="new_material">Новый материал</string>
     <string name="rv_mat_unit_measure">Единица измерения</string>
     <string name="cost">цена</string>
+    <string name="request_add_materials">Добавьте материал</string>
 
     <string-array name="status_client">
         <item>Замер</item>

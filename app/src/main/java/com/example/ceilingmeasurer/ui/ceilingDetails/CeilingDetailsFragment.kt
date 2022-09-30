@@ -7,6 +7,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.launch
@@ -74,9 +75,36 @@ class CeilingDetailsFragment : Fragment(), IOnBackPressed {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initCeiling()
+        initSpinner()
         initButtons()
         loadImage()
         initImageViewClickListener()
+    }
+
+    private fun initSpinner() {
+        val spinnerList = mutableListOf<String>()
+        viewModel.materialsList.observe(viewLifecycleOwner) { materialsList ->
+            spinnerList.removeAll(spinnerList)
+            for (material in materialsList) {
+                spinnerList.add(material.name_material)
+            }
+            if (spinnerList.isEmpty()) {
+                spinnerList.add(requireContext().getString(R.string.request_add_materials))
+            }
+            initSpinnerAdapter(spinnerList)
+        }
+        viewModel.getMaterialsList()
+    }
+
+    private fun initSpinnerAdapter(spinnerList: List<String>) {
+        ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            spinnerList
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spinnerMaterial.adapter = adapter
+        }
     }
 
     private fun loadImage() {
@@ -102,7 +130,6 @@ class CeilingDetailsFragment : Fragment(), IOnBackPressed {
     private fun initCeiling() {
         binding.apply {
             name.setText(ceiling.name)
-            material.setText(ceiling.name_material)
             length.setText(ceiling.length.toString())
             width.setText(ceiling.width.toString())
             twoSteps.setText(ceiling.two_steps.toString())
@@ -153,7 +180,7 @@ class CeilingDetailsFragment : Fragment(), IOnBackPressed {
         id = ceiling.id,
         clientId = ceiling.clientId,
         name = binding.name.text.toString().trim(),
-        name_material = binding.material.text.toString().trim(),
+        name_material = binding.spinnerMaterial.selectedItem.toString().trim(),
         length = binding.length.text.toString().trim().toDoubleOrNull() ?: 0.0,
         width = binding.width.text.toString().trim().toDoubleOrNull() ?: 0.0,
         chandeliers = binding.chandeliers.text.toString().trim().toIntOrNull() ?: 0,

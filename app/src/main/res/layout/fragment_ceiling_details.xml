@@ -44,11 +44,11 @@
                 android:layout_marginEnd="@dimen/input_layout_margin_side_small"
                 android:hint="@string/material">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/material"
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner_material"
+                    android:minHeight="56dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
