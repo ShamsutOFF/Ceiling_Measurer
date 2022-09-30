@@ -17,7 +17,7 @@
     <dimen name="input_layout_margin_top">6dp</dimen>
     <dimen name="card_view_margin">20dp</dimen>
     <dimen name="card_view_inner_margin">20dp</dimen>
-    <dimen name="last_element_bottom_margin">36dp</dimen>
+    <dimen name="last_element_bottom_margin">56dp</dimen>
     <dimen name="ceiling_text_side_margin">20dp</dimen>
     <dimen name="client_button_margin">20dp</dimen>
     <dimen name="recycler_ceilings_min_height">100dp</dimen>

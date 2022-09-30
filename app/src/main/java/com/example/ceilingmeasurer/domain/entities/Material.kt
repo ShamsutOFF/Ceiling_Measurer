@@ -5,8 +5,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Material(
-    val name_material: String = "Полотно белый глянец",
+    val id: Int = 0,
+    val name_material: String = "",
     val unit_measure: String = "м2",
-    val unit_price: Int = 260,
-    val unit_work_price: Int = 360
+    val unit_price: Double = 260.0,
+    val unit_work_price: Double = 360.0
 ) : Parcelable

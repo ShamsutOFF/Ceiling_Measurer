@@ -10,6 +10,8 @@
         android:layout_marginTop="@dimen/card_view_inner_margin"
         android:background="@color/main_background_color"
         android:baselineAligned="false"
+        android:clickable="true"
+        android:focusable="true"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -42,11 +44,11 @@
                 android:layout_marginEnd="@dimen/input_layout_margin_side_small"
                 android:hint="@string/material">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/material"
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner_material"
+                    android:minHeight="56dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -235,12 +237,12 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image_plan"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/input_layout_margin_side_large"
                 android:layout_marginTop="@dimen/input_layout_margin_side_small"
                 android:layout_marginEnd="@dimen/input_layout_margin_side_large"
-                android:layout_marginStart="@dimen/input_layout_margin_side_large"
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:focusable="true"

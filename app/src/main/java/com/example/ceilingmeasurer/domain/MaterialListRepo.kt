@@ -4,5 +4,7 @@ import com.example.ceilingmeasurer.domain.entities.Material
 
 interface MaterialListRepo {
     suspend fun getMaterialList(): List<Material>
-    suspend fun saveMaterial(material: Material)
+    suspend fun insertMaterial(material: Material)
+    suspend fun updateMaterial(material: Material)
+    suspend fun deleteMaterial(material: Material)
 }

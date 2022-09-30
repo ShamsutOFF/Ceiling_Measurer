@@ -2,9 +2,12 @@ package com.example.ceilingmeasurer.ui.ceilingDetails
 
 import android.Manifest
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.launch
@@ -16,10 +19,11 @@ import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentCeilingDetailsBinding
 import com.example.ceilingmeasurer.domain.entities.Ceiling
 import com.example.ceilingmeasurer.temp.PlanFragment
+import com.example.ceilingmeasurer.utils.IOnBackPressed
 import com.example.ceilingmeasurer.utils.ImageSaver
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CeilingDetailsFragment : Fragment() {
+class CeilingDetailsFragment : Fragment(), IOnBackPressed {
     private var _binding: FragmentCeilingDetailsBinding? = null
     private val binding get() = _binding!!
     private lateinit var ceiling: Ceiling
@@ -71,9 +75,36 @@ class CeilingDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initCeiling()
+        initSpinner()
         initButtons()
         loadImage()
         initImageViewClickListener()
+    }
+
+    private fun initSpinner() {
+        val spinnerList = mutableListOf<String>()
+        viewModel.materialsList.observe(viewLifecycleOwner) { materialsList ->
+            spinnerList.removeAll(spinnerList)
+            for (material in materialsList) {
+                spinnerList.add(material.name_material)
+            }
+            if (spinnerList.isEmpty()) {
+                spinnerList.add(requireContext().getString(R.string.request_add_materials))
+            }
+            initSpinnerAdapter(spinnerList)
+        }
+        viewModel.getMaterialsList()
+    }
+
+    private fun initSpinnerAdapter(spinnerList: List<String>) {
+        ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            spinnerList
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spinnerMaterial.adapter = adapter
+        }
     }
 
     private fun loadImage() {
@@ -99,7 +130,6 @@ class CeilingDetailsFragment : Fragment() {
     private fun initCeiling() {
         binding.apply {
             name.setText(ceiling.name)
-            material.setText(ceiling.name_material)
             length.setText(ceiling.length.toString())
             width.setText(ceiling.width.toString())
             twoSteps.setText(ceiling.two_steps.toString())
@@ -140,14 +170,17 @@ class CeilingDetailsFragment : Fragment() {
     private fun buttonSave() {
         binding.buttonSaveCeiling.setOnClickListener {
             viewModel.saveCeiling(getCeiling())
+            Handler(Looper.getMainLooper()).postDelayed({
+                (parentFragment as IOnBackPressed).onBackPressed()
+            }, 500)
         }
     }
 
     private fun getCeiling() = Ceiling(
         id = ceiling.id,
         clientId = ceiling.clientId,
-        name = binding.name.text.toString(),
-        name_material = binding.material.text.toString(),
+        name = binding.name.text.toString().trim(),
+        name_material = binding.spinnerMaterial.selectedItem.toString().trim(),
         length = binding.length.text.toString().trim().toDoubleOrNull() ?: 0.0,
         width = binding.width.text.toString().trim().toDoubleOrNull() ?: 0.0,
         chandeliers = binding.chandeliers.text.toString().trim().toIntOrNull() ?: 0,
@@ -163,5 +196,10 @@ class CeilingDetailsFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onBackPressed(): Boolean {
+        parentFragmentManager.popBackStack()
+        return true
     }
 }

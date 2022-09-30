@@ -9,20 +9,20 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentClientDetailsBinding
 import com.example.ceilingmeasurer.domain.entities.Client
 import com.example.ceilingmeasurer.ui.ceilingDetails.CeilingDetailsFragment
-import com.example.ceilingmeasurer.ui.clientDetails.recycler.CeilingsCallback
 import com.example.ceilingmeasurer.ui.clientDetails.recycler.ClientDetailsAdapter
+import com.example.ceilingmeasurer.ui.clientsList.ClientsListFragment
+import com.example.ceilingmeasurer.utils.IOnBackPressed
 import com.example.ceilingmeasurer.utils.ImageSaver
 import com.example.ceilingmeasurer.utils.attachLeftSwipeHelper
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ClientDetailsFragment : Fragment() {
+class ClientDetailsFragment : Fragment(), IOnBackPressed {
     private var _binding: FragmentClientDetailsBinding? = null
     private val binding get() = _binding!!
     private lateinit var client: Client
@@ -104,23 +104,26 @@ class ClientDetailsFragment : Fragment() {
                 .setFileName("image${client.id}&${ceilingsAdapter.getData()[viewHolder.adapterPosition].id}")
                 .deleteFile()
             viewModel.deleteCeiling(ceilingsAdapter.getData()[viewHolder.adapterPosition])
-            ceilingsAdapter.notifyItemRemoved(viewHolder.adapterPosition)
             updateData()
         }
     }
 
     private fun initViewModel() {
-        viewModel.ceilingList.observe(viewLifecycleOwner) { newData ->
-            val diffCallback = CeilingsCallback(ceilingsAdapter.getData(), newData)
-            val diffCeilings = DiffUtil.calculateDiff(diffCallback)
-            ceilingsAdapter.setData(newData)
-            diffCeilings.dispatchUpdatesTo(ceilingsAdapter)
+        viewModel.ceilingList.observe(viewLifecycleOwner) {
+            val oldDataSize = ceilingsAdapter.getData().size
+            ceilingsAdapter.setData(it)
+            if (oldDataSize != 0 && oldDataSize == it.size - 1) {
+                onItemClick(it.size - 1)
+            }
         }
     }
 
     private fun initSaveButton() {
         binding.saveButton.setOnClickListener {
             viewModel.updateClientCredentials(getClient())
+            Handler(Looper.getMainLooper()).postDelayed({
+                (parentFragment as ClientsListFragment).onBackPressed()
+            }, 500)
         }
     }
 
@@ -147,15 +150,21 @@ class ClientDetailsFragment : Fragment() {
         _binding = null
     }
 
+    override fun onBackPressed(): Boolean {
+        parentFragmentManager.popBackStack()
+        updateData()
+        return true
+    }
+
     private fun getClient(): Client {
         val returnClient = arguments?.getParcelable<Client>(CLIENT) ?: Client()
         returnClient.apply {
-            name = binding.clientName.text.toString()
-            surname = binding.clientSurname.text.toString()
-            phone_number = binding.phoneNumber.text.toString()
-            address = binding.address.text.toString()
-            district = binding.district.text.toString()
-            status = binding.clientStatus.selectedItem.toString()
+            name = binding.clientName.text.toString().trim()
+            surname = binding.clientSurname.text.toString().trim()
+            phone_number = binding.phoneNumber.text.toString().trim()
+            address = binding.address.text.toString().trim()
+            district = binding.district.text.toString().trim()
+            status = binding.clientStatus.selectedItem.toString().trim()
         }
         return returnClient
     }
