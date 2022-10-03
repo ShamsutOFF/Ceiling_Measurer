@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="frg_det_mat_name">Сведения о материале</string>
+    <string name="hint_frg_det_mat_name">Название материала</string>
+    <string name="frg_det_mat_unit_measure">Еденица измерения</string>
+    <string name="hint_frg_det_mat_unit_measure">м2</string>
+    <string name="frg_det_mat_price_mat">Стоимость материала</string>
+    <string name="frg_det_mat_price_work">Стоимость работы</string>
+    <string name="btn_save">Сохранить</string>
+    <string name="rv_mat_name">Матовое полотно белое</string>
+    <string name="rv_mat_price_mat">цена работы</string>
+    <string name="rv_mat_price_work">цена материала</string>
+    <string name="btn_add_new_material">Добавить новый</string>
+    <string name="rv_mat_unit_measure">Единица измерения</string>
+    <string name="cost">цена</string>
+</resources>

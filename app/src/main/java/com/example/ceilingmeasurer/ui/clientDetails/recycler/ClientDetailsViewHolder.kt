@@ -3,12 +3,13 @@ package com.example.ceilingmeasurer.ui.clientDetails.recycler
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.RecyclerItemCeilingBinding
 import com.example.ceilingmeasurer.domain.entities.Ceiling
 
 class ClientDetailsViewHolder(
     private val binding: RecyclerItemCeilingBinding,
-    private val onItemClick: (position: Int) -> Unit
+    private val onItemClick: (position: Int) -> Unit,
 ) :
     RecyclerView.ViewHolder(binding.root) {
     init {
@@ -16,6 +17,8 @@ class ClientDetailsViewHolder(
             onItemClick(adapterPosition)
         }
     }
+
+    var ceilingCardView = binding.ceilingCardView
 
     companion object {
         fun create(
@@ -30,19 +33,12 @@ class ClientDetailsViewHolder(
 
     fun bind(ceiling: Ceiling) {
         binding.apply {
-            material.setText(ceiling.name_material)
-            square.setText(ceiling.square.toString())
-            perimeter.setText(ceiling.perimeter.toString())
-            chandeliers.setText(ceiling.chandeliers.toString())
-            lamps.setText(ceiling.lamps.toString())
-            corners.setText(ceiling.corners.toString())
-            stroke.setText(ceiling.stroke.toString())
-            twoSteps.setText(ceiling.two_steps.toString())
-            curtain.setText(ceiling.curtain.toString())
-            aluCurtain.setText(ceiling.alu_curtain.toString())
-            priceForM2.setText(ceiling.price_for_m2.toString())
-            attachment.setText(ceiling.attachment)
-            drawing.setText(ceiling.drawing)
+            if (ceiling.name.isEmpty()) ceilingName.text =
+                itemView.context.getString(R.string.new_ceiling)
+            else ceilingName.text = ceiling.name
+            if (ceiling.length.equals(0.0) || ceiling.width.equals(0.0)) ceilingSize.text = ""
+            else ceilingSize.text = (ceiling.length * ceiling.width).toString() + "m^2"
+            ceilingMaterial.text = ceiling.name_material
         }
     }
 }

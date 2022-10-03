@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ceiling_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/client_card_view_margin"
     android:layout_marginTop="@dimen/card_view_margin"
-    android:paddingBottom="20dp"
     android:clickable="true"
     android:focusable="true"
     android:paddingTop="@dimen/client_card_view_padding"
@@ -25,213 +25,32 @@
         android:baselineAligned="false"
         android:orientation="horizontal">
 
-        <LinearLayout
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ceiling_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_weight="2"
+            android:singleLine="true"
+            tools:text="Name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ceiling_size"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:gravity="center"
+            android:singleLine="true"
+            tools:text="Size" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_large"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
-                android:hint="@string/material">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/material"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_large"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
-                android:hint="@string/square">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/square"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_large"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
-                android:hint="@string/perimeter">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/perimeter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_large"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
-                android:hint="@string/corners">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/corners"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_large"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
-                android:hint="@string/two_steps">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/two_steps"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_large"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_small"
-                android:hint="@string/stroke">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/stroke"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <LinearLayout
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ceiling_material"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_small"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
-                android:hint="@string/chandeliers">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/chandeliers"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_small"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
-                android:hint="@string/lamps">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/lamps"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_small"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
-                android:hint="@string/curtain">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/curtain"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_small"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
-                android:hint="@string/alu_curtain">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/alu_curtain"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_small"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
-                android:hint="@string/price_for_m2">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/price_for_m2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_small"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
-                android:hint="@string/attachment">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/attachment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/input_layout_margin_side_small"
-                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
-                android:hint="@string/drawing">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/drawing"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+            android:layout_marginEnd="@dimen/ceiling_text_side_margin"
+            android:layout_weight="2"
+            android:gravity="end"
+            android:singleLine="true"
+            tools:text="Material" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

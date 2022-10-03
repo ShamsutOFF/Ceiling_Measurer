@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ceilingmeasurer">
 
+    <uses-permission android:name="android.permission.CAMERA" />
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -16,9 +17,11 @@
         tools:targetApi="31">
         <activity
             android:name=".ui.MainActivity"
+            android:theme="@style/Theme.CeilingMeasurer.Splash"
             android:configChanges="orientation"
+            android:exported="true"
             android:screenOrientation="portrait"
-            android:exported="true">
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

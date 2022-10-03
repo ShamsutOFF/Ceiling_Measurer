@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background_color"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:text="@string/frg_det_mat_name"
+        android:textSize="@dimen/material_text_size_24" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/input_layout_margin_side_large"
+        android:layout_marginTop="@dimen/input_layout_margin_top"
+        android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+        android:hint="@string/hint_frg_det_mat_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name_material"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/frg_det_mat_unit_measure"
+                android:textSize="16sp" />
+
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/unit_measure_sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="end"
+                android:layout_marginTop="@dimen/spinner_margin_top"
+                android:layout_marginEnd="@dimen/input_layout_margin_side_large"
+                android:layout_marginBottom="@dimen/spinner_margin_bottom"
+                android:background="@drawable/spinner_border"
+                android:layout_weight="1"
+                android:hint="@string/hint_frg_det_mat_unit_measure"/>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/frg_det_mat_price_mat"
+            android:textSize="16sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/input_layout_margin_side_large"
+            android:layout_marginTop="@dimen/input_layout_margin_top"
+            android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+            android:layout_weight="1"
+            android:hint="@string/cost">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/price_material"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@android:color/white"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/frg_det_mat_price_work"
+            android:textSize="16sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/input_layout_margin_side_large"
+            android:layout_marginTop="@dimen/input_layout_margin_top"
+            android:layout_marginEnd="@dimen/input_layout_margin_side_small"
+            android:layout_weight="1"
+            android:hint="@string/cost">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/price_work"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@android:color/white"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_material_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="@string/btn_save" />
+</androidx.appcompat.widget.LinearLayoutCompat>
+

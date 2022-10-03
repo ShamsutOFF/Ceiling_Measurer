@@ -1,9 +1,12 @@
 package com.example.ceilingmeasurer.ui.clientDetails
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -11,16 +14,19 @@ import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentClientDetailsBinding
 import com.example.ceilingmeasurer.domain.entities.Client
+import com.example.ceilingmeasurer.ui.ceilingDetails.CeilingDetailsFragment
 import com.example.ceilingmeasurer.ui.clientDetails.recycler.ClientDetailsAdapter
+import com.example.ceilingmeasurer.ui.clientsList.ClientsListFragment
+import com.example.ceilingmeasurer.utils.IOnBackPressed
+import com.example.ceilingmeasurer.utils.ImageSaver
+import com.example.ceilingmeasurer.utils.attachLeftSwipeHelper
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ClientDetailsFragment : Fragment() {
+class ClientDetailsFragment : Fragment(), IOnBackPressed {
     private var _binding: FragmentClientDetailsBinding? = null
     private val binding get() = _binding!!
     private lateinit var client: Client
-    private val adapter = ClientDetailsAdapter { position ->
-        onItemClick(position)
-    }
+    private val ceilingsAdapter = ClientDetailsAdapter { position -> onItemClick(position) }
 
     private val viewModel: ClientDetailsViewModel by viewModel()
 
@@ -50,11 +56,33 @@ class ClientDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecycler()
         initClient()
+        initSpinner()
+        initRecycler()
         initViewModel()
         initSaveButton()
-        renderData()
+        initAddCeilingButton()
+        updateData()
+    }
+
+    private fun initSpinner() {
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.status_client,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.clientStatus.adapter = adapter
+        }
+    }
+
+    private fun initAddCeilingButton() {
+        binding.addCeilingButton.setOnClickListener {
+            viewModel.insertNewCeiling(client.id)
+            Handler(Looper.getMainLooper()).postDelayed({
+                updateData()
+            }, 1000)
+        }
     }
 
     private fun initClient() {
@@ -64,54 +92,80 @@ class ClientDetailsFragment : Fragment() {
             phoneNumber.setText(client.phone_number)
             address.setText(client.address)
             district.setText(client.district)
-            clientStatus.setText(client.status)
         }
     }
 
     private fun initRecycler() {
-        binding.ceilingsRecyclerView.layoutManager = GridLayoutManager(context, 1)
-        binding.ceilingsRecyclerView.adapter = adapter
+        binding.ceilingsRecyclerView.apply {
+            layoutManager = GridLayoutManager(context, 1)
+            adapter = ceilingsAdapter
+        }.attachLeftSwipeHelper { viewHolder ->
+            ImageSaver(requireContext())
+                .setFileName("image${client.id}&${ceilingsAdapter.getData()[viewHolder.adapterPosition].id}")
+                .deleteFile()
+            viewModel.deleteCeiling(ceilingsAdapter.getData()[viewHolder.adapterPosition])
+            updateData()
+        }
     }
 
     private fun initViewModel() {
         viewModel.ceilingList.observe(viewLifecycleOwner) {
-            adapter.setData(it)
+            val oldDataSize = ceilingsAdapter.getData().size
+            ceilingsAdapter.setData(it)
+            if (oldDataSize != 0 && oldDataSize == it.size - 1) {
+                onItemClick(it.size - 1)
+            }
         }
     }
 
     private fun initSaveButton() {
         binding.saveButton.setOnClickListener {
-            viewModel.updateClientCredentials(
-                getClient()
-            )
-            viewModel.updateCeilingsDetails(adapter.getData())
-            parentFragmentManager.popBackStack()
+            viewModel.updateClientCredentials(getClient())
+            Handler(Looper.getMainLooper()).postDelayed({
+                (parentFragment as ClientsListFragment).onBackPressed()
+            }, 500)
         }
     }
 
-    private fun renderData() {
+    private fun updateData() {
         viewModel.getCeilings(client)
     }
 
     private fun onItemClick(position: Int) {
-        //nothing
+        parentFragmentManager.beginTransaction()
+            .replace(
+                R.id.client_list_container,
+                CeilingDetailsFragment.newInstance(
+                    ceiling = ceilingsAdapter.getData()[position]
+                )
+            )
+            .addToBackStack("")
+            .commit()
     }
 
     override fun onDestroy() {
-        viewModel.updateClientCredentials(
-            getClient()
-        )
-        viewModel.updateCeilingsDetails(adapter.getData())
+//        viewModel.updateClientCredentials(getClient())
+//        viewModel.updateCeilingsDetails(adapter.getData())
         super.onDestroy()
         _binding = null
     }
 
-    private fun getClient(): Client = Client(
-        binding.clientName.text.toString(),
-        binding.clientSurname.text.toString(),
-        binding.phoneNumber.text.toString(),
-        binding.address.text.toString(),
-        binding.district.text.toString(),
-        binding.clientStatus.text.toString()
-    )
+    override fun onBackPressed(): Boolean {
+        parentFragmentManager.popBackStack()
+        updateData()
+        return true
+    }
+
+    private fun getClient(): Client {
+        val returnClient = arguments?.getParcelable<Client>(CLIENT) ?: Client()
+        returnClient.apply {
+            name = binding.clientName.text.toString().trim()
+            surname = binding.clientSurname.text.toString().trim()
+            phone_number = binding.phoneNumber.text.toString().trim()
+            address = binding.address.text.toString().trim()
+            district = binding.district.text.toString().trim()
+            status = binding.clientStatus.selectedItem.toString().trim()
+        }
+        return returnClient
+    }
 }

@@ -4,7 +4,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ceilingmeasurer.domain.entities.Client
 
-class ClientsListAdapter(private val onItemClick: (position: Int) -> Unit) :
+class ClientsListAdapter(
+    private val onItemClick: (position: Int) -> Unit
+) :
     RecyclerView.Adapter<ClientsListViewHolder>() {
     private var data: List<Client> = emptyList()
 

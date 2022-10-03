@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.ActivityMainBinding
 import com.example.ceilingmeasurer.ui.clientsList.ClientsListFragment
+import com.example.ceilingmeasurer.ui.materialsList.MaterialsListFragment
 import com.example.ceilingmeasurer.utils.IOnBackPressed
 import com.example.hellolibrary.HelloLibrary
 
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_CeilingMeasurer)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -63,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_clients -> attachFragment(ClientsListFragment(), FRAGMENT_CLIENTS)
-                R.id.nav_materials -> attachFragment(MaterialsFragment(), FRAGMENT_MATERIALS)
+                R.id.nav_materials -> attachFragment(MaterialsListFragment(), FRAGMENT_MATERIALS)
                 R.id.nav_orders -> attachFragment(OrdersFragment(), FRAGMENT_ORDERS)
             }
             true

@@ -9,9 +9,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="black_1">#03000000</color>
     <color name="blue_20">#3303DAC5</color>
-    <color name="main_background_color">#BCE3DE</color>
+    <color name="main_background_color">#EAF1F0</color>
     <color name="blue_40">#6603DAC5</color>
     <color name="green_70">#B300FF00</color>
     <color name="yellow_70">#83FFFF00</color>
     <color name="red_70">#83FF0000</color>
+    <color name="rv_mat_list_name_position">#3F51B5</color>
+    <color name="black_color">#000000</color>
 </resources>

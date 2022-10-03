@@ -5,17 +5,19 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Ceiling(
-    val name_material: String = "",
-    val square: Double = 0.0,
-    val perimeter: Double = 0.0,
-    val chandeliers: Int = 0,
-    val lamps: Int = 0,
-    val corners: Int = 0,
-    val stroke: Int = 0,
-    val two_steps: Double = 0.0,
-    val curtain: Double = 0.0,
-    val alu_curtain: Double = 0.0,
-    val price_for_m2: Double = 0.0,
-    val attachment: String = "",
-    val drawing: String = ""
+    var id: Int = 0,
+    var clientId: Int = 0,
+    var name: String = "",
+    var name_material: String = "",
+    var length: Double = 0.0,
+    var width: Double = 0.0,
+    var chandeliers: Int = 0,
+    var lamps: Int = 0,
+    var corners: Int = 0,
+    var stroke: Int = 0,
+    var two_steps: Double = 0.0,
+    var curtain: Double = 0.0,
+    var alu_curtain: Double = 0.0,
+    var price_for_m2: Double = 0.0,
+    var attachment: String = "",
 ) : Parcelable

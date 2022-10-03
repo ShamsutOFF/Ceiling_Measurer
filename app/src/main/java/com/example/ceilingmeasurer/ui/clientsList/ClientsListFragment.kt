@@ -1,6 +1,8 @@
 package com.example.ceilingmeasurer.ui.clientsList
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,19 +11,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentClientsListBinding
-import com.example.ceilingmeasurer.domain.entities.Client
 import com.example.ceilingmeasurer.ui.clientDetails.ClientDetailsFragment
 import com.example.ceilingmeasurer.ui.clientsList.recycler.ClientsListAdapter
 import com.example.ceilingmeasurer.utils.IOnBackPressed
+import com.example.ceilingmeasurer.utils.attachLeftSwipeHelper
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ClientsListFragment : Fragment(), IOnBackPressed {
 
     private var _binding: FragmentClientsListBinding? = null
     private val binding get() = _binding!!
-    private val adapter = ClientsListAdapter { position ->
-        onItemClick(position)
-    }
+    private val adapter = ClientsListAdapter { position -> onItemClick(position) }
+
     private val viewModel: ClientsListViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,12 +42,14 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initButton()
+        initAddButton()
         initRecycler()
         initViewModel()
-        renderData()
+        updateClientData()
+        initItemTouchHelper()
     }
 
+    // region private
     private fun initRecycler() {
         binding.clientListRecyclerView.layoutManager = GridLayoutManager(context, 1)
         binding.clientListRecyclerView.adapter = adapter
@@ -56,9 +59,16 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
         initChildFragment(ClientDetailsFragment.newInstance(adapter.getData()[position]))
     }
 
-    private fun initButton() {
+    private fun deleteClient(position: Int) {
+        viewModel.deleteClient(adapter.getData()[position])
+    }
+
+    private fun initAddButton() {
         binding.clientListAddButton.setOnClickListener {
-            initChildFragment(ClientDetailsFragment.newInstance(Client()))
+            viewModel.insertNewClient()
+            Handler(Looper.getMainLooper()).postDelayed({
+                updateClientData()
+            }, 500)
         }
     }
 
@@ -71,13 +81,27 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
 
     private fun initViewModel() {
         viewModel.clientList.observe(viewLifecycleOwner) {
+            val oldDataSize = adapter.getData().size
             adapter.setData(it)
+            if (oldDataSize != 0 && oldDataSize == it.size - 1) {
+                onItemClick(it.size - 1)
+            }
         }
     }
 
-    private fun renderData() {
+    private fun updateClientData() {
         viewModel.getClientList()
     }
+
+    private fun initItemTouchHelper() {
+        binding.clientListRecyclerView.attachLeftSwipeHelper { viewHolder ->
+            deleteClient(viewHolder.adapterPosition)
+            Handler(Looper.getMainLooper()).postDelayed({
+                updateClientData()
+            }, 500)
+        }
+    }
+    // endregion
 
     override fun onDestroy() {
         super.onDestroy()
@@ -86,6 +110,7 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
 
     override fun onBackPressed(): Boolean {
         childFragmentManager.popBackStack()
+        updateClientData()
         return true
     }
 }

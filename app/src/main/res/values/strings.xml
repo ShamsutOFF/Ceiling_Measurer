@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Ceiling Measurer</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="clients">Клиенты</string>
     <string name="materials">Материалы</string>
@@ -27,6 +26,43 @@
     <string name="price_for_m2">Цена за кв. метр</string>
     <string name="attachment">Фото замера</string>
     <string name="drawing">Чертеж</string>
-    <string name="save">Save</string>
+    <string name="save">Сохранить</string>
     <string name="add_client">Добавить клиента</string>
+    <string name="frg_det_mat_name">Сведения о материале</string>
+    <string name="hint_frg_det_mat_name">Название материала</string>
+    <string name="frg_det_mat_unit_measure">Еденица измерения</string>
+    <string name="hint_frg_det_mat_unit_measure">м2</string>
+    <string name="frg_det_mat_price_mat">Стоимость материала</string>
+    <string name="frg_det_mat_price_work">Стоимость работы</string>
+    <string name="btn_save">Сохранить</string>
+    <string name="rv_mat_name">Матовое полотно белое</string>
+    <string name="rv_mat_price_mat">цена материала</string>
+    <string name="rv_mat_price_work">цена работы</string>
+    <string name="btn_add_new_material">Добавить новый</string>
+    <string name="length">Длина</string>
+    <string name="width">Ширина</string>
+    <string name="open_plan">Открыть чертеж</string>
+    <string name="add_photo">добавить фото</string>
+    <string name="delete_ceiling">удалить</string>
+    <string name="add_new_ceiling">Добавить потолок</string>
+    <string name="ceiling_name">Наименование</string>
+    <string name="new_client">Новый клиент</string>
+    <string name="new_ceiling">Новый потолок</string>
+    <string name="new_material">Новый материал</string>
+    <string name="rv_mat_unit_measure">Единица измерения</string>
+    <string name="cost">цена</string>
+    <string name="request_add_materials">Добавьте материал</string>
+
+    <string-array name="status_client">
+        <item>Замер</item>
+        <item>В работе</item>
+        <item>Сдан</item>
+        <item>Отказ</item>
+    </string-array>
+
+    <string-array name="unit_measure_spin">
+        <item>м2</item>
+        <item>м.п.</item>
+        <item>шт</item>
+    </string-array>
 </resources>
