@@ -67,7 +67,7 @@ dependencies {
     implementation(Libs.koin_core)
     implementation(Libs.koin_android)
     implementation(Libs.koin_compat)
+    implementation(project(":info_library"))
 
     //HelloLibrary
-    implementation(project(":hellolibrary"))
 }
