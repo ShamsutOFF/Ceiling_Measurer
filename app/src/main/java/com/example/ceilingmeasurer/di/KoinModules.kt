@@ -17,6 +17,7 @@ import com.example.ceilingmeasurer.ui.clientDetails.ClientDetailsViewModel
 import com.example.ceilingmeasurer.ui.clientsList.ClientsListViewModel
 import com.example.ceilingmeasurer.ui.materialDetails.MaterialDetailsViewModel
 import com.example.ceilingmeasurer.ui.materialsList.MaterialsListViewModel
+import com.example.hellolibrary.MobileCounter
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

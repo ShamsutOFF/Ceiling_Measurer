@@ -11,18 +11,21 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.transition.TransitionInflater
 import com.example.ceilingmeasurer.R
 import com.example.ceilingmeasurer.databinding.FragmentClientsListBinding
+import com.example.ceilingmeasurer.ui.MainActivity
 import com.example.ceilingmeasurer.ui.clientDetails.ClientDetailsFragment
 import com.example.ceilingmeasurer.ui.clientsList.recycler.ClientsListAdapter
+import com.example.ceilingmeasurer.ui.mobileCounter
 import com.example.ceilingmeasurer.utils.IOnBackPressed
 import com.example.ceilingmeasurer.utils.attachLeftSwipeHelper
+import com.example.hellolibrary.MobileCounter
+import org.json.JSONObject
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ClientsListFragment : Fragment(), IOnBackPressed {
-
     private var _binding: FragmentClientsListBinding? = null
     private val binding get() = _binding!!
     private val adapter = ClientsListAdapter { position -> onItemClick(position) }
-
     private val viewModel: ClientsListViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +68,9 @@ class ClientsListFragment : Fragment(), IOnBackPressed {
 
     private fun initAddButton() {
         binding.clientListAddButton.setOnClickListener {
+            val jsonObject = JSONObject()
+            jsonObject.put("event", "Нажали кнопку добавить клиента!")
+            mobileCounter.sendInfo(jsonObject)
             viewModel.insertNewClient()
             Handler(Looper.getMainLooper()).postDelayed({
                 updateClientData()
