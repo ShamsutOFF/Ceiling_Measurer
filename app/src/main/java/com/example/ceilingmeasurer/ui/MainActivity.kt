@@ -43,6 +43,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         Log.d(TAG, "onStop() called")
+        val jsonObject = JSONObject()
+        jsonObject.put("event", "Приложение свернуто!")
+        mobileCounter.sendInfo(jsonObject)
         super.onStop()
     }
 

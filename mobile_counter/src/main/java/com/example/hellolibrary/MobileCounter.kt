@@ -10,6 +10,8 @@ import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
+import java.text.SimpleDateFormat
+import java.util.*
 
 private const val TAG = "@@@@@ Mobile Counter"
 private var androidID = ""
@@ -20,6 +22,10 @@ private const val COUNTER = "Counter"
 private const val ENDPOINT = "https://42aea87e-bcb4-4f70-b387-7061bee87d95.mock.pstmn.io/orders/habr"
 
 class MobileCounter {
+
+    private var calendar: Calendar = Calendar.getInstance()
+    private var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    private var formattedDate: String =""
 
     fun init(context: Context) {
         androidID = Settings.Secure.getString(
@@ -56,6 +62,8 @@ class MobileCounter {
 
     fun sendInfo(jsonObjectForSending: JSONObject) {
         Log.d(TAG, "sendInfo() called this =$this")
+        formattedDate = formatter.format(calendar.time)
+        jsonObjectForSending.put("Date", formattedDate)
         Thread {
             val url = URL(ENDPOINT)
             val httpURLConnection = url.openConnection() as HttpURLConnection
@@ -84,9 +92,7 @@ class MobileCounter {
                 if (httpURLConnection.responseCode == HttpURLConnection.HTTP_OK) {
                     val json = httpURLConnection.inputStream.bufferedReader().readText()
                     val reader = BufferedReader(InputStreamReader(httpURLConnection.inputStream))
-                    val response = reader.readLines().joinToString()
                     Log.d(TAG, "responseCode = ${httpURLConnection.responseCode}")
-                    Log.d(TAG, "response = $response")
                     Log.d(TAG, "json = $json")
                 } else {
                     // TODO: Здесь нужно сохранять jsonObjectForSending если отправка не удалась
