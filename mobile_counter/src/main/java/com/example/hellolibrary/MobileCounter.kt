@@ -5,8 +5,6 @@ import android.os.Build
 import android.provider.Settings
 import android.util.Log
 import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
@@ -19,13 +17,14 @@ private var launchCounter = 0
 private const val SAVED_DATA = "SavedData"
 private const val COUNTER = "Counter"
 
-private const val ENDPOINT = "https://42aea87e-bcb4-4f70-b387-7061bee87d95.mock.pstmn.io/orders/habr"
+private const val ENDPOINT =
+    "https://42aea87e-bcb4-4f70-b387-7061bee87d95.mock.pstmn.io/orders/habr"
 
 class MobileCounter {
 
     private var calendar: Calendar = Calendar.getInstance()
     private var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-    private var formattedDate: String =""
+    private var formattedDate: String = ""
 
     fun init(context: Context) {
         androidID = Settings.Secure.getString(
@@ -48,15 +47,17 @@ class MobileCounter {
 
     private fun getDeviceInfoJSON(): JSONObject {
         val json = JSONObject()
-        json.put("launchCounter", launchCounter)
-        json.put("androidID", androidID)
-        json.put("MODEL", Build.MODEL)
-        json.put("MANUFACTURER", Build.MANUFACTURER)
-        json.put("BOARD", Build.BOARD)
-        json.put("BRAND", Build.BRAND)
-        json.put("ID", Build.ID)
-        json.put("USER", Build.USER)
-        json.put("VERSION.SDK_INT", Build.VERSION.SDK_INT)
+        with(json){
+            put("launchCounter", launchCounter)
+            put("androidID", androidID)
+            put("MODEL", Build.MODEL)
+            put("MANUFACTURER", Build.MANUFACTURER)
+            put("BOARD", Build.BOARD)
+            put("BRAND", Build.BRAND)
+            put("ID", Build.ID)
+            put("USER", Build.USER)
+            put("VERSION.SDK_INT", Build.VERSION.SDK_INT)
+        }
         return json
     }
 
@@ -65,33 +66,11 @@ class MobileCounter {
         formattedDate = formatter.format(calendar.time)
         jsonObjectForSending.put("Date", formattedDate)
         Thread {
-            val url = URL(ENDPOINT)
-            val httpURLConnection = url.openConnection() as HttpURLConnection
+            val httpURLConnection = openHttpURLConnection()
             try {
-                httpURLConnection.requestMethod = "POST"
-                httpURLConnection.setRequestProperty(
-                    "Content-Type",
-                    "application/json"
-                )
-                httpURLConnection.setRequestProperty(
-                    "Accept",
-                    "application/json"
-                )
-                httpURLConnection.doInput = true
-                httpURLConnection.doOutput = true
-
-                val outputStreamWriter = OutputStreamWriter(httpURLConnection.outputStream)
-
-                val jsonForSending = JSONObject()
-                jsonForSending.put("DeviceInfo", getDeviceInfoJSON())
-                jsonForSending.put("Action", jsonObjectForSending)
-                outputStreamWriter.write(jsonForSending.toString())
-                Log.d(TAG, "sendInfo() called jsonForSending = $jsonForSending")
-                outputStreamWriter.flush()
-
+                sendJsonToEndpoint(httpURLConnection, jsonObjectForSending)
                 if (httpURLConnection.responseCode == HttpURLConnection.HTTP_OK) {
                     val json = httpURLConnection.inputStream.bufferedReader().readText()
-                    val reader = BufferedReader(InputStreamReader(httpURLConnection.inputStream))
                     Log.d(TAG, "responseCode = ${httpURLConnection.responseCode}")
                     Log.d(TAG, "json = $json")
                 } else {
@@ -104,5 +83,30 @@ class MobileCounter {
                 httpURLConnection.disconnect()
             }
         }.start()
+    }
+
+    private fun openHttpURLConnection(): HttpURLConnection {
+        val httpURLConnection = URL(ENDPOINT).openConnection() as HttpURLConnection
+        with(httpURLConnection) {
+            requestMethod = "POST"
+            setRequestProperty("Content-Type", "application/json")
+            setRequestProperty("Accept", "application/json")
+            doInput = true
+            doOutput = true
+        }
+        return httpURLConnection
+    }
+
+    private fun sendJsonToEndpoint(
+        httpURLConnection: HttpURLConnection,
+        jsonObjectForSending: JSONObject
+    ) {
+        val outputStreamWriter = OutputStreamWriter(httpURLConnection.outputStream)
+        val jsonForSending = JSONObject()
+        jsonForSending.put("DeviceInfo", getDeviceInfoJSON())
+        jsonForSending.put("Action", jsonObjectForSending)
+        outputStreamWriter.write(jsonForSending.toString())
+        Log.d(TAG, "sendInfo() called jsonForSending = $jsonForSending")
+        outputStreamWriter.flush()
     }
 }
