@@ -1,9 +1,14 @@
 package com.example.hellolibrary
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
+import androidx.room.Room
+import com.example.hellolibrary.data.MessageDatabase
+import com.example.hellolibrary.data.dao.MessageDao
+import com.example.hellolibrary.data.entities.Message
 import org.json.JSONObject
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
@@ -21,20 +26,20 @@ private const val ENDPOINT =
     "https://42aea87e-bcb4-4f70-b387-7061bee87d95.mock.pstmn.io/orders/habr"
 
 class MobileCounter {
-
-    private var calendar: Calendar = Calendar.getInstance()
+    private lateinit var dao: MessageDao
     private var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-    private var formattedDate: String = ""
 
+    @SuppressLint("HardwareIds")
     fun init(context: Context) {
         androidID = Settings.Secure.getString(
             context.contentResolver,
             Settings.Secure.ANDROID_ID
         )
+        val db =
+            Room.databaseBuilder(context, MessageDatabase::class.java, "Message_database").build()
+        dao = db.messageDao()
         incrementLaunchCounter(context)
-        val event = JSONObject()
-        event.put("event", "App Started!")
-        sendInfo(event)
+        sendInfo(JSONObject().put("event", "App Started!"))
     }
 
     private fun incrementLaunchCounter(context: Context) {
@@ -47,7 +52,7 @@ class MobileCounter {
 
     private fun getDeviceInfoJSON(): JSONObject {
         val json = JSONObject()
-        with(json){
+        with(json) {
             put("launchCounter", launchCounter)
             put("androidID", androidID)
             put("MODEL", Build.MODEL)
@@ -62,8 +67,7 @@ class MobileCounter {
     }
 
     fun sendInfo(jsonObjectForSending: JSONObject) {
-        Log.d(TAG, "sendInfo() called this =$this")
-        formattedDate = formatter.format(calendar.time)
+        val formattedDate = formatter.format(Date())
         jsonObjectForSending.put("Date", formattedDate)
         Thread {
             val httpURLConnection = openHttpURLConnection()
@@ -71,13 +75,17 @@ class MobileCounter {
                 sendJsonToEndpoint(httpURLConnection, jsonObjectForSending)
                 if (httpURLConnection.responseCode == HttpURLConnection.HTTP_OK) {
                     val json = httpURLConnection.inputStream.bufferedReader().readText()
+                    dao.deleteAll()
                     Log.d(TAG, "responseCode = ${httpURLConnection.responseCode}")
                     Log.d(TAG, "json = $json")
                 } else {
-                    // TODO: Здесь нужно сохранять jsonObjectForSending если отправка не удалась
+                    val message = Message(0, jsonObjectForSending.toString())
+                    dao.insertMessage(message)
                     Log.e("HTTPURLCONNECTION_ERROR", httpURLConnection.responseCode.toString())
                 }
             } catch (ex: Exception) {
+                val message = Message(0, jsonObjectForSending.toString())
+                dao.insertMessage(message)
                 ex.printStackTrace()
             } finally {
                 httpURLConnection.disconnect()
@@ -86,6 +94,7 @@ class MobileCounter {
     }
 
     private fun openHttpURLConnection(): HttpURLConnection {
+        Log.d(TAG, "openHttpURLConnection() called")
         val httpURLConnection = URL(ENDPOINT).openConnection() as HttpURLConnection
         with(httpURLConnection) {
             requestMethod = "POST"
@@ -101,12 +110,17 @@ class MobileCounter {
         httpURLConnection: HttpURLConnection,
         jsonObjectForSending: JSONObject
     ) {
-        val outputStreamWriter = OutputStreamWriter(httpURLConnection.outputStream)
         val jsonForSending = JSONObject()
-        jsonForSending.put("DeviceInfo", getDeviceInfoJSON())
-        jsonForSending.put("Action", jsonObjectForSending)
-        outputStreamWriter.write(jsonForSending.toString())
+        jsonForSending.accumulate("DeviceInfo", getDeviceInfoJSON())
+
+        val messagesList = dao.getAll()
+        messagesList.forEach {
+            jsonForSending.accumulate("Action", it.message)
+        }
+        jsonForSending.accumulate("Action", jsonObjectForSending)
         Log.d(TAG, "sendInfo() called jsonForSending = $jsonForSending")
+        val outputStreamWriter = OutputStreamWriter(httpURLConnection.outputStream)
+        outputStreamWriter.write(jsonForSending.toString())
         outputStreamWriter.flush()
     }
 }
