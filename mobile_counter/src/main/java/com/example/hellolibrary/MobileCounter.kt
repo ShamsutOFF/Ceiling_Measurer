@@ -16,8 +16,10 @@ import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 private const val TAG = "@@@@@ Mobile Counter"
 private var androidID = ""
+private var appName = ""
 private var launchCounter = 0
 private const val SAVED_DATA = "SavedData"
 private const val COUNTER = "Counter"
@@ -31,6 +33,12 @@ class MobileCounter {
 
     @SuppressLint("HardwareIds")
     fun init(context: Context) {
+        val applicationInfo = context.applicationInfo
+        val stringId = applicationInfo.labelRes
+        appName = if (stringId == 0) applicationInfo.nonLocalizedLabel.toString() else context.getString(
+            stringId
+        )
+        Log.d(TAG, "init() called with: appName = $appName")
         androidID = Settings.Secure.getString(
             context.contentResolver,
             Settings.Secure.ANDROID_ID
@@ -55,6 +63,7 @@ class MobileCounter {
         with(json) {
             put("launchCounter", launchCounter)
             put("androidID", androidID)
+            put("appName", appName)
             put("MODEL", Build.MODEL)
             put("MANUFACTURER", Build.MANUFACTURER)
             put("BOARD", Build.BOARD)
