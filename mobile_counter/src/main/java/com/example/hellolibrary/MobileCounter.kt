@@ -10,7 +10,6 @@ import com.example.hellolibrary.data.MessageDatabase
 import com.example.hellolibrary.data.dao.MessageDao
 import com.example.hellolibrary.data.entities.Message
 import org.json.JSONObject
-import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
@@ -90,13 +89,52 @@ class MobileCounter {
             try {
                 if (httpURLConnection.responseCode == HttpURLConnection.HTTP_OK) {
                     Log.d(TAG, "responseCode = ${httpURLConnection.responseCode}")
-                    dao.deleteAll()
+                    checkInfoInBD()
                 } else {
                     dao.insertMessage(Message(0, encodedDataString))
                     Log.e("INTERCONNECTION_ERROR", httpURLConnection.responseCode.toString())
                 }
             } catch (ex: Exception) {
                 dao.insertMessage(Message(0, encodedDataString))
+                ex.printStackTrace()
+            } finally {
+                httpURLConnection.disconnect()
+            }
+        }.start()
+    }
+
+    private fun checkInfoInBD() {
+        Log.d(TAG, "checkInfoInBD() called")
+        val encodedStringForSending = dao.getFirst()?.message
+        if (encodedStringForSending.isNullOrEmpty()) {
+            Log.d(TAG, "encodedStringForSending isNullOrEmpty")
+            Log.d(TAG, "We got nothing to sending!!!")
+            return
+        } else {
+            Log.d(TAG, "encodedStringForSending = $encodedStringForSending")
+            sendInfoFromBD(encodedStringForSending)
+        }
+    }
+
+    private fun sendInfoFromBD(encodedDataString: String) {
+        Log.d(TAG, "sendInfoFromBD() called with: encodedDataString = $encodedDataString")
+        Thread {
+            val url = URL(ENDPOINT + encodedDataString)
+            Log.d(TAG, "url = $url")
+            val httpURLConnection = url.openConnection() as HttpURLConnection
+            httpURLConnection.requestMethod = "GET"
+            try {
+                if (httpURLConnection.responseCode == HttpURLConnection.HTTP_OK) {
+                    Log.d(TAG, "responseCode = ${httpURLConnection.responseCode}")
+                    //Тут нужно удалить первую строку из БД, которую мы только что отправили
+                    //Затем снова    checkInfoInBD()
+                    //checkInfoInBD()
+                    dao.deleteMessage(encodedDataString)
+                    checkInfoInBD()
+                } else {
+                    Log.e("INTERCONNECTION_ERROR", httpURLConnection.responseCode.toString())
+                }
+            } catch (ex: Exception) {
                 ex.printStackTrace()
             } finally {
                 httpURLConnection.disconnect()
@@ -111,8 +149,18 @@ class MobileCounter {
         jsonForSending.put("eventDst", "stats")
         jsonForSending.put("eventTime", Date().time)
         jsonForSending.put("sso_id", UUID.randomUUID().toString())
-        jsonForSending.put("eventObject", getDeviceInfoJSON())
-        jsonForSending.accumulate("eventObject", jsonObjectForSending)
+        val eventObject = getDeviceInfoJSON()
+
+//        jsonForSending.put("eventObject", getDeviceInfoJSON())
+        // TODO Здесь нужно а eventObject добавить поля из jsonObjectForSending с суфиксом _app и значения к ним
+        val keys = jsonObjectForSending.keys()
+        while (keys.hasNext()){
+            val tempKey = keys.next()
+            Log.d(TAG, "tempKey = $tempKey")
+            eventObject.put(tempKey+"_app", jsonObjectForSending.get(tempKey))
+        }
+        jsonForSending.put("eventObject", eventObject)
+
         Log.d(TAG, "getEncodedJsonAsString() called jsonForSending = $jsonForSending")
 
         val encodedJSONSting = URLEncoder.encode(jsonForSending.toString(), "UTF-8")

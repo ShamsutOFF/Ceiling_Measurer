@@ -1,7 +1,6 @@
 package com.example.hellolibrary.data.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -18,4 +17,11 @@ interface MessageDao {
 
     @Query("DELETE FROM message_table")
     fun deleteAll()
+
+    @Query("SELECT * FROM message_table LIMIT 1")
+    fun getFirst() : Message
+
+    @Query("DELETE FROM message_table WHERE message = :message")
+    fun deleteMessage(message: String)
+
 }
