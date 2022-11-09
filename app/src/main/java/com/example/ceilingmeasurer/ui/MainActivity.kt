@@ -57,11 +57,11 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "testMyInfoLibrary() called")
         mobileCounter.init(this)
 
-//        val jsonObject = JSONObject()
-//        jsonObject.put("name", "Jack")
-//        jsonObject.put("salary", "3540")
-//        jsonObject.put("age", "23")
-//        mobileCounter.sendInfo(jsonObject)
+        val jsonObject = JSONObject()
+        jsonObject.put("name", "Jack")
+        jsonObject.put("salary", "3540")
+        jsonObject.put("age", "23")
+        mobileCounter.sendInfo(jsonObject)
     }
 
     private fun initBottomNavigation() {

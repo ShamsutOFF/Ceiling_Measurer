@@ -42,7 +42,6 @@ class MobileCounter {
             if (stringId == 0) applicationInfo.nonLocalizedLabel.toString() else context.getString(
                 stringId
             )
-        Log.d(TAG, "init() called with: appName = $appName")
         deviceID = Settings.Secure.getString(
             context.contentResolver,
             Settings.Secure.ANDROID_ID
@@ -58,7 +57,6 @@ class MobileCounter {
         val sharedPref = context.getSharedPreferences(SAVED_DATA, Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
         launchCounter = sharedPref.getInt(COUNTER, 0) + 1
-        Log.d(TAG, "incrementLaunchCounter() launchCounter = $launchCounter")
         editor.putInt(COUNTER, launchCounter).apply()
     }
 
@@ -81,8 +79,6 @@ class MobileCounter {
     fun sendInfo(jsonObjectForSending: JSONObject) {
         Thread {
             val encodedDataString = getEncodedJsonAsString(jsonObjectForSending)
-            val url = URL(ENDPOINT + encodedDataString)
-            Log.d(TAG, "url = $url")
             val httpURLConnection =
                 URL(ENDPOINT + encodedDataString).openConnection() as HttpURLConnection
             httpURLConnection.requestMethod = "GET"
@@ -103,32 +99,15 @@ class MobileCounter {
         }.start()
     }
 
-    private fun checkInfoInBD() {
-        Log.d(TAG, "checkInfoInBD() called")
-        val encodedStringForSending = dao.getFirst()?.message
-        if (encodedStringForSending.isNullOrEmpty()) {
-            Log.d(TAG, "encodedStringForSending isNullOrEmpty")
-            Log.d(TAG, "We got nothing to sending!!!")
-            return
-        } else {
-            Log.d(TAG, "encodedStringForSending = $encodedStringForSending")
-            sendInfoFromBD(encodedStringForSending)
-        }
-    }
-
     private fun sendInfoFromBD(encodedDataString: String) {
         Log.d(TAG, "sendInfoFromBD() called with: encodedDataString = $encodedDataString")
         Thread {
             val url = URL(ENDPOINT + encodedDataString)
-            Log.d(TAG, "url = $url")
             val httpURLConnection = url.openConnection() as HttpURLConnection
             httpURLConnection.requestMethod = "GET"
             try {
                 if (httpURLConnection.responseCode == HttpURLConnection.HTTP_OK) {
                     Log.d(TAG, "responseCode = ${httpURLConnection.responseCode}")
-                    //Тут нужно удалить первую строку из БД, которую мы только что отправили
-                    //Затем снова    checkInfoInBD()
-                    //checkInfoInBD()
                     dao.deleteMessage(encodedDataString)
                     checkInfoInBD()
                 } else {
@@ -142,30 +121,38 @@ class MobileCounter {
         }.start()
     }
 
+    private fun checkInfoInBD() {
+        Log.d(TAG, "checkInfoInBD() called")
+        val encodedStringForSending = dao.getFirst()?.message
+        if (encodedStringForSending.isNullOrEmpty()) {
+            Log.d(TAG, "We got nothing to sending!!!")
+            return
+        } else {
+            sendInfoFromBD(encodedStringForSending)
+        }
+    }
+
     private fun getEncodedJsonAsString(jsonObjectForSending: JSONObject): String {
         val jsonForSending = JSONObject()
-        jsonForSending.put("eventType", "mobile")
-        jsonForSending.put("eventSrc", appName)
-        jsonForSending.put("eventDst", "stats")
-        jsonForSending.put("eventTime", Date().time)
-        jsonForSending.put("sso_id", UUID.randomUUID().toString())
-        val eventObject = getDeviceInfoJSON()
+        with(jsonForSending) {
+            put("eventType", "mobile")
+            put("eventSrc", appName)
+            put("eventDst", "stats")
+            put("eventTime", Date().time)
+            put("sso_id", UUID.randomUUID().toString())
+        }
 
-//        jsonForSending.put("eventObject", getDeviceInfoJSON())
-        // TODO Здесь нужно а eventObject добавить поля из jsonObjectForSending с суфиксом _app и значения к ним
+        val eventObject = getDeviceInfoJSON()
         val keys = jsonObjectForSending.keys()
-        while (keys.hasNext()){
+
+        while (keys.hasNext()) {
             val tempKey = keys.next()
             Log.d(TAG, "tempKey = $tempKey")
-            eventObject.put(tempKey+"_app", jsonObjectForSending.get(tempKey))
+            eventObject.put(tempKey + "_app", jsonObjectForSending.get(tempKey))
         }
         jsonForSending.put("eventObject", eventObject)
+        Log.d(TAG, "@@@ getEncodedJsonAsString jsonForSending = $jsonForSending")
 
-        Log.d(TAG, "getEncodedJsonAsString() called jsonForSending = $jsonForSending")
-
-        val encodedJSONSting = URLEncoder.encode(jsonForSending.toString(), "UTF-8")
-        Log.d(TAG, "getEncodedJsonAsString() called encodedJSONSting = $encodedJSONSting")
-
-        return encodedJSONSting
+        return URLEncoder.encode(jsonForSending.toString(), "UTF-8")
     }
 }

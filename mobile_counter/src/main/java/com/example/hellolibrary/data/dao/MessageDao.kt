@@ -19,7 +19,7 @@ interface MessageDao {
     fun deleteAll()
 
     @Query("SELECT * FROM message_table LIMIT 1")
-    fun getFirst() : Message
+    fun getFirst() : Message?
 
     @Query("DELETE FROM message_table WHERE message = :message")
     fun deleteMessage(message: String)
